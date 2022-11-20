@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous" />
+    <!-- link fontawsome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://kit.fontawesome.com/040bc95231.js"
+            crossorigin="anonymous"></script>
+
+
+
+    <style>
+
+        body {
+            background: #F5F3F3;
+        }
+
+        .type-bus {
+            margin-right: 1rem;
+        }
+
+        .icon {
+            background: white;
+            padding-top: 1px;
+            text-align: center;
+            border: solid #4F4CEE 1.5px;
+            width: 35px;
+            height: 30px;
+            font-size: 25px;
+            color: #4F4CEE;
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+        }
+
+        .box {
+            text-align: center;
+            border: solid #4F4CEE 1.5px;
+            padding: 1rem;
+            margin: 0.5rem;
+            background: white;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .font25 {
+            font-size: 25px;
+        }
+
+        .container-fluid {
+            margin: 2rem auto;
+        }
+
+        .header {
+            padding-top: 1rem;
+            padding-bottom: 1rem
+        }
+
+        .big-icon {
+            float: left;
+            font-size: 35px;
+            color: #4F4CEE;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .info {
+            padding-right: 10%;
+        }
+
+        .news-brief {
+            padding-left: 40px;
+        }
+
+        .items {
+            width: 100%;
+            height:auto;
+            text-align: left;
+            background: white;
+        }
+
+        .slide {
+            font-size: 14px;
+        }
+        .slide-brief {
+            font-size: 12px;
+        }
+        .slide-date {
+            font-size: 12px;
+        }
+        .slick-slide {
+            margin-top: 5px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+            .slick-slide img {
+                width: 100%;
+                height: 100%;
+                border: 0px solid #fff;
+            }
+            
+        .container{
+            padding-left:7%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+
+            <div class="col-sm-1 text-end">
+                <p class="type-bus ">Share</p>
+                <div class="icon fa-solid fa-link"></div>
+                <div class="icon fa-brands fa-instagram"></div>
+                <div class="icon fa-brands fa-twitter"></div>
+                <div class="icon fa-brands fa-facebook"></div>
+            </div>
+
+            <div class="col-sm-10 ">
+                <img class="img-responsive" src="https://as2.ftcdn.net/v2/jpg/04/45/63/13/1000_F_445631316_npIsAALTCEiygiYM1ANeNJzvgx6zqgeA.jpg" width="100%" alt="Chania">
+            </div>
+        </div>
+        <br>
+
+        <div class="row justify-content-left">
+
+            <div class="col-sm-7 offset-sm-1">
+                <br>
+                <h3 class="news-title bold">Lễ hội Điện ảnh và Âm nhạc: Back to the Future</h3>
+                <i class="fa-solid fa-location-dot"></i>
+                <span class="news-location bold"> Trung Tâm XXX</span>
+                <span class="news-location bold">@ Khánh Hòa</span>
+                <div class="date">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    20/12/2022 · 20.00 - 23.59 GMT+7
+                </div>
+                <div class="brief">
+                    Bữa tiệc giải trí hiện đại sôi động cạnh bờ biển đang thu hút sự chú ý của mọi người. Hãy đến với Nha Trang để cùng trải nghiệm âm nhạc của tương lai hòa cùng không khí thành phố biển dịp Giáng Sinh này.
+                </div>
+            </div>
+
+            <div class="col-sm-4 ">
+                <br>
+                <div class="box ticketBox">
+                    <p class="name bold">Vé xe Khánh Hòa</p>
+                    <p class="price">~300.000đ</p>
+                    <button type="button" class="btn btn-primary orange bold font20">
+                        Tìm hiểu thêm
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="row justify-content-space-between">
+            <h5 class="header bold offset-sm-1"> Thông tin sự kiện </h5>
+            <div class="col-sm-3 offset-sm-1 clearfix">
+                <div class="info-box">
+                    <span class="big-icon fa-regular fa-clock"></span>
+                    <div class="news-brief bold"> Thời gian</div>
+                    <div class="news-brief"> 20.00h  20/12/22 </div>
+                </div>
+            </div>
+            <div class="col-sm-3 offset-sm-1 clearfix ">
+                <div class="info-box">
+                    <span class="big-icon  fa-solid fa-person"></span>
+                    <div class="news-brief bold">Khán giả </div>
+                    <div class="news-brief"> 12+trở lên</div>
+                </div>
+            </div>
+            <div class="col-sm-3 offset-sm-1 clearfix">
+                <div class="info-box">
+                    <span class="big-icon  fa-solid fa-triangle-exclamation"></span>
+                    <div class="news-brief bold">Lưu ý</div>
+                    <div class="news-brief"> Tuân thủ 5K</div>
+                </div>
+            </div>
+
+            <h5 class="header bold offset-sm-1"> Chi tiết sự kiện </h5>
+            <div class="info offset-sm-1">
+                Bữa tiệc giải trí hiện đại sôi động cạnh bờ biển đang thu hút sự chú ý của mọi người. Hãy đến với Nha Trang để cùng trải nghiệm âm nhạc của tương lai hòa cùng không khí thành phố biển dịp Giáng Sinh này.
+            </div>
+        </div>
+        <br>
+        <h5 class="news bold offset-sm-1"> Tin tức khác </h5>
+
+    </div>
+
+    <div class="container">
+
+        <div class="items">
+            <div>
+                <img src="../img/ticket1.png">
+                <div class="slide bold">Cập nhật thông tin vé xe Tết</div>
+                <div class="slide-brief">Tóm tắt nội dung</div>
+                <div class="slide-date">Ngày đăng</div>
+            </div>
+
+            <div>
+                <img src="../img/pic.png">
+                <div class="slide bold">Triển lãm Picasso</div>
+                <div class="slide-brief">Tóm tắt nội dung</div>
+                <div class="slide-date">Ngày đăng</div>
+            </div>
+            <div>
+                <img src="../img/bus2.jpg">
+                <div class="slide bold">Bến xe Miền Đông ùn tắc</div>
+                <div class="slide-brief">Tóm tắt nội dung</div>
+                <div class="slide-date">Ngày đăng</div>
+            </div>
+            <div>
+                <img src="../img/pic 2.png">
+                <div class="slide bold">Nạn cò mồi và cách đặt vé</div>
+                <div class="slide-brief">Tóm tắt nội dung</div>
+                <div class="slide-date">Ngày đăng</div>
+            </div>
+            <div>
+                <img src="../img/ticket1.png">
+                <div class="slide bold">Cập nhật thông tin vé xe Tết</div>
+                <div class="slide-brief">Tóm tắt nội dung</div>
+                <div class="slide-date">Ngày đăng</div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.items').slick({
+                slidesToShow: 4,
+                infinite: true,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+            });
+        });
+    </script>
+
+</body>
+</html>
