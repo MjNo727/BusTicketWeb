@@ -211,3 +211,136 @@ section{
 .infor-blog{
   margin: 15px;
 }
+
+
+/*css Tan 23/11/2022*/
+.nav-mb{
+  display: none;
+}
+
+.nav-list-mb{
+  position: fixed;
+  background: white;
+  width: 100%;
+  height: 100%;
+  padding-top: 10%;
+  z-index:500;
+  top: 0;
+  left: -2000px;
+  transition: 0.5s;
+  
+}
+
+.action-btn-mb{
+   position: fixed;
+  background: white;
+  width: 100%;
+  height: 100%;
+  padding-top: 10%;
+  z-index:500;
+  top: 0;
+  right: -2000px;  
+  transition: 0.5s;
+}
+
+.center-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+.is-left-defaut{
+  left: 0;
+}
+
+
+.is-right-defaut{
+  right: 0;
+}
+.nav-list-mb .logo-mb{
+  display: flex;
+  justify-content: center;
+}
+
+.nav-list-mb .center-flex {
+  margin-top: 30px;
+}
+
+.nav-list-mb li{
+  font-size: 24px;
+}
+
+.nav-list-mb li i{
+  margin-right: 5px;
+}
+
+.btn-exit{
+  margin-top: 5%;
+  width: 200px;
+  background: none;
+  border-radius: 5px;
+}
+
+footer{
+  background : #2b89ce;
+  color: white ;
+  padding-top: 30px;
+
+}
+
+.widget-col{
+  margin-bottom: 20px;
+}
+
+.is-border-bottom{
+  border-bottom: 1px solid white;
+}
+
+.copyright{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.copyright i{
+  margin-right: 10px;
+}
+
+@media (max-width: 1333px){
+ .nav-pc{
+  display: none !important;
+ } 
+
+ .nav-mb{
+  display: flex ;
+  justify-content: space-between;
+  align-items: center;
+ }
+
+ .logo-mb img{
+  width: 200px;
+ }
+
+ .btn-mb{
+  width: 40px;
+  height: 40px;
+  background: none;
+  border-radius: 5px;
+ }
+
+ .action-btn-mb .btn-login{
+  color: #2b89ce;
+}
+
+.action-btn-mb .btn-signup{
+  color: orange;
+}
+
+
+}
