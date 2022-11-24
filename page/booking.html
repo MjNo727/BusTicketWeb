@@ -171,12 +171,15 @@
                     <label>Mã giảm giá</label><br>
                     <input type="text" id="discount" name="discount" value="Giảm 45% - FUTA 45%" class="form-input"><br>
                     <label class="money">Thành tiền: 300.000đ</label><br>
-                    <div class="buttonsubmit"><button type="submit" class="submit">Đặt vé</button></div>
+                    <div class="buttonsubmit"><button type="button" class="submit" onclick="book()">Đặt vé</button></div>
 
                 </form>
             </div>
         </section>
-
+        <article id="noti" class="popup-hidden">
+            <p id="status"></p>
+            <button type="button" class="closeButton">&#x2715</button>
+        </article>
 
     </main>
 
@@ -235,5 +238,23 @@
         </div>
         </div>
     </footer>
+</body>
+<script>
+    var check=1;
+    document.querySelector(".closeButton").addEventListener("click", close);
+    function close(){
+        document.getElementById("noti").className="popup-hidden";
+        document.getElementById("status").innerText="";
+    }
+    function book(){
+        document.getElementById("noti").className="popup";
+        if (check%2==1)
+            document.getElementById("status").innerText="Đặt vé thành công";
+        else
+            document.getElementById("status").innerText="Đặt vé thất bại";
+        check++;
+
+    }
+</script>
 
 </html>

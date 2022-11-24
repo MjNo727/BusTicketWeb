@@ -116,3 +116,38 @@
     color:white;
     font-size: 2rem;
 }
+
+
+.popup {
+    position: fixed;
+    left: 40%;
+    top: 50%;
+    width: 25rem;
+    height: 15rem;
+    border: 2px solid #0C86CB;
+    border-radius: 1rem;
+    background-color: white;
+    color: #f2754e;
+    font-size: 2rem;
+    text-align: center;
+    padding: 6% 0;
+    justify-content: center;
+    /* visibility: hidden; */
+    /* display: inline-block;
+    content: "\00d7"; */
+    
+}
+.status{
+    /* position:absolute; */
+}
+.closeButton{
+    position: absolute;
+    /* display: inline-block;
+    content: "&#100067"; */
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border: none;
+    top: 0.5rem;
+    right: 0.5rem;
+}
