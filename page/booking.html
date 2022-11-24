@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../font/icofont/icofont.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../css/booking.css">
+    <!-- <style>
+        .route-option.selected[data-v-008a65cb] {
+            border: 2px solid #f2754e;
+        }
+    </style> -->
+</head>
+
+<body>
+    <header>
+        <div class="nav-list-mb" id="nav-list-mb">
+            <div class="logo-mb"><img src="./img/logo.png"></div>
+            <div class="center-flex">
+                <ul>
+                    <li><a href="./tintuc.html"> <i class="icofont-school-bus"></i>Tin Tức</a></li>
+                    <li><a href="./lichtrinh.html"><i class="icofont-school-bus"></i>Lịch Trình</a></li>
+                    <li><a href="./quanlyve.html"><i class="icofont-school-bus"></i>Quản Lý Vé</a></li>
+                    <li><a href="./lienhe.html"><i class="icofont-school-bus"></i>Liên Hệ</a></li>
+                </ul>
+            </div>
+            <div class="logo-mb"><button class="btn-exit" onclick="menuDisplay()"><i class="icofont-exit"></i> Trở
+                    về</button></div>
+        </div>
+        <div class="action-btn-mb center-flex" id="action-btn-mb">
+            <div>
+                <div class="logo-mb "><img src="../img/logo.png"></div>
+                <div><button class="btn btn-exit btn-login"><i class="icofont-user"></i> Đăng nhập</button></div>
+                <div><button class="btn btn-exit btn-signup"><i class="icofont-user"></i> Đăng ký</button></div>
+                <div class="logo-mb"><button class="btn-exit" onclick="userDisplay()"><i class="icofont-exit"></i> Trở
+                        về </button></div>
+            </div>
+        </div>
+
+        <div class="main-header">
+
+            <div class="container">
+                <div class="row is-align-center nav-pc">
+                    <div class="col-xl-2 col-md-2 col-2 col logo">
+                        <img src="../img/logo.png">
+                    </div>
+                    <div class="col-xl-5 col-md-5 col-5 col ">
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="./tintuc.html">Tin Tức</a></li>
+                                <li><a href="./lichtrinh.html">Lịch Trình</a></li>
+                                <li><a href="./quanlyve.html">Quản Lý Vé</a></li>
+                                <li><a href="./lienhe.html">Liên Hệ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-xl-5 col-md-5 col-5 col action-btn">
+                        <button class="btn btn-us">Về chúng tôi</button>
+                        <button class="btn btn-login"><i class="icofont-user"></i> Đăng nhập</button>
+                        <button class="btn btn-signup"><i class="icofont-user"></i> Đăng ký</button>
+                    </div>
+                </div>
+                <div class="nav-mb">
+                    <div class="main-menu-mb">
+                        <button class="btn-mb" onclick="menuDisplay()">
+                            <i class="icofont-navigation-menu"></i>
+                        </button>
+                    </div>
+                    <div class="logo-mb">
+                        <img src="../img/logo.png">
+                    </div>
+                    <div class="user-bar-mb">
+                        <button class="btn-mb" onclick="userDisplay()">
+                            <i class="icofont-user-alt-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="banner-text">
+            <p>V.exe - Cam kết hoàn 150% nếu nhà xe không giữ vé</p>
+        </div>
+        <img src="../img/banner-img.png" class="banner-img">
+    </header>
+
+    <main>
+        <section class="center-block">
+            <div>00:00<img src="../img/arrow.png" alt="" style="width: 3%;"> 08:00 </div>
+            <div class="type"> 300.000 Limousine</div>
+
+            <div class="fromto">
+                <div>
+                    <p>Bến xe miền Đông </p>
+                </div>
+                <img src="../img/fromto.png" alt="" class="fromto-pic">
+                <p class="fromto-time">8 tiếng</p>
+                <div>
+                    <p>Bến xe Đà Lạt</p>
+                </div>
+            </div>
+
+            <div class="seat">
+                <div class="up-floor">
+                    <div>
+                        <p>Tầng trên</p>
+                    </div>
+                    <hr class="line">
+                    <div class="grid-container">
+                        <div class="grid-item">A01</div>
+                        <div></div>
+                        <div class="grid-item">A02</div>
+                        <div class="grid-item">A03</div>
+                        <div class="grid-item">A04</div>
+                        <div class="grid-item">A05</div>
+                        <div class="grid-item">A06</div>
+                        <div class="grid-item">A07</div>
+                        <div class="grid-item">A08</div>
+                        <div class="grid-item">A09</div>
+                        <div class="grid-item">A10</div>
+                        <div class="grid-item">A11</div>
+                        <div class="grid-item">A12</div>
+                        <div class="grid-item">A13</div>
+                        <div class="grid-item">A14</div>
+                        <div class="grid-item">A15</div>
+                        <div class="grid-item">A16</div>
+                        <div class="grid-item">A17</div>
+                    </div>
+                </div>
+                <div class="downstairs">
+                    <div>
+                        <p>Tầng dưới</p>
+                    </div>
+                    <hr class="line">
+                    <div class="grid-container">
+                        <div class="grid-item">B01</div>
+                        <div></div>
+                        <div class="grid-item">B02</div>
+                        <div class="grid-item">B03</div>
+                        <div class="grid-item">B04</div>
+                        <div class="grid-item">B05</div>
+                        <div class="grid-item">B06</div>
+                        <div class="grid-item">B07</div>
+                        <div class="grid-item">B08</div>
+                        <div class="grid-item">B09</div>
+                        <div class="grid-item">B10</div>
+                        <div class="grid-item">B11</div>
+                        <div class="grid-item">B12</div>
+                        <div class="grid-item">B13</div>
+                        <div class="grid-item">B14</div>
+                        <div class="grid-item">B15</div>
+                        <div class="grid-item">B16</div>
+                        <div class="grid-item">A17</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form">
+                <form action="/action_page.php">
+                    <div class="form-head"><p>THÔNG TIN HÀNH KHÁCH</p></div>
+                    <label>Họ và tên</label><br>
+                    <input type="text" id="name" name="name" class="form-input" value="Đệ nhất quốc sư Trần Dần"><br>
+                    <label>Số điện thoại</label><br>
+                    <input type="text" id="phonenum" name="phonenum" class="form-input" value="0901456525"><br><br>
+                    <label>Các ghế đã chọn: </label>
+                    <div class="form-head"><p>THANH TOÁN</p></div>
+                    <label>Mã giảm giá</label><br>
+                    <input type="text" id="discount" name="discount" value="Giảm 45% - FUTA 45%" class="form-input"><br>
+                    <label class="money">Thành tiền: 300.000đ</label><br>
+                    <div class="buttonsubmit"><button type="submit" class="submit">Đặt vé</button></div>
+
+                </form>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <div class="is-border-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-12 widget-col">
+                        <img src="../img/logo.png" style="width: 80%">
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 widget-col">
+                        <ul class="widget-footer">
+                            <li>
+                                <h3>Về chúng tôi</h3>
+                            </li>
+                            <li><a href="#">Giới thiệu</a></li>
+                            <li><a href="#">Hướng dẫn</a></li>
+                            <li><a href="#">Tuyển dụng</a></li>
+                            <li><a href="#">Tin tức</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 widget-col">
+                        <ul class="widget-footer">
+                            <li>
+                                <h3>Hỗ trợ</h3>
+                            </li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Chính sách</a></li>
+                            <li><a href="#">Đối tác</a></li>
+                            <li><a href="#">Q&A</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 widget-col">
+                        <ul class="widget-footer">
+                            <li>
+                                <h3>Tải ứng dụng</h3>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="copyright-left">
+                    <i class="icofont-twitter"></i>
+                    <i class="icofont-instagram"></i>
+                    <i class="icofont-facebook"></i>
+                </div>
+                <div class="copyright-right">
+                    <p>2022 V.exe incorporated</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+</html>

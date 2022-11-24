@@ -1,0 +1,44 @@
+.is-color-blue {
+    color: #0c86cb;
+}
+
+.is-mt-2 {
+    margin-top: 2rem;
+}
+
+.is-mt-10 {
+    margin-top: 10rem;
+}
+
+.border {
+    border-color: #0c86cb;
+    border-radius: 2rem;
+    border-width: 2px;
+}
+
+.dofb {
+    width: 45rem;
+    text-align: start;
+    font-size: 2.1rem;
+}
+
+.buton {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+    width: 25rem;
+    background-color: #0c86cb;
+    border-radius: 2rem;
+    border-width: 0rem;
+    padding: 10px 20px 10px 20px;
+    font-size: 2.1rem;
+    color: white;
+}
+
+.main {
+    border: 0.3rem solid #0c86cb;
+    border-radius: 2rem;
+    
+    padding: 2rem 4rem 2rem;
+    margin: auto;
+    width: 40%;
+}
