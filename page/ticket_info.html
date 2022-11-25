@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket Info</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../font/icofont/icofont.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+
+    <style>
+      .body {
+        border: solid #0c86cb 3px;
+        margin: 2rem auto;
+        width: 85rem;
+        border-radius: 28px;
+      }
+
+      .header-container {
+        display: flex;
+        gap: 8rem;
+        margin: 1rem auto;
+        margin-top: 3rem;
+        width: 80rem;
+        /* background-color: red; */
+        /* padding: 0.5rem; */
+      }
+      .checked {
+        color: #0c86cb;
+      }
+
+      .type-bus {
+        color: #f15a24;
+        font-size: 35px;
+      }
+
+      .icofont-star {
+        margin: 0.3rem;
+        margin-top: 0.5rem;
+      }
+
+      .departure-place,
+      .arrive-place {
+        background-color: rgba(241, 90, 36, 0.5);
+        width: 1317px;
+        margin-top: 0.5rem;
+        font-size: 30px;
+        padding: 1rem;
+        color: white;
+      }
+      .info-container {
+        display: flex;
+        width: 80rem;
+        margin: 5rem auto;
+        gap: 8rem;
+      }
+      .btn--similar {
+        width: 60rem;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        padding: 1rem;
+        margin: 4rem 12rem;
+      }
+
+      .booking__btn {
+        color: white;
+        border-radius: 5px;
+        border: none;
+      }
+
+      .isChecked {
+        color: #2a26d9;
+      }
+
+      .isOrange {
+        background-color: #f15a24;
+      }
+
+      .isbold {
+        font-weight: bold;
+      }
+      .isfont25 {
+        font-size: 25px;
+      }
+      .isfont35 {
+        font-size: 35px;
+      }
+      .isfont20 {
+        font-size: 20px;
+      }
+
+      .isBGLightGrey {
+        background-color: #f7f7f7;
+      }
+
+      .isPurple {
+        color: #4f4cee;
+      }
+
+      .ml-10 {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-list-mb" id="nav-list-mb">
+        <div class="logo-mb"><img src="/img/logo.png" /></div>
+        <div class="center-flex">
+          <ul>
+            <li>
+              <a href="./page/tintuc.html">
+                <i class="icofont-school-bus"></i>Tin Tức</a
+              >
+            </li>
+            <li>
+              <a href="./page/lichtrinh.html"
+                ><i class="icofont-school-bus"></i>Lịch Trình</a
+              >
+            </li>
+            <li>
+              <a href="./page/quanlyve.html"
+                ><i class="icofont-school-bus"></i>Quản Lý Vé</a
+              >
+            </li>
+            <li>
+              <a href="./page/lienhe.html"
+                ><i class="icofont-school-bus"></i>Liên Hệ</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="logo-mb">
+          <button class="btn-exit" onclick="menuDisplay()">
+            <i class="icofont-exit"></i> Trở về
+          </button>
+        </div>
+      </div>
+      <div class="action-btn-mb center-flex" id="action-btn-mb">
+        <div>
+          <div class="logo-mb"><img src="../img/logo.png" /></div>
+          <div>
+            <button class="btn btn-exit btn-login">
+              <i class="icofont-user"></i> Đăng nhập
+            </button>
+          </div>
+          <div>
+            <button class="btn btn-exit btn-signup">
+              <i class="icofont-user"></i> Đăng ký
+            </button>
+          </div>
+          <div class="logo-mb">
+            <button class="btn-exit" onclick="userDisplay()">
+              <i class="icofont-exit"></i> Trở về
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-header">
+        <div class="container">
+          <div class="row is-align-center nav-pc">
+            <div class="col-xl-2 col-md-2 col-2 col logo">
+              <img src="../img/logo.png" />
+            </div>
+            <div class="col-xl-5 col-md-5 col-5 col">
+              <nav class="main-menu">
+                <ul>
+                  <li><a href="./page/tintuc.html">Tin Tức</a></li>
+                  <li><a href="./page/lichtrinh.html">Lịch Trình</a></li>
+                  <li><a href="./page/quanlyve.html">Quản Lý Vé</a></li>
+                  <li><a href="./page/lienhe.html">Liên Hệ</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-xl-5 col-md-5 col-5 col action-btn">
+              <button class="btn btn-us">Về chúng tôi</button>
+              <button class="btn btn-login">
+                <i class="icofont-user"></i> Đăng nhập
+              </button>
+              <button class="btn btn-signup">
+                <i class="icofont-user"></i> Đăng ký
+              </button>
+            </div>
+          </div>
+          <div class="nav-mb">
+            <div class="main-menu-mb">
+              <button class="btn-mb" onclick="menuDisplay()">
+                <i class="icofont-navigation-menu"></i>
+              </button>
+            </div>
+            <div class="logo-mb">
+              <img src="../img/logo.png" />
+            </div>
+            <div class="user-bar-mb">
+              <button class="btn-mb" onclick="userDisplay()">
+                <i class="icofont-user-alt-6"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="banner-text">
+        <p>V.exe - Cam kết hoàn 150% nếu nhà xe không giữ vé</p>
+      </div>
+      <img src="../img/banner-img.png" class="banner-img" />
+    </header>
+
+    <!-- BODY -->
+    <body>
+      <div class="container body">
+        <div class="container">
+          <div class="row container isBGLightGrey p-4 mt-5">
+            <div class="col-xl-5">
+              <span class="type-bus isbold">Phuơng Trang FUTABUS</span>
+            </div>
+            <div class="col-xl-3 d-flex justify-content-start pt-1">
+              <i class="icofont-star isfont35 isChecked"></i>
+              <i class="icofont-star isfont35 isChecked"></i>
+              <i class="icofont-star isfont35 isChecked"></i>
+              <i class="icofont-star isfont35 isChecked"></i>
+              <i class="icofont-star isfont35"></i>
+            </div>
+            <div class="col-xl-4 d-flex justify-content-end isfont20 mt-2">
+              <p class="isbold isPurple">
+                Thông tin <i class="icofont-arrow-right isfont25"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row departure-place isbold">
+            Địa điểm xuất bến: Bến Xe An Sương
+          </div>
+          <div class="row arrive-place"></div>
+        </div>
+
+        <div class="container isBGLightGrey">
+          <div class="row pt-4 pb-2">
+            <div class="col-xl-4">
+              <p class="isfont25 isbold">Điểm đi</p>
+              <d class="isfont20">
+                <div class="row">
+                  <div class="col-xl-6">Bến xe An Sương</div>
+                  <div
+                    class="icofont-arrow-right col-md-6 d-flex justify-content-center isfont35"
+                  ></div>
+                </div>
+              </d>
+            </div>
+            <div class="col-xl-4">
+              <p class="isfont25 isbold border border-top-0">Điểm đến</p>
+              <p class="isfont20">Bến xe Đà Lạt</p>
+            </div>
+            <div class="col-xl-4">
+              <p class="isfont25 isbold">Ngày: 21/12/2022</p>
+              <div class="row">
+                <div class="col-xl-3">
+                  <p class="isfont20 isbold">Giờ đi</p>
+                </div>
+                <div class="col-xl-3">
+                  <p class="isfont20 isbold">Giá vé</p>
+                </div>
+                <div class="col-xl-4">
+                  <button
+                    type="button"
+                    class="btn isOrange booking__btn ml-10 isfont20"
+                  >
+                    Đặt vé
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row pl-3 pb-2">
+            <div class="col-xl-4"></div>
+            <div class="col-xl-4"></div>
+            <div class="col-xl-1">
+              <p class="isfont20">00:00</p>
+            </div>
+            <div class="col-xl-1">
+              <p class="isfont20">300K</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn--similar isOrange isBond isfont25"
+          >
+            CÁC CHUYẾN XE KHÁC TƯƠNG TỰ
+          </button>
+        </div>
+      </div>
+    </body>
+  </body>
+</html>
