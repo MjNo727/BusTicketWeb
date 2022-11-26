@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User info</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../font/icofont/icofont.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../css/userInfo.css">
+    <!-- <style>
+        .route-option.selected[data-v-008a65cb] {
+            border: 2px solid #f2754e;
+        }
+    </style> -->
+</head>
+
+<body>
+    <header>
+        <div class="nav-list-mb" id="nav-list-mb">
+            <div class="logo-mb"><img src="./img/logo.png"></div>
+            <div class="center-flex">
+                <ul>
+                    <li><a href="./tintuc.html"> <i class="icofont-school-bus"></i>Tin Tức</a></li>
+                    <li><a href="./lichtrinh.html"><i class="icofont-school-bus"></i>Lịch Trình</a></li>
+                    <li><a href="./quanlyve.html"><i class="icofont-school-bus"></i>Quản Lý Vé</a></li>
+                    <li><a href="./lienhe.html"><i class="icofont-school-bus"></i>Liên Hệ</a></li>
+                </ul>
+            </div>
+            <div class="logo-mb"><button class="btn-exit" onclick="menuDisplay()"><i class="icofont-exit"></i> Trở
+                    về</button></div>
+        </div>
+        <div class="action-btn-mb center-flex" id="action-btn-mb">
+            <div>
+                <div class="logo-mb "><img src="../img/logo.png"></div>
+                <div><button class="btn btn-exit btn-login"><i class="icofont-user"></i> Đăng nhập</button></div>
+                <div><button class="btn btn-exit btn-signup"><i class="icofont-user"></i> Đăng ký</button></div>
+                <div class="logo-mb"><button class="btn-exit" onclick="userDisplay()"><i class="icofont-exit"></i> Trở
+                        về </button></div>
+            </div>
+        </div>
+
+        <div class="main-header">
+
+            <div class="container">
+                <div class="row is-align-center nav-pc">
+                    <div class="col-xl-2 col-md-2 col-2 col logo">
+                        <img src="../img/logo.png">
+                    </div>
+                    <div class="col-xl-5 col-md-5 col-5 col ">
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="./tintuc.html">Tin Tức</a></li>
+                                <li><a href="./lichtrinh.html">Lịch Trình</a></li>
+                                <li><a href="./quanlyve.html">Quản Lý Vé</a></li>
+                                <li><a href="./lienhe.html">Liên Hệ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-xl-5 col-md-5 col-5 col action-btn">
+                        <button class="btn btn-us">Về chúng tôi</button>
+                        <button class="btn btn-login"><i class="icofont-user"></i> Đăng nhập</button>
+                        <button class="btn btn-signup"><i class="icofont-user"></i> Đăng ký</button>
+                    </div>
+                </div>
+                <div class="nav-mb">
+                    <div class="main-menu-mb">
+                        <button class="btn-mb" onclick="menuDisplay()">
+                            <i class="icofont-navigation-menu"></i>
+                        </button>
+                    </div>
+                    <div class="logo-mb">
+                        <img src="../img/logo.png">
+                    </div>
+                    <div class="user-bar-mb">
+                        <button class="btn-mb" onclick="userDisplay()">
+                            <i class="icofont-user-alt-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="banner-text">
+            <p>V.exe - Cam kết hoàn 150% nếu nhà xe không giữ vé</p>
+        </div>
+        <img src="../img/banner-img.png" class="banner-img">
+    </header>
+
+    <main>
+        <section>
+            <section>Thông tin cá nhân</section>
+            <article>
+                <div class="avatar">
+                    <img src="../img/ava.jfif" alt="">
+                </div>
+                <div class="info">
+                    <div class="info-head">Thông tin cá nhân:</div>
+                    <div class="grid-info">
+                        <div class="grid-item-info">Họ và tên:</div>
+                        <div class="grid-item-info is_bold">Trần Dần</div>
+                        <div class="grid-item-info is_bold"> </div>
+                        <div class="grid-item-info">Email:</div>
+                        <div class="grid-item-info is_bold">denhatquocsu@gmail.com</div>
+                        <div class="grid-item-info is_bold"><img src="../img/addButton.png" alt=""> </div>
+                        <div class="grid-item-info">CMMD/CCCD:</div>
+                        <div class="grid-item-info is_bold">_</div>
+                        <div class="grid-item-info is_bold"><img src="../img/addButton.png" alt=""> </div>
+                        <div class="grid-item-info">Giới tính</div>
+                        <div class="grid-item-info is_bold">_</div>
+                        <div class="grid-item-info is_bold"><img src="../img/addButton.png" alt=""> </div>
+                        <div class="grid-item-info">Ngày sinh:</div>
+                        <div class="grid-item-info is_bold">_</div>
+                        <div class="grid-item-info is_bold"><img src="../img/addButton.png" alt=""> </div>
+                        <div class="grid-item-info">Địa chỉ</div>
+                        <div class="grid-item-info is_bold">_</div>
+                        <div class="grid-item-info is_bold"><img src="../img/addButton.png" alt=""> </div>
+                        <div class="grid-item-info">SĐT</div>
+                        <div class="grid-item-info is_bold">0901 456 525</div>
+                        <div class="grid-item-info is_bold"><img src="../img/addButton.png" alt=""> </div>
+                    </div>
+                </div>
+            </article>
+            <aside>
+                <button class="update">Cập nhật thông tin</button>
+            </aside>
+            
+            <!-- <canvas data-v-393a465a="" class="editor-canvas__canvas" id="paper-view-0" style="-webkit-user-drag: none; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 256px; height: 256px;" width="320" height="320"></canvas> -->
+        <!-- <img src="https://img.icons8.com/fluency/48/000000/plus-2-math.png"/> -->
+        <!-- <a target="_blank" href="https://icons8.com/icon/yFAVSbDZOJll/add-new"></a> -->
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="is-border-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-12 widget-col">
+                        <img src="../img/logo.png" style="width: 80%">
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 widget-col">
+                        <ul class="widget-footer">
+                            <li>
+                                <h3>Về chúng tôi</h3>
+                            </li>
+                            <li><a href="#">Giới thiệu</a></li>
+                            <li><a href="#">Hướng dẫn</a></li>
+                            <li><a href="#">Tuyển dụng</a></li>
+                            <li><a href="#">Tin tức</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 widget-col">
+                        <ul class="widget-footer">
+                            <li>
+                                <h3>Hỗ trợ</h3>
+                            </li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Chính sách</a></li>
+                            <li><a href="#">Đối tác</a></li>
+                            <li><a href="#">Q&A</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-12 widget-col">
+                        <ul class="widget-footer">
+                            <li>
+                                <h3>Tải ứng dụng</h3>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="copyright-left">
+                    <i class="icofont-twitter"></i>
+                    <i class="icofont-instagram"></i>
+                    <i class="icofont-facebook"></i>
+                </div>
+                <div class="copyright-right">
+                    <p>2022 V.exe incorporated</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+</body>
+<script>
+    function changeChoice(e){
+        console.log(e.target);
+        choices.forEach((c) =>{
+            c.className = "grid-choice-item";
+            // console.log(c);
+        })
+        e.target.className = "grid-choice-item-active";
+        // console.log(e.target.parentNode);
+
+    }
+    var choices=document.querySelectorAll(".grid-choice button");
+    choices.forEach(choice => choice.addEventListener("click",changeChoice));
+</script>
+
+</html>
