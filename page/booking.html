@@ -21,7 +21,7 @@
 <body>
     <header>
         <div class="nav-list-mb" id="nav-list-mb">
-            <div class="logo-mb"><img src="./img/logo.png"></div>
+            <div class="logo-mb"><img src="../img/logo.png"></div>
             <div class="center-flex">
                 <ul>
                     <li><a href="./tintuc.html"> <i class="icofont-school-bus"></i>Tin Tức</a></li>
@@ -256,5 +256,16 @@
 
     }
 </script>
+<script type="text/javascript">
+    function menuDisplay(){
+      var list = document.getElementById("nav-list-mb");
+      list.classList.toggle("is-left-defaut");
+    }
+
+    function userDisplay(){
+      var list = document.getElementById("action-btn-mb");
+      list.classList.toggle("is-right-defaut");
+    }
+  </script>
 
 </html>
