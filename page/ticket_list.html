@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ticket List</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/ticket_list.css" />
+    <link rel="stylesheet" href="../font/icofont/icofont.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/animate.css" />
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+
+    <style>
+      .isBGLightGrey {
+        background-color: #f7f7f7;
+      }
+      .isfont25 {
+        font-size: 25px;
+      }
+      .isfont20 {
+        font-size: 20px;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -110,6 +125,245 @@
       </div>
       <img src="../img/banner-img.png" class="banner-img" />
     </header>
-    <body></body>
+    <body>
+      <div class="container body__container">
+        <div class="filter__advance">
+          <p class="filter__section__header">Bộ lọc nâng cao</p>
+          <div class="position__container">
+            <input
+              id="dropdown_position"
+              type="checkbox"
+              class="dropdownCheckbox"
+              style="display: none"
+            />
+            <label for="dropdown_position" class="isfont18">
+              Vị trí ghế
+              <i class="icofont-rounded-down"></i>
+              <i class="icofont-rounded-up"></i>
+            </label>
+            <div class="position">
+              <label class="radio__item">
+                <input type="radio" name="radio" />
+                <span class="filter__radio"></span>
+                <span>Hàng đầu</span>
+              </label>
+              <label class="radio__item">
+                <input type="radio" name="radio" />
+                <span class="filter__radio"></span>
+                <span>Hàng giữa</span>
+              </label>
+              <label class="radio__item">
+                <input type="radio" name="radio" />
+                <span class="filter__radio"></span>
+                <span>Hàng cuối</span>
+              </label>
+            </div>
+          </div>
+          <div class="homecar__container">
+            <input
+              id="dropdown_homecar"
+              type="checkbox"
+              class="dropdownCheckbox"
+              style="display: none"
+            />
+            <label for="dropdown_homecar" class="isfont18"
+              >Nhà xe
+              <i class="icofont-rounded-down"></i>
+              <i class="icofont-rounded-up"></i>
+            </label>
+            <div class="homecar">
+              <label class="radio__item">
+                <input type="radio" name="radio" />
+                <span class="filter__radio"></span>
+                <span>Phương Trang</span>
+              </label>
+              <label class="radio__item">
+                <input type="radio" name="radio" />
+                <span class="filter__radio"></span>
+                <span>Thành Bưởi</span>
+              </label>
+              <label class="radio__item">
+                <input type="radio" name="radio" />
+                <span class="filter__radio"></span>
+                <span>Lạc Hồng</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="ticket__container container p-3">
+          <div class="ticket__header row" style="background-color: #0c86cb">
+            <p class="col-sm-3">Khởi chạy</p>
+            <p class="col-sm-3">Thời gian hành trình</p>
+            <p class="col-sm-3">Xe khách</p>
+            <p class="col-sm-3">Giá vé</p>
+          </div>
+          <div class="row mt-2 mb-2 isboder_bottom">
+            <div class="col-sm-3 time_departure">
+              <div>
+                <img src="../img/brand_homecar/United Airlines.png" alt="" />
+              </div>
+              <div>
+                0:00 AM<br />
+                Phương Trang
+              </div>
+            </div>
+            <div class="col-sm-3">8 tiếng <br />Sài Gòn - Đà Lạt</div>
+            <p class="col-sm-3">Xe khách</p>
+            <p class="col-sm-3">300.000đ</p>
+          </div>
+
+          <div class="row mt-2 mb-2 isboder_bottom">
+            <div class="col-sm-3 time_departure">
+              <div>
+                <img src="../img/brand_homecar/United Airlines.png" alt="" />
+              </div>
+              <div>
+                0:00 AM<br />
+                Phương Trang
+              </div>
+            </div>
+            <div class="col-sm-3">8 tiếng <br />Sài Gòn - Đà Lạt</div>
+            <p class="col-sm-3">Xe khách</p>
+            <p class="col-sm-3">300.000đ</p>
+          </div>
+
+          <div class="row mt-2 mb-2 isboder_bottom">
+            <div class="col-sm-3 time_departure">
+              <div>
+                <img src="../img/brand_homecar/Delta Airlines.png" alt="" />
+              </div>
+              <div>
+                0:00 AM<br />
+                Lạc Hồng
+              </div>
+            </div>
+            <div class="col-sm-3">9 tiếng <br />Sài Gòn - Đà Lạt</div>
+            <p class="col-sm-3">Xe khách</p>
+            <p class="col-sm-3">250.000đ</p>
+          </div>
+
+          <div class="row mt-2 mb-2 isboder_bottom">
+            <div class="col-sm-3 time_departure">
+              <div>
+                <img src="../img/brand_homecar/United Airlines.png" alt="" />
+              </div>
+              <div>
+                0:00 AM<br />
+                Phương Trang
+              </div>
+            </div>
+            <div class="col-sm-3">8 tiếng <br />Sài Gòn - Đà Lạt</div>
+            <p class="col-sm-3">Xe khách</p>
+            <p class="col-sm-3">300.000đ</p>
+          </div>
+        </div>
+      </div>
+    </body>
+    <footer>
+      <div class="is-border-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-12 widget-col">
+              <img src="../img/logo.png" style="width: 80%">
+            </div>
+            <div class="col-md-3 col-sm-6 col-12 widget-col">
+              <ul class="widget-footer">
+                <li><h3>Về chúng tôi</h3></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Hướng dẫn</a></li>
+                <li><a href="#">Tuyển dụng</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="#">Liên hệ</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 col-12 widget-col">
+              <ul class="widget-footer">
+                <li><h3>Hỗ trợ</h3></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Chính sách</a></li>
+                <li><a href="#">Đối tác</a></li>
+                <li><a href="#">Q&A</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 col-12 widget-col">
+              <ul class="widget-footer">
+                <li><h3>Tải ứng dụng</h3></li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <div class="copyright-left">
+            <i class="icofont-twitter"></i>
+            <i class="icofont-instagram"></i>
+            <i class="icofont-facebook"></i>
+          </div>
+          <div class="copyright-right">
+            <p>2022 V.exe incorporated</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="./js/jquery-1.11.0.min.js" ></script>
+      <script type="text/javascript" src="./js/jquery-migrate-1.2.1.min.js" ></script>
+          <script type="text/javascript" src="./js/slick.min.js"></script>
+          <script type="text/javascript">
+            $(document).ready(function () {
+              $(".image-slider").slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                infinite: true,
+                arrows: true,
+                draggable: false,
+                prevArrow: `<button type='button' class='slick-prev slick-arrow'><i class="icofont-arrow-left"></i></button>`,
+                nextArrow: `<button type='button' class='slick-next slick-arrow'><i class="icofont-arrow-right"></i></button>`,
+                dots: false,
+                responsive: [
+                  {
+                    breakpoint: 1025,
+                    settings: {
+                      slidesToShow: 3,
+                    },
+                  },
+                  {
+                    breakpoint: 480,
+                    settings: {
+                      slidesToShow: 1,
+                      arrows: false,
+                      infinite: false,
+                    },
+                  },
+                ],
+                autoplay: false,
+                autoplaySpeed: 1000,
+              });
+            });
+          </script>
+          <script type="text/javascript">
+             const images = document.querySelectorAll(".img-click");
+             images.forEach((el) => el.addEventListener("click", handleChangeImage));
+             function handleChangeImage(e) {
+               const source = e.target.getAttribute("src");
+               const featureImage = document.querySelector(".feature-image");
+               featureImage.setAttribute("src", source);
+             }
+          </script> 
+          <script type="text/javascript">
+            function menuDisplay(){
+              var list = document.getElementById("nav-list-mb");
+              list.classList.toggle("is-left-defaut");
+            }
+
+            function userDisplay(){
+              var list = document.getElementById("action-btn-mb");
+              list.classList.toggle("is-right-defaut");
+            }
+          </script>
+          <script type="text/javascript" src="js/wow.min.js"></script>
+    <script>new WOW().init();</script>
   </body>
 </html>
