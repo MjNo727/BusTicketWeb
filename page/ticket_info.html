@@ -12,11 +12,12 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 
     <style>
-      .body {
+      .body_ticket_info {
         border: solid #0c86cb 3px;
         margin: 2rem auto;
         width: 85rem;
         border-radius: 28px;
+        /* height: 733px; */
       }
 
       .header-container {
@@ -63,7 +64,7 @@
         border-radius: 5px;
         border: none;
         padding: 1rem;
-        margin: 4rem 12rem;
+        /* margin: 4rem 12rem; */
       }
 
       .booking__btn {
@@ -212,7 +213,7 @@
 
     <!-- BODY -->
     <body>
-      <div class="container body">
+      <div class="container body_ticket_info">
         <div class="container">
           <div class="row container isBGLightGrey p-4 mt-5">
             <div class="col-xl-5">
@@ -288,14 +289,122 @@
               <p class="isfont20">300K</p>
             </div>
           </div>
-          <button
-            type="button"
-            class="btn btn--similar isOrange isBond isfont25"
-          >
-            CÁC CHUYẾN XE KHÁC TƯƠNG TỰ
-          </button>
+          <div style="text-align: center; margin: 3rem">
+            <button
+              type="button"
+              class="btn btn--similar isOrange isBond isfont25"
+            >
+              CÁC CHUYẾN XE KHÁC TƯƠNG TỰ
+            </button>
+          </div>
         </div>
       </div>
     </body>
+    <footer>
+      <div class="is-border-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-12 widget-col">
+              <img src="../img/logo.png" style="width: 80%">
+            </div>
+            <div class="col-md-3 col-sm-6 col-12 widget-col">
+              <ul class="widget-footer">
+                <li><h3>Về chúng tôi</h3></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Hướng dẫn</a></li>
+                <li><a href="#">Tuyển dụng</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="#">Liên hệ</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 col-12 widget-col">
+              <ul class="widget-footer">
+                <li><h3>Hỗ trợ</h3></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Chính sách</a></li>
+                <li><a href="#">Đối tác</a></li>
+                <li><a href="#">Q&A</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 col-12 widget-col">
+              <ul class="widget-footer">
+                <li><h3>Tải ứng dụng</h3></li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <div class="copyright-left">
+            <i class="icofont-twitter"></i>
+            <i class="icofont-instagram"></i>
+            <i class="icofont-facebook"></i>
+          </div>
+          <div class="copyright-right">
+            <p>2022 V.exe incorporated</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="./js/jquery-1.11.0.min.js" ></script>
+      <script type="text/javascript" src="./js/jquery-migrate-1.2.1.min.js" ></script>
+          <script type="text/javascript" src="./js/slick.min.js"></script>
+          <script type="text/javascript">
+            $(document).ready(function () {
+              $(".image-slider").slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                infinite: true,
+                arrows: true,
+                draggable: false,
+                prevArrow: `<button type='button' class='slick-prev slick-arrow'><i class="icofont-arrow-left"></i></button>`,
+                nextArrow: `<button type='button' class='slick-next slick-arrow'><i class="icofont-arrow-right"></i></button>`,
+                dots: false,
+                responsive: [
+                  {
+                    breakpoint: 1025,
+                    settings: {
+                      slidesToShow: 3,
+                    },
+                  },
+                  {
+                    breakpoint: 480,
+                    settings: {
+                      slidesToShow: 1,
+                      arrows: false,
+                      infinite: false,
+                    },
+                  },
+                ],
+                autoplay: false,
+                autoplaySpeed: 1000,
+              });
+            });
+          </script>
+          <script type="text/javascript">
+             const images = document.querySelectorAll(".img-click");
+             images.forEach((el) => el.addEventListener("click", handleChangeImage));
+             function handleChangeImage(e) {
+               const source = e.target.getAttribute("src");
+               const featureImage = document.querySelector(".feature-image");
+               featureImage.setAttribute("src", source);
+             }
+          </script> 
+          <script type="text/javascript">
+            function menuDisplay(){
+              var list = document.getElementById("nav-list-mb");
+              list.classList.toggle("is-left-defaut");
+            }
+
+            function userDisplay(){
+              var list = document.getElementById("action-btn-mb");
+              list.classList.toggle("is-right-defaut");
+            }
+          </script>
+          <script type="text/javascript" src="js/wow.min.js"></script>
+    <script>new WOW().init();</script>
   </body>
 </html>

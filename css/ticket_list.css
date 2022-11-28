@@ -1,0 +1,154 @@
+.radio__item {
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.radio__item > input[type="radio"] {
+  display: none;
+}
+
+.radio__item .filter__radio {
+  border: 1px solid #222021;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-radius: 10px; */
+}
+
+.radio__item .filter__radio::before {
+  content: "";
+  display: block;
+  background: #4f4cee;
+  width: 12px;
+  height: 12px;
+  transition: 0.3s all ease-in-out;
+  opacity: 0;
+}
+
+.radio__item > input[type="radio"]:checked + .filter__radio::before {
+  opacity: 1;
+}
+
+.radio__item > input[type="radio"]:checked ~ span {
+  color: #4f4cee;
+}
+
+body {
+  background: #fbfbfb;
+  font-family: Arial;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.filter__section__header {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/* **********************************HANDLING DROPDOWN*/
+.position {
+  max-height: 0;
+  overflow: hidden;
+  transition: 1s;
+}
+.position__container > input[type="checkbox"]:checked ~ .position {
+  max-height: 10rem;
+}
+
+.position__container
+  > input[type="checkbox"]:not(checked)
+  + label
+  > .icofont-rounded-up {
+  display: none;
+}
+
+.position__container
+  > input[type="checkbox"]:checked
+  + label
+  > .icofont-rounded-up {
+  display: inline-block;
+}
+
+.position__container
+  > input[type="checkbox"]:checked
+  + label
+  > .icofont-rounded-down {
+  display: none;
+}
+
+.homecar {
+  max-height: 0;
+  overflow: hidden;
+  transition: 1s;
+}
+.homecar__container > input[type="checkbox"]:checked ~ .homecar {
+  max-height: 10rem;
+}
+
+.homecar__container
+  > input[type="checkbox"]:not(checked)
+  + label
+  > .icofont-rounded-up {
+  display: none;
+}
+
+.homecar__container
+  > input[type="checkbox"]:checked
+  + label
+  > .icofont-rounded-up {
+  display: inline-block;
+}
+
+.homecar__container
+  > input[type="checkbox"]:checked
+  + label
+  > .icofont-rounded-down {
+  display: none;
+}
+/* ************************************************************************* */
+.body__container {
+  display: flex;
+  gap: 5rem;
+}
+
+.filter__advance {
+  width: 20rem;
+}
+
+.ticket__header p {
+  /* font-weight: bold; */
+  padding-top: 1rem;
+  color: white;
+}
+
+.time_departure {
+  display: flex;
+  gap: 1rem;
+}
+
+.time_departure img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ******************************************************* */
+.isfont20 {
+  font-size: 2rem;
+}
+
+.isfont18 {
+  font-size: 18px;
+}
+
+.isbold {
+  font-weight: bold;
+}
+
+.isboder_bottom {
+  border-bottom: solid #666666 0.5px;
+}
