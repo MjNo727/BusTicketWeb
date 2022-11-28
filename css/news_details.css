@@ -1,0 +1,75 @@
+
+        body {
+            background: #F5F3F3;
+        }
+
+        .type-bus {
+            margin-right: 1rem;
+        }
+
+        .icon {
+            background: white;
+            padding-top: 1px;
+            text-align: center;
+            border: solid #4F4CEE 1.5px;
+            width: 35px;
+            height: 30px;
+            font-size: 25px;
+            color: #4F4CEE;
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+        }
+
+        .box {
+            text-align: center;
+            border: solid #4F4CEE 1.5px;
+            padding: 1rem;
+            margin: 0.5rem;
+            background: white;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .font25 {
+            font-size: 25px;
+        }
+
+        .header {
+            padding-top: 1rem;
+            padding-bottom: 1rem
+        }
+
+        .big-icon {
+            float: left;
+            font-size: 35px;
+            color: #4F4CEE;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .info {
+            padding-right: 5%;
+        }
+
+        .btn-primary{
+            background-color: #4F4CEE;
+            color: white;
+            border: #4F4CEE;
+        }
+
+        .news-brief {
+            padding-left: 40px;
+        }
+
+        .items {
+            width: 100%;
+            height:auto;
+            text-align: left;
+            background: white;
+        }
