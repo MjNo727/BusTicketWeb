@@ -7,105 +7,10 @@
     <title>Ticket Info</title>
 
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/ticket_info.css" />
     <link rel="stylesheet" href="../font/icofont/icofont.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/animate.css" />
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
-
-    <style>
-      .body_ticket_info {
-        border: solid #0c86cb 3px;
-        margin: 2rem auto;
-        width: 85rem;
-        border-radius: 28px;
-        /* height: 733px; */
-      }
-
-      .header-container {
-        display: flex;
-        gap: 8rem;
-        margin: 1rem auto;
-        margin-top: 3rem;
-        width: 80rem;
-        /* background-color: red; */
-        /* padding: 0.5rem; */
-      }
-      .checked {
-        color: #0c86cb;
-      }
-
-      .type-bus {
-        color: #f15a24;
-        font-size: 35px;
-      }
-
-      .icofont-star {
-        margin: 0.3rem;
-        margin-top: 0.5rem;
-      }
-
-      .departure-place,
-      .arrive-place {
-        background-color: rgba(241, 90, 36, 0.5);
-        width: 1317px;
-        margin-top: 0.5rem;
-        font-size: 30px;
-        padding: 1rem;
-        color: white;
-      }
-      .info-container {
-        display: flex;
-        width: 80rem;
-        margin: 5rem auto;
-        gap: 8rem;
-      }
-      .btn--similar {
-        width: 60rem;
-        color: white;
-        border-radius: 5px;
-        border: none;
-        padding: 1rem;
-        /* margin: 4rem 12rem; */
-      }
-
-      .booking__btn {
-        color: white;
-        border-radius: 5px;
-        border: none;
-      }
-
-      .isChecked {
-        color: #2a26d9;
-      }
-
-      .isOrange {
-        background-color: #f15a24;
-      }
-
-      .isbold {
-        font-weight: bold;
-      }
-      .isfont25 {
-        font-size: 25px;
-      }
-      .isfont35 {
-        font-size: 35px;
-      }
-      .isfont20 {
-        font-size: 20px;
-      }
-
-      .isBGLightGrey {
-        background-color: #f7f7f7;
-      }
-
-      .isPurple {
-        color: #4f4cee;
-      }
-
-      .ml-10 {
-        margin-left: 10px;
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -214,8 +119,8 @@
     <!-- BODY -->
     <body>
       <div class="container body_ticket_info">
-        <div class="container">
-          <div class="row container isBGLightGrey p-4 mt-5">
+        <div class="">
+          <div class="row isBGLightGrey p-3 mt-5">
             <div class="col-xl-5">
               <span class="type-bus isbold">Phuơng Trang FUTABUS</span>
             </div>
@@ -234,14 +139,19 @@
           </div>
         </div>
 
-        <div class="container">
-          <div class="row departure-place isbold">
-            Địa điểm xuất bến: Bến Xe An Sương
+        <div class="">
+          <div class="departure-place isbold">
+            <i style="color: red">Địa điểm xuất bến:</i> Bến Xe An Sương
           </div>
-          <div class="row arrive-place"></div>
+          <div class="home-car isbold">
+            <i style="color: red">Nhà xe:</i> Phương Trang
+          </div>
+          <div class="car-type isbold">
+            <i style="color: red">Loại xe:</i> Xe khách thường
+          </div>
         </div>
 
-        <div class="container isBGLightGrey">
+        <div class="isBGLightGrey">
           <div class="row pt-4 pb-2">
             <div class="col-xl-4">
               <p class="isfont25 isbold">Điểm đi</p>
@@ -262,10 +172,10 @@
               <p class="isfont25 isbold">Ngày: 21/12/2022</p>
               <div class="row">
                 <div class="col-xl-3">
-                  <p class="isfont20 isbold">Giờ đi</p>
+                  <p class="isfont20 isbold">Giờ đi <br> 00:00</p>
                 </div>
                 <div class="col-xl-3">
-                  <p class="isfont20 isbold">Giá vé</p>
+                  <p class="isfont20 isbold">Giá vé <br> 300K</p>
                 </div>
                 <div class="col-xl-4">
                   <button
@@ -279,7 +189,7 @@
             </div>
           </div>
 
-          <div class="row pl-3 pb-2">
+          <!-- <div class="row pl-3 pb-2">
             <div class="col-xl-4"></div>
             <div class="col-xl-4"></div>
             <div class="col-xl-1">
@@ -288,7 +198,7 @@
             <div class="col-xl-1">
               <p class="isfont20">300K</p>
             </div>
-          </div>
+          </div> -->
           <div style="text-align: center; margin: 3rem">
             <button
               type="button"

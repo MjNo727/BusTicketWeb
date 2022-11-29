@@ -1,0 +1,112 @@
+.body_ticket_info {
+  border: solid #0c86cb 3px;
+  margin: 2rem auto;
+  width: 85rem;
+  border-radius: 28px;
+  /* height: 733px; */
+}
+
+.header-container {
+  display: flex;
+  gap: 8rem;
+  margin: 1rem auto;
+  margin-top: 3rem;
+  width: 80rem;
+  /* background-color: red; */
+  /* padding: 0.5rem; */
+}
+.checked {
+  color: #0c86cb;
+}
+
+.type-bus {
+  color: #f15a24;
+  font-size: 35px;
+}
+
+.icofont-star {
+  margin: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.departure-place,
+.arrive-place,
+.home-car,
+.car-type {
+  background-color: rgba(241, 90, 36, 0.5);
+  /* width: 1317px; */
+  width: 100%;
+  margin: 0.5rem auto;
+  font-size: 30px;
+  padding: 1rem;
+  color: white;
+}
+.info-container {
+  display: flex;
+  width: 80rem;
+  margin: 5rem auto;
+  gap: 8rem;
+}
+.btn--similar {
+  /* width: 60rem; */
+  width: 50%;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 1rem;
+  /* margin: 4rem 12rem; */
+}
+
+.booking__btn {
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+.isChecked {
+  color: #2a26d9;
+}
+
+/**********************
+/ RESPONSIVE
+/* ******************** */
+
+@media only screen and (max-width: 600px) {
+  .btn--similar {
+    font-size: 1.2rem !important;
+    width: 100%;
+    padding: 0;
+    margin: 1rem auto;
+  }
+}
+
+/**********************/
+
+.isOrange {
+  background-color: #f15a24;
+}
+
+.isbold {
+  font-weight: bold;
+}
+.isfont25 {
+  font-size: 25px;
+}
+.isfont35 {
+  font-size: 35px;
+}
+.isfont20 {
+  font-size: 20px;
+}
+
+.isBGLightGrey {
+  background-color: #f7f7f7;
+}
+
+.isPurple {
+  color: #4f4cee;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}

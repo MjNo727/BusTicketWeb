@@ -135,8 +135,43 @@ body {
   max-width: 100%;
   height: auto;
 }
+.view_message {
+  display: none;
+}
+.view_detail_checkbox {
+  display: none;
+}
+/**********************
+/ RESPONSIVE
+/* ******************** */
 
-/* ******************************************************* */
+@media only screen and (max-width: 600px) {
+  .body__container {
+    display: block;
+  }
+  .ticket__header {
+    display: none !important;
+  }
+  .time_departure ~ div,
+  .time_departure ~ p {
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: 1s;
+  }
+
+  .view_message {
+    display: block;
+  }
+  .view_detail_checkbox:checked ~ div,
+  .view_detail_checkbox:checked ~ p {
+    /* display: block; */
+    max-height: 3rem;
+    display: block;
+  }
+}
+
+/**********************/
 .isfont20 {
   font-size: 2rem;
 }
@@ -151,4 +186,12 @@ body {
 
 .isboder_bottom {
   border-bottom: solid #666666 0.5px;
+}
+
+.isBGLightGrey {
+  background-color: #f7f7f7;
+}
+
+.isPurple {
+  color: #4f4cee;
 }

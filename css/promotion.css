@@ -12,7 +12,8 @@
 .promotion_package {
   /* position: relative; */
   background-color: #0c86cb;
-  width: 38rem;
+  /* width: 38rem; */
+  width: 100%;
   border-radius: 10px;
   margin: 2rem;
 }
@@ -58,6 +59,38 @@
   padding: 0.2rem 2rem;
   border-radius: 50px;
   border: none;
+}
+
+/* RESPOSIVE */
+
+@media only screen and (max-width: 800px) {
+  .row {
+    display: block !important;
+  }
+  .promotion_package {
+    width: 22rem !important;
+    height: 10rem;
+    margin: 1rem auto;
+  }
+  .btn-book {
+    margin-left: 12rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .row {
+    display: block !important;
+  }
+  .promotion_package {
+    width: 18rem !important;
+    /* width: 100% !important; */
+    height: 13rem;
+    margin: 1rem auto;
+  }
+  .btn-book {
+    margin-left: 8rem;
+    /* margin-top: 0.5rem; */
+  }
 }
 
 .isBGBlue {
