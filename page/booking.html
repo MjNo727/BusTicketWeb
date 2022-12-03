@@ -11,175 +11,422 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../css/slick.css">
     <link rel="stylesheet" type="text/css" href="../css/booking.css">
-    <!-- <style>
-        .route-option.selected[data-v-008a65cb] {
-            border: 2px solid #f2754e;
-        }
-    </style> -->
+    
 </head>
 
 <body>
     <header>
         <div class="nav-list-mb" id="nav-list-mb">
-            <div class="logo-mb"><img src="../img/logo.png"></div>
-            <div class="center-flex">
-                <ul>
-                    <li><a href="./tintuc.html"> <i class="icofont-school-bus"></i>Tin Tức</a></li>
-                    <li><a href="./lichtrinh.html"><i class="icofont-school-bus"></i>Lịch Trình</a></li>
-                    <li><a href="./quanlyve.html"><i class="icofont-school-bus"></i>Quản Lý Vé</a></li>
-                    <li><a href="./lienhe.html"><i class="icofont-school-bus"></i>Liên Hệ</a></li>
-                </ul>
-            </div>
-            <div class="logo-mb"><button class="btn-exit" onclick="menuDisplay()"><i class="icofont-exit"></i> Trở
-                    về</button></div>
+          <div class="logo-mb"><img src="../img/logo.png"></div>
+          <div class="center-flex">
+            <ul>
+              <li><a href="./page/promotion.html"> <i class="icofont-school-bus"></i>Khuyến mãi</a></li>
+              <li><a href="./page/ticket_list.html"><i class="icofont-school-bus"></i>Lịch Trình</a></li>
+              <li><a href="./page/history.html"><i class="icofont-school-bus"></i>Quản Lý Vé</a></li>
+              <li><a href="./page/contact.html"><i class="icofont-school-bus"></i>Liên Hệ</a></li>
+            </ul>     
+          </div>
+          <div class="logo-mb"><button class="btn-exit" onclick="menuDisplay()"><i class="icofont-exit"></i> Trở về </button></div>
         </div>
         <div class="action-btn-mb center-flex" id="action-btn-mb">
-            <div>
-                <div class="logo-mb "><img src="../img/logo.png"></div>
-                <div><button class="btn btn-exit btn-login"><i class="icofont-user"></i> Đăng nhập</button></div>
-                <div><button class="btn btn-exit btn-signup"><i class="icofont-user"></i> Đăng ký</button></div>
-                <div class="logo-mb"><button class="btn-exit" onclick="userDisplay()"><i class="icofont-exit"></i> Trở
-                        về </button></div>
-            </div>
+          <div >
+            <div class="logo-mb "><img src="../img/logo.png"></div>
+            <div><button class="btn btn-exit btn-login" onclick="signinAction()"><i class="icofont-user"></i> Đăng nhập</button></div>
+            <div><button class="btn btn-exit btn-signup" onclick="registerAction()"><i class="icofont-user"></i> Đăng ký</button></div>
+            <div class="logo-mb"><button class="btn-exit" onclick="userDisplay()"><i class="icofont-exit"></i> Trở về </button></div>  
+          </div>
         </div>
 
-        <div class="main-header">
+        <!-- pop up sign in account -->
+        <div class="login-popup" id="action-btn-signin">
+          <div class="position-center-flex">
+            <div class="form-login">
+              <form action="#">
+                <h2>Đăng nhập vào V.exe</h2>
+                <div class="form-items">
+                  <input type="text" name="username" placeholder="Số điện thoại hoặc email">  
+                </div>
+                <div class="form-items" style="margin-bottom: 0">
+                  <input type="password" name="password" placeholder="Mật Khẩu">  
+                </div>
+                <div class="form-items">
+                  <a href="#">Quên mật khẩu?</a>  
+                </div>
+                <div class="form-items">
+                  <button class="signin-btn-action">Đăng Nhập</button>  
+                </div>
+                <div class="form-items">
+                  <button class="register-btn-action" onclick="twoToggleElement()">Tạo Tài Khoản Mới</button>  
+                </div>
+                <div class="form-items">
+                  <button class="btn-exit" onclick="signinAction()"><i class="icofont-exit"></i> Trở về </button>
+                </div> 
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- end pop up sign in account -->
 
+        <!-- pop up register account -->
+        <div class="login-popup" id="action-btn-register">
+          <div class="position-center-flex">
+            <div class="form-login">
+              <form action="#">
+                <h2>Tạo tài khoản của bạn</h2>
+                <div class="form-items">
+                  <input type="text" name="name" placeholder="Họ và tên">  
+                </div>
+                <div class="form-items">
+                  <input type="text" name="name" placeholder="Số điện thoại và email">  
+                </div>
+                <div class="form-items">
+                  <input type="password" name="password" placeholder="Mật Khẩu">  
+                </div>
+                <div class="form-items">
+                  <input type="password" name="password" placeholder="Nhập lại mật khẩu">  
+                </div>
+                <div class="form-items">
+                  <label style="display:block;text-align: left;">Ngày Sinh</label>
+                  <select name="date" id="date">
+                    <option value="date-1">Ngày 1</option>
+                    <option value="date-2">Ngày 2</option>
+                    <option value="date-3">Ngày 3</option>
+                    <option value="date-4">Ngày 4</option>
+                    <option value="date-5">Ngày 5</option>
+                    <option value="date-6">Ngày 6</option>
+                    <option value="date-7">Ngày 7</option>
+                    <option value="date-8">Ngày 8</option>
+                    <option value="date-9">Ngày 9</option>
+                    <option value="date-10">Ngày 10</option>
+                    <option value="date-11">Ngày 11</option>
+                    <option value="date-12">Ngày 12</option>
+                    <option value="date-13">Ngày 13</option>
+                    <option value="date-14">Ngày 14</option>
+                    <option value="date-15">Ngày 15</option>
+                    <option value="date-16">Ngày 16</option>
+                    <option value="date-17">Ngày 17</option>
+                    <option value="date-18">Ngày 18</option>
+                    <option value="date-19">Ngày 19</option>
+                    <option value="date-20">Ngày 20</option>
+                    <option value="date-21">Ngày 21</option>
+                    <option value="date-22">Ngày 22</option>
+                    <option value="date-23">Ngày 23</option>
+                    <option value="date-24">Ngày 24</option>
+                    <option value="date-25">Ngày 25</option>
+                    <option value="date-26">Ngày 26</option>
+                    <option value="date-27">Ngày 27</option>
+                    <option value="date-28">Ngày 28</option>
+                    <option value="date-29">Ngày 29</option>
+                    <option value="date-30">Ngày 30</option>
+                    <option value="date-31">Ngày 31</option>
+                  </select>
+                  <select name="month" id="month">
+                    <option value="month-1">Tháng 1</option>
+                    <option value="month-2">Tháng 2</option>
+                    <option value="month-3">Tháng 3</option>
+                    <option value="month-4">Tháng 4</option>
+                    <option value="month-5">Tháng 5</option>
+                    <option value="month-6">Tháng 6</option>
+                    <option value="month-7">Tháng 7</option>
+                    <option value="month-8">Tháng 8</option>
+                    <option value="month-9">Tháng 9</option>
+                    <option value="month-10">Tháng 10</option>
+                    <option value="month-11">Tháng 11</option>
+                    <option value="month-12">Tháng 12</option>
+                  </select>
+                  <select name="year" id="year">
+                    <option value="year-1995">Năm 1995</option>
+                    <option value="year-1996">Năm 1996</option>
+                    <option value="year-1997">Năm 1997</option>
+                    <option value="year-1998">Năm 1998</option>
+                    <option value="year-1999">Năm 1999</option>
+                    <option value="year-2000">Năm 2000</option>
+                    <option value="year-2001">Năm 2001</option>
+                    <option value="year-2002">Năm 2002</option>
+                    <option value="year-2003">Năm 2003</option>
+                    <option value="year-2004">Năm 2004</option>
+                  </select>
+                </div>
+                <div class="form-items">
+                  <button class="register-btn-action">Tạo Tài Khoản</button>  
+                </div>
+                <div class="form-items">
+                  <button class="btn-exit" onclick="registerAction()"><i class="icofont-exit"></i> Trở về </button>
+                </div> 
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- end pop up register account -->
+
+         <div class="main-header">  
             <div class="container">
-                <div class="row is-align-center nav-pc">
-                    <div class="col-xl-2 col-md-2 col-2 col logo">
-                        <img src="../img/logo.png">
-                    </div>
-                    <div class="col-xl-5 col-md-5 col-5 col ">
-                        <nav class="main-menu">
-                            <ul>
-                                <li><a href="./tintuc.html">Tin Tức</a></li>
-                                <li><a href="./lichtrinh.html">Lịch Trình</a></li>
-                                <li><a href="./quanlyve.html">Quản Lý Vé</a></li>
-                                <li><a href="./lienhe.html">Liên Hệ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-xl-5 col-md-5 col-5 col action-btn">
-                        <button class="btn btn-us">Về chúng tôi</button>
-                        <button class="btn btn-login"><i class="icofont-user"></i> Đăng nhập</button>
-                        <button class="btn btn-signup"><i class="icofont-user"></i> Đăng ký</button>
-                    </div>
-                </div>
-                <div class="nav-mb">
-                    <div class="main-menu-mb">
-                        <button class="btn-mb" onclick="menuDisplay()">
-                            <i class="icofont-navigation-menu"></i>
-                        </button>
-                    </div>
-                    <div class="logo-mb">
-                        <img src="../img/logo.png">
-                    </div>
-                    <div class="user-bar-mb">
-                        <button class="btn-mb" onclick="userDisplay()">
-                            <i class="icofont-user-alt-6"></i>
-                        </button>
-                    </div>
-                </div>
+               <div class="row is-align-center nav-pc">
+                  <div class="col-xl-2 col-md-2 col-2 col logo">
+                     <img src="../img/logo.png">
+                  </div>
+                  <div class="col-xl-5 col-md-5 col-5 col ">
+                     <nav class="main-menu">
+                        <ul>
+                           <li><a href="./page/promotion.html">Khuyến Mãi</a></li>
+                           <li><a href="./page/ticket_list.html">Lịch Trình</a></li>
+                           <li><a href="./page/history.html">Quản Lý Vé</a></li>
+                           <li><a href="./page/contact.html">Liên Hệ</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+                  <div class="col-xl-5 col-md-5 col-5 col action-btn">
+                     <button class="btn btn-us"><a href="./page/about_us.html">Về chúng tôi</a></button>
+                     <button class="btn btn-login" onclick="signinAction()"><i class="icofont-user"></i> Đăng nhập</button>
+                     <button class="btn btn-signup" onclick="registerAction()"><i class="icofont-user"></i> Đăng ký</button>
+                  </div>
+               </div>
+               <div class="nav-mb">
+                 <div class="main-menu-mb">
+                   <button class="btn-mb" onclick="menuDisplay()">
+                     <i class="icofont-navigation-menu"></i>
+                   </button>
+                 </div>
+                 <div class="logo-mb">
+                   <img src="../img/logo.png">
+                 </div>
+                 <div class="user-bar-mb">
+                  <button class="btn-mb" onclick="userDisplay()">
+                    <i class="icofont-user-alt-6"></i>
+                  </button>
+                 </div>
+               </div>
             </div>
-        </div>
-        <div class="banner-text">
+         </div>
+         <div class="banner-text">
             <p>V.exe - Cam kết hoàn 150% nếu nhà xe không giữ vé</p>
-        </div>
-        <img src="../img/banner-img.png" class="banner-img">
-    </header>
+         </div>
+         <img src="../img/banner-img.png" class="banner-img">
+         
+      </header>
 
     <main>
-        <section class="center-block">
-            <div>00:00<img src="../img/arrow.png" alt="" style="width: 3%;"> 08:00 </div>
-            <div class="type"> 300.000 Limousine</div>
-
-            <div class="fromto">
-                <div>
-                    <p>Bến xe miền Đông </p>
-                </div>
-                <img src="../img/fromto.png" alt="" class="fromto-pic">
-                <p class="fromto-time">8 tiếng</p>
-                <div>
+        <section>
+            <div class="position-center-flex">
+                <div class="modal-booking">
+                    <p>00:00 -> 08:00</p>
+                    <p>300.000VND - Limousine</p>
+                    <p>Bến xe miền Đông</p>
+                    <p>8 Tiếng</p>
                     <p>Bến xe Đà Lạt</p>
+                    <div class="bus-position">
+                        <div class="left-bus-position" id="left-bus-position">
+                            <h3>Tầng Trên</h3>
+                            <div class="row">
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A01
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A02
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A03
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos disablePos">
+                                        A04
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A05
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A06
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos bookPos">
+                                        A07
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos disablePos">
+                                        A08
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A09
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A10
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A11
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A12
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A13
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A14
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A15
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A16
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        A17
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-bus-position" id="right-bus-position">
+                            <h3>Tầng Dưới</h3>
+                            <div class="row">
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B01
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B02
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B03
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos disablePos">
+                                        B04
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B05
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B06
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos bookPos">
+                                        B07
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos disablePos">
+                                        B08
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B09
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B10
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B11
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B12
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B13
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B14
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B15
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B16
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-4 col-4">
+                                    <div class="pos">
+                                        B17
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center-flex is-margin-small is-hide-pc">
+                        <button class="change-btn displayNone" id="pos-up" onclick="changePos()">Tầng Trên</button>
+                        <button class="change-btn" id="pos-down" onclick="changePos()">Tầng Dưới</button>    
+                    </div>
+                    <h3 class="is-text-center infor-customer">THÔNG TIN HÀNH KHÁCH</h3>
+                    <p class="is-margin-bottom-0">Họ và tên</p>
+                    <div class="text-box">
+                        <input type="text" name="name" placeholder="Họ tên khách hàng">
+                    </div>
+                    <p class="is-margin-bottom-0">Số điện thoại</p>
+                    <div class="text-box">
+                        <input type="text" name="phone" placeholder="Số điện thoại">
+                    </div>
+                    <p>Ghế đã chọn: A07</p>
+                    <h3 class="is-text-center infor-customer">THANH TOÁN</h3>
+                    <p class="is-margin-bottom-0">Mã giảm giá</p>
+                    <div class="text-box">
+                        <input type="text" name="promotion" placeholder="Áp dụng mã giảm giá">
+                    </div>
+                    <h3>Thành tiền: 300.000đ</h3>
+                    <button class="btn-checkout">Đặt vé</button>
                 </div>
-            </div>
-
-            <div class="seat">
-                <div class="up-floor">
-                    <div>
-                        <p>Tầng trên</p>
-                    </div>
-                    <hr class="line">
-                    <div class="grid-container">
-                        <div class="grid-item">A01</div>
-                        <div></div>
-                        <div class="grid-item">A02</div>
-                        <div class="grid-item">A03</div>
-                        <div class="grid-item">A04</div>
-                        <div class="grid-item">A05</div>
-                        <div class="grid-item">A06</div>
-                        <div class="grid-item">A07</div>
-                        <div class="grid-item">A08</div>
-                        <div class="grid-item">A09</div>
-                        <div class="grid-item">A10</div>
-                        <div class="grid-item">A11</div>
-                        <div class="grid-item">A12</div>
-                        <div class="grid-item">A13</div>
-                        <div class="grid-item">A14</div>
-                        <div class="grid-item">A15</div>
-                        <div class="grid-item">A16</div>
-                        <div class="grid-item">A17</div>
-                    </div>
-                </div>
-                <div class="downstairs">
-                    <div>
-                        <p>Tầng dưới</p>
-                    </div>
-                    <hr class="line">
-                    <div class="grid-container">
-                        <div class="grid-item">B01</div>
-                        <div></div>
-                        <div class="grid-item">B02</div>
-                        <div class="grid-item">B03</div>
-                        <div class="grid-item">B04</div>
-                        <div class="grid-item">B05</div>
-                        <div class="grid-item">B06</div>
-                        <div class="grid-item">B07</div>
-                        <div class="grid-item">B08</div>
-                        <div class="grid-item">B09</div>
-                        <div class="grid-item">B10</div>
-                        <div class="grid-item">B11</div>
-                        <div class="grid-item">B12</div>
-                        <div class="grid-item">B13</div>
-                        <div class="grid-item">B14</div>
-                        <div class="grid-item">B15</div>
-                        <div class="grid-item">B16</div>
-                        <div class="grid-item">A17</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form">
-                <form action="/action_page.php">
-                    <div class="form-head"><p>THÔNG TIN HÀNH KHÁCH</p></div>
-                    <label>Họ và tên</label><br>
-                    <input type="text" id="name" name="name" class="form-input" value="Đệ nhất quốc sư Trần Dần"><br>
-                    <label>Số điện thoại</label><br>
-                    <input type="text" id="phonenum" name="phonenum" class="form-input" value="0901456525"><br><br>
-                    <label>Các ghế đã chọn: </label>
-                    <div class="form-head"><p>THANH TOÁN</p></div>
-                    <label>Mã giảm giá</label><br>
-                    <input type="text" id="discount" name="discount" value="Giảm 45% - FUTA 45%" class="form-input"><br>
-                    <label class="money">Thành tiền: 300.000đ</label><br>
-                    <div class="buttonsubmit"><button type="button" class="submit" onclick="book()">Đặt vé</button></div>
-
-                </form>
             </div>
         </section>
-        <article id="noti" class="popup-hidden">
-            <p id="status"></p>
-            <button type="button" class="closeButton">&#x2715</button>
-        </article>
+
 
     </main>
 
@@ -266,6 +513,34 @@
       var list = document.getElementById("action-btn-mb");
       list.classList.toggle("is-right-defaut");
     }
+
+    function changePos(){
+        var upPos = document.getElementById("pos-up");
+        var downPos = document.getElementById("pos-down");
+        var leftBus = document.getElementById("left-bus-position");
+        var rightBus = document.getElementById("right-bus-position");
+        upPos.classList.toggle("displayNone");
+        downPos.classList.toggle("displayNone");
+        rightBus.classList.toggle("displayBlock");   
+        leftBus.classList.toggle("displayNone");   
+    }
+
+    function signinAction(){
+                var formSignin = document.getElementById("action-btn-signin");
+                formSignin.classList.toggle("opacityDisplay");
+              }
+
+    function registerAction(){
+                var formRegis = document.getElementById("action-btn-register");
+                formRegis.classList.toggle("opacityDisplay");
+              }
+
+    function twoToggleElement(){
+               var formSignin = document.getElementById("action-btn-signin");
+                var formRegis = document.getElementById("action-btn-register");
+                formSignin.classList.toggle("opacityDisplay"); 
+                formRegis.classList.toggle("opacityDisplay");
+              }
   </script>
 
 </html>
