@@ -6,8 +6,6 @@ main {
 section {
     width: 50%;
     height: 100rem;
-    /* background-color: grey; */
-    /*cc*/
 }
 
 .grid-choice {
@@ -37,11 +35,13 @@ section {
 }
 
 .trip {
-    /* background-color: pink; */
-    /*hihi*/
     background-color: white;
     border: 2px solid #0C86CB;
     margin-top: 10%;
+}
+
+.trip-hidden{
+    display: none;
 }
 
 .trip-head{
@@ -62,11 +62,12 @@ hr{
     margin-top: 1rem;
 }
 
-.logo {
+.logogarage {
     width: 5rem;
     height: 5rem;
     margin: 0 1rem;
 }
+
 
 .money {
     color: #0C86CB;
