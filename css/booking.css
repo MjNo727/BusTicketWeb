@@ -151,3 +151,138 @@
     top: 0.5rem;
     right: 0.5rem;
 }
+
+/* css Tan 3/12/2022 */
+.modal-booking{
+    border: 1px solid #2a87cb;
+    padding: 10px 20px;
+    width: 650px;
+    border-radius: 10px;
+}
+
+.bus-position{
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid #ea842f;
+    border-radius: 15px;
+    padding: 30px 15px;
+    background: #d9d9d9;
+}
+
+.left-bus-position{    
+    width: 50%;
+    border-right: 1px solid #a6a5df;
+}
+
+.left-bus-position h3, .right-bus-position h3{
+    text-align: center;
+    font-weight: normal;
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #a6a5df;
+}
+
+.right-bus-position{
+    width: 50%;   
+    
+}
+
+.disablePos{
+    background: #969696 !important;
+}
+
+.bookPos{
+    background: #dba68b !important;
+}
+
+.pos{
+    width: 100%;
+    padding: 8px 0;
+    text-align: center;
+    background: #a7a6de;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.right-bus-position .row, .left-bus-position .row{
+ padding:0 25px;   
+}
+
+.is-text-center{
+    text-align: center;
+}
+
+.infor-customer{
+    margin: 15px 0;
+    color: #ea842f;
+}
+
+.is-margin-bottom-0{
+    margin-bottom: 0px;
+}
+
+.text-box{
+    margin-bottom: 20px;
+}
+
+.text-box input{
+    width: 100%;
+    padding: 5px 20px;
+    border-radius:15px;
+}
+
+.btn-checkout{
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background: #ea842f;
+    color: white;
+    border: none;
+}
+
+.is-margin-small{
+    margin: 15px ;
+}
+
+.is-hide-pc{
+    display: none;
+}
+
+.displayBlock{
+    display: block !important;
+    width: 100%;
+    border-left: 1px solid #a6a5df;
+    border-right: 1px solid #a6a5df;
+}
+
+.change-btn{
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    background: #ea842f;
+    color: white;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.displayNone{
+    display: none;
+}
+
+@media (max-width: 767px){
+ .right-bus-position{
+    display: none;
+ }   
+ .left-bus-position{
+    width: 100%;
+    border-left: 1px solid #a6a5df;
+ }
+
+ .is-hide-pc{
+    display: flex;
+ }
+}
