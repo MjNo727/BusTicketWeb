@@ -4,6 +4,104 @@
   box-sizing: border-box;
 }
 
+.login-popup{
+  position: fixed;  
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background: white;
+  width: 100%;
+  height: 100vh;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.opacityDisplay{
+  opacity: 1 !important;
+  z-index: 2000;
+}
+
+.position-center-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.search-items{
+  width: 100%;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid gray;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.btn-search{
+  background: #f08230;
+  color: white;
+  font-weight: bolder;
+  border: none;
+}
+
+
+.form-login form{
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid #2c8ace;
+  padding: 50px;
+
+}
+
+.search-bar{
+  margin: 50px 0;
+  background: #d9d9d9;
+  padding: 15px;
+}
+form h2{
+  color: #2c8ace;
+  margin-bottom: 20px;
+}
+
+.form-items{
+  margin-bottom: 15px;
+}
+
+.form-items input{
+  font-size: 16px;
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #2c8ace;
+  background: #fefbf4;
+  padding: 5px 15px;
+}
+
+.form-items a{
+  font-size: 14px;
+  color: #2c8ace;
+  font-weight: bolder;
+}
+
+.form-items button{
+  width: 100%;
+  padding: 5px 30px;
+  border-radius: 50px;
+}
+
+.signin-btn-action{
+  background: #2a86cc;
+  color: white;
+  border: none;
+}
+
+.register-btn-action{
+  background: #ea832f;
+  color: white;
+  border: none;
+}
+
+
 header{
   margin: 15px 0;
 }
@@ -359,3 +457,4 @@ footer{
 .action-btn-mb .btn-signup{
   color: orange;
 }
+
