@@ -47,8 +47,11 @@ body {
 
 .filter__section__header {
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 30px;
+  margin-top: 10px;
 }
+
+
 
 /* **********************************HANDLING DROPDOWN*/
 .position {
@@ -194,4 +197,9 @@ body {
 
 .isPurple {
   color: #4f4cee;
+}
+
+.row.mt-2.mb-2.isboder_bottom:hover{
+  background: #f28730;
+  color: white;
 }
