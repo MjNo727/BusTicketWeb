@@ -16,6 +16,22 @@
   opacity: 0;
 }
 
+.background-box{
+  background: #2a87cb;
+  color: white;
+  border-radius: 0 30px 30px 0;
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
+.is-margin-rl-20{
+  margin: 0 20px !important;
+}
+
+.is-no-padding{
+  padding: 0 !important;
+}
+
 .opacityDisplay{
   opacity: 1 !important;
   z-index: 2000;
@@ -458,4 +474,25 @@ footer{
   color: orange;
 }
 
+}
+
+@media(max-width: 767px){
+  .background-blue{
+    padding: 30px 0px;
+  }
+}
+
+@media(max-width: 472px){
+  .background-box h3{
+    font-size: 0.9em;
+  }
+
+  .background-box p{
+    font-size: 15px;   
+  }
+
+  .btn-more{
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
 }
