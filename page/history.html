@@ -21,7 +21,7 @@
 <body>
   <header>
     <div class="nav-list-mb" id="nav-list-mb">
-      <div class="logo-mb"><img src="../img/logo.png"></div>
+      <div class="logo-mb"><a href="../index.html"><img src="../img/logo.png"></a></div>
       <div class="center-flex">
         <ul>
           <li><a href="../page/promotion.html"> <i class="icofont-school-bus"></i>Khuyến mãi</a></li>
@@ -35,7 +35,7 @@
     </div>
     <div class="action-btn-mb center-flex" id="action-btn-mb">
       <div>
-        <div class="logo-mb "><img src="../img/logo.png"></div>
+        <div class="logo-mb "><a href="../index.html"><img src="../img/logo.png"></a></div>
         <div><button class="btn btn-exit btn-login" onclick="signinAction()"><i class="icofont-user"></i> Đăng
             nhập</button></div>
         <div><button class="btn btn-exit btn-signup" onclick="registerAction()"><i class="icofont-user"></i> Đăng
@@ -171,7 +171,7 @@
       <div class="container">
         <div class="row is-align-center nav-pc">
           <div class="col-xl-2 col-md-2 col-2 col logo">
-            <img src="../img/logo.png">
+            <a href="../index.html"><img src="../img/logo.png"></a>
           </div>
           <div class="col-xl-5 col-md-5 col-5 col ">
             <nav class="main-menu">
@@ -196,7 +196,7 @@
             </button>
           </div>
           <div class="logo-mb">
-            <img src="../img/logo.png">
+            <a href="../index.html"><img src="../img/logo.png"></a>
           </div>
           <div class="user-bar-mb">
             <button class="btn-mb" onclick="userDisplay()">
@@ -215,10 +215,16 @@
 
   <main>
     <section>
-      <article class="grid-choice">
-        <button class="grid-choice-item-active">Tất cả </button>
-        <button class="grid-choice-item">Đã hoàn tất </button>
-        <button class="grid-choice-item">Đang thực hiện </button>
+      <article class="row grid-choice">
+        <div class="col-lg-4 col-sm-12 is-magrin-bot-15">
+          <button class="grid-choice-item-active">Tất cả </button>  
+        </div>
+        <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
+          <button class="grid-choice-item">Đã hoàn tất </button>  
+        </div>
+        <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
+          <button class="grid-choice-item">Đang thực hiện </button>  
+        </div>
       </article>
       <article class="trip">
         <div class="trip-head">
@@ -227,7 +233,7 @@
         <hr>
         <div class="info">
           <div><img src="../img/phuongtrang.jpg" alt="" class="logogarage"></div>
-          <div>
+          <div style="padding: 20px">
             <div>
               <p>Chuyến đi: TP.HCM<img src="../img/arrow.png" alt="" style="width: 3%;">Đà Lạt
             </div>
@@ -266,7 +272,7 @@
         <hr>
         <div class="info">
           <div><img src="../img/phuongtrang.jpg" alt="" class="logogarage"></div>
-          <div>
+          <div style="padding: 20px">
             <div>
               <p>Chuyến đi: TP.HCM<img src="../img/arrow.png" alt="" style="width: 3%;">Đà Lạt
             </div>
@@ -302,60 +308,52 @@
   </main>
 
   <footer>
-    <div class="is-border-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-12 widget-col">
-            <img src="../img/logo.png" style="width: 80%">
-          </div>
-          <div class="col-md-3 col-sm-6 col-12 widget-col">
-            <ul class="widget-footer">
-              <li>
-                <h3>Về chúng tôi</h3>
-              </li>
-              <li><a href="#">Giới thiệu</a></li>
-              <li><a href="#">Hướng dẫn</a></li>
-              <li><a href="#">Tuyển dụng</a></li>
-              <li><a href="#">Tin tức</a></li>
-              <li><a href="#">Liên hệ</a></li>
-            </ul>
-          </div>
-          <div class="col-md-3 col-sm-6 col-12 widget-col">
-            <ul class="widget-footer">
-              <li>
-                <h3>Hỗ trợ</h3>
-              </li>
-              <li><a href="#">Help Center</a></li>
-              <li><a href="#">Chính sách</a></li>
-              <li><a href="#">Đối tác</a></li>
-              <li><a href="#">Q&A</a></li>
-            </ul>
-          </div>
-          <div class="col-md-3 col-sm-6 col-12 widget-col">
-            <ul class="widget-footer">
-              <li>
-                <h3>Tải ứng dụng</h3>
-              </li>
-
-            </ul>
+        <div class="is-border-bottom">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-12 widget-col">
+                <a href="../index.html"><img src="../img/logo.png" style="width: 80%"></a>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12 widget-col">
+                <ul class="widget-footer">
+                  <li><h3>Về chúng tôi</h3></li>
+                  <li><a href="../page/about_us.html">Giới thiệu</a></li>
+                  <li><a href="../page/partner_info.html">Hướng dẫn</a></li>
+                  <li><a href="../page/contact.html">Liên hệ</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12 widget-col">
+                <ul class="widget-footer">
+                  <li><h3>Hỗ trợ</h3></li>
+                  <li><a href="#">Help Center</a></li>
+                  <li><a href="#">Chính sách</a></li>
+                  <li><a href="#">Đối tác</a></li>
+                  <li><a href="#">Q&A</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12 widget-col">
+                <ul class="widget-footer">
+                  <li><h3>Tải ứng dụng</h3></li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>  
+        </div>
+        <div class="container">
+          <div class="copyright">
+            <div class="copyright-left">
+              <i class="icofont-twitter"></i>
+              <i class="icofont-instagram"></i>
+              <i class="icofont-facebook"></i>
+            </div>
+            <div class="copyright-right">
+              <p>2022 V.exe incorporated</p>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="copyright">
-        <div class="copyright-left">
-          <i class="icofont-twitter"></i>
-          <i class="icofont-instagram"></i>
-          <i class="icofont-facebook"></i>
         </div>
-        <div class="copyright-right">
-          <p>2022 V.exe incorporated</p>
-        </div>
-      </div>
-    </div>
-    </div>
-  </footer>
+      </footer>
 </body>
 <script>
   function changeChoice(e) {
