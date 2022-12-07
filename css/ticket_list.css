@@ -51,9 +51,11 @@ body {
   margin-top: 10px;
 }
 
+/* **********************************HANDLING DROPDOWN************/
 
-
-/* **********************************HANDLING DROPDOWN*/
+/* ***********************
+* POSITION SECTION EFFECT
+************************* */
 .position {
   max-height: 0;
   overflow: hidden;
@@ -84,6 +86,10 @@ body {
   display: none;
 }
 
+/* ***********************
+* HOMECAR SECTION EFFECT
+************************* */
+
 .homecar {
   max-height: 0;
   overflow: hidden;
@@ -113,6 +119,41 @@ body {
   > .icofont-rounded-down {
   display: none;
 }
+
+/* ***********************
+* PRICE FILTER SECTION EFFECT
+************************* */
+.range-filter {
+  max-height: 0;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.price__container > input[type="checkbox"]:checked ~ .range-filter {
+  max-height: 10rem;
+}
+
+.price__container
+  > input[type="checkbox"]:not(checked)
+  + label
+  > .icofont-rounded-up {
+  display: none;
+}
+
+.price__container
+  > input[type="checkbox"]:checked
+  + label
+  > .icofont-rounded-up {
+  display: inline-block;
+}
+
+.price__container
+  > input[type="checkbox"]:checked
+  + label
+  > .icofont-rounded-down {
+  display: none;
+}
+
 /* ************************************************************************* */
 .body__container {
   display: flex;
@@ -175,6 +216,63 @@ body {
 }
 
 /**********************/
+.range-filter {
+  /* padding-top: 10px; */
+  width: 240px;
+  /* margin: auto; */
+  /* margin-bottom: 10px; */
+}
+.range-controls {
+  position: relative;
+  height: 60px;
+  margin-bottom: 15px;
+  padding: 0 30px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.scale {
+  margin-top: 39px;
+  height: 2px;
+  background: #d7dcde;
+}
+.bar {
+  height: 2px;
+  background: #4f4cee;
+}
+.toggle {
+  position: absolute;
+  top: 32px;
+  left: 30px;
+  width: 4px;
+  height: 4px;
+  border: 8px solid #4f4cee;
+  /* background: #4f4cee; */
+  cursor: pointer;
+  border-radius: 50%;
+}
+.min-toggle {
+  left: 70px;
+}
+.max-toggle {
+  left: 165px;
+}
+.price-controls input {
+  width: 5.6rem;
+  padding: 8px 16px;
+
+  font-size: 16px;
+  font-family: "Tahoma", sans-serif;
+  text-align: center;
+  /* border-radius: 5px; */
+  border: none;
+  color: black;
+}
+
+.min-price {
+  /* margin-right: 14px; */
+  padding: 0 3rem;
+}
+/**********************/
 .isfont20 {
   font-size: 2rem;
 }
@@ -199,7 +297,7 @@ body {
   color: #4f4cee;
 }
 
-.row.mt-2.mb-2.isboder_bottom:hover{
+.row.mt-2.mb-2.isboder_bottom:hover {
   background: #f28730;
   color: white;
 }
