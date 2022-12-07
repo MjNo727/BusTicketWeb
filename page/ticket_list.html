@@ -199,6 +199,7 @@
       <main>
          <div class="container ">
             <div class="row">
+               <!-- BỘ LỌC NÂNG CAO SECTION -->
                <div class="filter__advance col-md-3 col-sm-12 col-12">
                   <p class="filter__section__header">Bộ lọc nâng cao</p>
                   <div class="position__container">
@@ -261,6 +262,34 @@
                         </label>
                      </div>
                   </div>
+                  
+                  <!-- PRICE SECTION -->
+                  <div class="price__container">
+                     <input
+                        id="dropdown_price"
+                        type="checkbox"
+                        class="dropdownPrice"
+                        style="display: none"
+                        />
+                     <label for="dropdown_price" class="isfont18"
+                        >Giá
+                     <i class="icofont-rounded-down"></i>
+                     <i class="icofont-rounded-up"></i>
+                     </label>
+                     <div class="range-filter">
+                        <div class="range-controls">
+                            <div class="scale"><div style="margin-left:50px;width:100px;" class="bar"></div></div>
+                            <div class="toggle min-toggle"></div>
+                            <div class="toggle max-toggle"></div>
+                        </div>
+                        <div class="price-controls">
+                            Từ <input class="min-price" type="text" value="100.000">
+                            đến  <input class="max-price" type="text" value="600.000">
+                        </div>
+                    </div>
+                  </div>
+                  <!--  -->
+
                </div>
                <div class="ticket__container p-3 col-md-9 col-sm-12 col-12">
                   <div class="ticket__header row" style="background-color: #0c86cb">
