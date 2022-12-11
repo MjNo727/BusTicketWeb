@@ -131,6 +131,7 @@ body {
 
 .price__container > input[type="checkbox"]:checked ~ .range-filter {
   max-height: 10rem;
+  padding: 20px 25px 0 25px;
 }
 
 .price__container
@@ -152,6 +153,93 @@ body {
   + label
   > .icofont-rounded-down {
   display: none;
+}
+
+.range-filter {
+  width: 100%;
+  /* padding: 20px 25px 0 25px; */
+  border-radius: 10px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+}
+
+.price-input {
+  width: 100%;
+  display: flex;
+  margin: 30px 0 35px;
+}
+.price-input .field {
+  display: flex;
+  width: 100%;
+  height: 45px;
+  align-items: center;
+}
+.field input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-size: 19px;
+  margin-left: 12px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #999;
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.price-input .separator {
+  width: 130px;
+  display: flex;
+  font-size: 19px;
+  align-items: center;
+  justify-content: center;
+}
+.slider {
+  height: 5px;
+  position: relative;
+  background: #ddd;
+  border-radius: 5px;
+}
+.slider .progress {
+  height: 100%;
+  left: 25%;
+  right: 25%;
+  position: absolute;
+  border-radius: 5px;
+  background: #4f4cee;
+}
+.range-input {
+  position: relative;
+}
+.range-input input {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  top: -5px;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  background: #4f4cee;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+input[type="range"]::-moz-range-thumb {
+  height: 17px;
+  width: 17px;
+  border: none;
+  border-radius: 50%;
+  background: #4f4cee;
+  pointer-events: auto;
+  -moz-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
 }
 
 /* ************************************************************************* */
@@ -216,73 +304,6 @@ body {
 }
 
 /**********************/
-.range-filter {
-  /* padding-top: 10px; */
-  width: 240px;
-  /* margin: auto; */
-  /* margin-bottom: 10px; */
-}
-.range-controls {
-  position: relative;
-  height: 60px;
-  margin-bottom: 15px;
-  padding: 0 30px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-.scale {
-  margin-top: 39px;
-  height: 2px;
-  background: #d7dcde;
-}
-.bar {
-  height: 2px;
-  background: #4f4cee;
-}
-.toggle {
-  position: absolute;
-  top: 32px;
-  left: 30px;
-  width: 4px;
-  height: 4px;
-  border: 8px solid #4f4cee;
-  /* background: #4f4cee; */
-  cursor: pointer;
-  border-radius: 50%;
-}
-.min-toggle {
-  left: 70px;
-}
-.max-toggle {
-  left: 165px;
-}
-
-.price-controls {
-  padding: 0 30px;
-  display: flex;
-  gap: 1px;
-}
-
-.price-controls p {
-  padding-top: 12px;
-}
-
-.price-controls input {
-  width: 5.6rem;
-  padding: 8px 15px;
-  /* margin-left: 15px; */
-  font-size: 16px;
-  font-family: "Tahoma", sans-serif;
-  text-align: center;
-  /* border-radius: 5px; */
-  border: none;
-  color: black;
-}
-
-.min-price {
-  /* margin-right: 14px; */
-  padding: 0 3rem;
-}
 /**********************/
 .isfont20 {
   font-size: 2rem;
