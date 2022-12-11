@@ -300,18 +300,18 @@
                            <div class="progress"></div>
                          </div>
                          <div class="range-input">
-                           <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                           <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                           <input type="range" class="range-min" min="0" max="900000" value="200000" step="1000">
+                           <input type="range" class="range-max" min="0" max="900000" value="700000" step="1000">
                          </div>
                         <div class="price-input">
                           <div class="field">
                             <span>Min</span>
-                            <input type="number" class="input-min" value="2500">
+                            <input type="number" class="input-min" value="200000">
                           </div>
-                          <div class="separator">-</div>
+                          <div class="separator"></div>
                           <div class="field">
                             <span>Max</span>
-                            <input type="number" class="input-max" value="7500">
+                            <input type="number" class="input-max" value="700000">
                           </div>
                         </div>
                       </div>
@@ -545,7 +545,7 @@
          const rangeInput = document.querySelectorAll(".range-input input"),
                priceInput = document.querySelectorAll(".price-input input"),
                range = document.querySelector(".slider .progress");
-               let priceGap = 1000;
+               let priceGap = 2000;
                priceInput.forEach(input =>{
                   input.addEventListener("input", e =>{
                      let minPrice = parseInt(priceInput[0].value),
