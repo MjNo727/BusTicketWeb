@@ -1,0 +1,121 @@
+
+  <link rel="stylesheet" type="text/css" href="../css/history.css">
+  
+
+  <main>
+    <section>
+      <article class="row grid-choice">
+        <div class="col-lg-4 col-sm-12 is-magrin-bot-15">
+          <button class="grid-choice-item-active">Tất cả </button>  
+        </div>
+        <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
+          <button class="grid-choice-item">Đã hoàn tất </button>  
+        </div>
+        <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
+          <button class="grid-choice-item">Đang thực hiện </button>  
+        </div>
+      </article>
+      <article class="trip">
+        <div class="trip-head">
+          <p>Nhà xe Phương Trang</p>
+        </div>
+        <hr>
+        <div class="info">
+          <div><img src="../img/phuongtrang.jpg" alt="" class="logogarage"></div>
+          <div style="padding: 20px">
+            <div>
+              <p>Chuyến đi: TP.HCM<img src="../img/arrow.png" alt="" style="width: 3%;">Đà Lạt
+            </div>
+            <div>Ngày đi: 11/11/2022</div>
+            <div>Số ghế: A07</div>
+            <div>Giá vé: <p class="money">300.000đ</p>
+            </div>
+            <div>Đánh giá của bạn:</div>
+            <div class="rate">
+              <input type="radio" id="star5" name="rate" value="5" />
+              <label for="star5" title="text">5 stars</label>
+              <input type="radio" id="star4" name="rate" value="4" />
+              <label for="star4" title="text">4 stars</label>
+              <input type="radio" id="star3" name="rate" value="3" />
+              <label for="star3" title="text">3 stars</label>
+              <input type="radio" id="star2" name="rate" value="2" />
+              <label for="star2" title="text">2 stars</label>
+              <input type="radio" id="star1" name="rate" value="1" />
+              <label for="star1" title="text">1 star</label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <textarea class="comment">Nhận xét của bạn:</textarea>
+        </div>
+        <hr>
+        <div class="status">
+          <p>Tình trạng: Đã hoàn tất </p>
+        </div>
+      </article>
+
+      <article class="trip">
+        <div class="trip-head">
+          <p>Nhà xe Phương Trang</p>
+        </div>
+        <hr>
+        <div class="info">
+          <div><img src="../img/phuongtrang.jpg" alt="" class="logogarage"></div>
+          <div style="padding: 20px">
+            <div>
+              <p>Chuyến đi: TP.HCM<img src="../img/arrow.png" alt="" style="width: 3%;">Đà Lạt
+            </div>
+            <div>Ngày đi: 12/11/2022</div>
+            <div>Số ghế: B11</div>
+            <div>Giá vé: <p class="money">350.000đ</p>
+            </div>
+            <div>Đánh giá của bạn:</div>
+            <div class="rate">
+              <input type="radio" id="star5" name="rate" value="5" />
+              <label for="star5" title="text">5 stars</label>
+              <input type="radio" id="star4" name="rate" value="4" />
+              <label for="star4" title="text">4 stars</label>
+              <input type="radio" id="star3" name="rate" value="3" />
+              <label for="star3" title="text">3 stars</label>
+              <input type="radio" id="star2" name="rate" value="2" />
+              <label for="star2" title="text">2 stars</label>
+              <input type="radio" id="star1" name="rate" value="1" />
+              <label for="star1" title="text">1 star</label>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="status">
+          <p>Tình trạng: Đang thực hiện </p>
+        </div>
+      </article>
+
+
+    </section>
+
+
+  </main>
+
+  
+<script>
+  function changeChoice(e) {
+    let text = e.target.textContent;
+    let value = text == "Đang thực hiện " ? 0 : text == "Đã hoàn tất " ?1 : 2;
+    let count = 0;
+    trips.forEach(trip => {
+      trip.className = "trip";
+      if (count == value){
+        trip.className = "trip-hidden";
+      }
+      ++count;
+    });
+    choices.forEach((c) => {
+      c.className = "grid-choice-item";
+    })
+    e.target.className = "grid-choice-item-active";
+  }
+  var choices = document.querySelectorAll(".grid-choice button");
+  choices.forEach(choice => choice.addEventListener("click", changeChoice));
+  var trips = document.querySelectorAll("article.trip");
+
+</script>
