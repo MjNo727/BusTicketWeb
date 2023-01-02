@@ -111,7 +111,7 @@
                      <p class="col-sm-3">Loại xe</p>
                      <p class="col-sm-3">Giá vé</p>
                   </div>
-                  <a href="/ticket_info">
+                  {{!-- <a href="/ticket_info">
                     <div class="row mt-2 mb-2 isboder_bottom">
                        <div class="col-sm-3 time_departure">
                           <div>
@@ -173,7 +173,8 @@
                        <p class="col-sm-3">Xe khách</p>
                        <p class="col-sm-3">250.000đ</p>
                     </div>
-                  </a>
+                  </a> --}}
+                  {{#each ticketList}}
                   <a href="/ticket_info">
                     <div class="row mt-2 mb-2 isboder_bottom">
                        <div class="col-sm-3 time_departure">
@@ -181,8 +182,8 @@
                              <img src="../img/brand_homecar/United Airlines.png" alt="" />
                           </div>
                           <div>
-                             0:00 AM<br />
-                             Phương Trang
+                             {{tripInfor.departure_time}}<br />
+                             {{garageInfor.name}}
                           </div>
                        </div>
                        <input type="checkbox" id="id_view4" class="view_detail_checkbox"></input>
@@ -190,11 +191,12 @@
                        Chi tiết
                        <i class="icofont-rounded-down isPurple"></i>
                        </label>
-                       <div class="col-sm-3">8 tiếng <br />Sài Gòn - Đà Lạt</div>
-                       <p class="col-sm-3">Xe khách</p>
-                       <p class="col-sm-3">300.000đ</p>
+                       <div class="col-sm-3">{{tripInfor.total_time}}<br />{{tripInfor.name}}</div>
+                       <p class="col-sm-3">{{carInfor.name}}</p>
+                       <p class="col-sm-3">{{price}}</p>
                     </div>
                   </a>
+                  {{/each}}
                </div>
             </div>
          </div>
