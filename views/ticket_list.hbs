@@ -6,7 +6,7 @@
                <!-- BỘ LỌC NÂNG CAO SECTION -->
                <div class="filter__advance col-md-3 col-sm-12 col-12">
                   <p class="filter__section__header">Bộ lọc nâng cao</p>
-                  <div class="position__container">
+                  {{!-- <div class="position__container">
                      <input
                         id="dropdown_position"
                         type="checkbox"
@@ -35,8 +35,8 @@
                         <span>Hàng cuối</span>
                         </label>
                      </div>
-                  </div>
-                  <div class="homecar__container">
+                  </div> --}}
+                  <div class="homecar__container" method="POST">
                      <input
                         id="dropdown_homecar"
                         type="checkbox"
@@ -50,19 +50,24 @@
                      </label>
                      <div class="homecar">
                         <label class="radio__item">
-                        <input type="radio" name="radio_homecar" />
+                        <input id="phuong_trang_id" type="radio" name="radio_homecar" value="Phương Trang" />
                         <span class="filter__radio"></span>
                         <span>Phương Trang</span>
                         </label>
                         <label class="radio__item">
-                        <input type="radio" name="radio_homecar" />
+                        <input id="thanh_buoi_id" type="radio" name="radio_homecar" value="Thành Bưởi" />
                         <span class="filter__radio"></span>
                         <span>Thành Bưởi</span>
                         </label>
                         <label class="radio__item">
-                        <input type="radio" name="radio_homecar" />
+                        <input id="lac_hong_id" type="radio" name="radio_homecar" value="Lạc Hồng"/>
                         <span class="filter__radio"></span>
                         <span>Lạc Hồng</span>
+                        </label>
+                        <label class="radio__item">
+                        <input id="tuan_hung_id" type="radio" name="radio_homecar" value="Tuấn Hưng"/>
+                        <span class="filter__radio"></span>
+                        <span>Tuấn Hưng</span>
                         </label>
                      </div>
                   </div>
@@ -81,28 +86,28 @@
                      <i class="icofont-rounded-up"></i>
                      </label>
                      <div class="range-filter">
-                        <div class="slider">
+                        {{!-- <div class="slider">
                            <div class="progress"></div>
                          </div>
                          <div class="range-input">
                            <input type="range" class="range-min" min="0" max="900000" value="200000" step="1000">
                            <input type="range" class="range-max" min="0" max="900000" value="700000" step="1000">
-                         </div>
+                         </div> --}}
                         <div class="price-input">
                           <div class="field">
                             <span>Min</span>
-                            <input type="number" class="input-min" value="200000">
+                            <input type="number" class="input-min">
                           </div>
                           <div class="separator"></div>
                           <div class="field">
                             <span>Max</span>
-                            <input type="number" class="input-max" value="700000">
+                            <input type="number" class="input-max">
                           </div>
                         </div>
                       </div>
                   </div>
                   <!--  -->
-
+                  <button type="submit" class="search-items btn-search search-advance">Lọc nâng cao</button>
                </div>
                <div class="ticket__container p-3 col-md-9 col-sm-12 col-12">
                   <div class="ticket__header row" style="background-color: #0c86cb">
@@ -113,7 +118,7 @@
                   </div>
                   
                   {{#each ticketList}}
-                  <a href="/ticket_info">
+                  <a href="/ticket_info?ticket={{_id}}">
                     <div class="row mt-2 mb-2 isboder_bottom">
                        <div class="col-sm-3 time_departure">
                           <div>
@@ -139,3 +144,69 @@
             </div>
          </div>
       </main>
+
+      <script>
+         const advanceBtn = document.querySelector(".search-advance");
+         let ticketList = JSON.parse(`{{{ticketListJSON}}}`);
+
+         advanceBtn.addEventListener('click', ()=>{
+            const inputGarage_PhuongTrang = document.querySelector("#phuong_trang_id");
+            const inputGarage_ThanhBuoi = document.querySelector("#thanh_buoi_id");
+            const inputGarage_LacHong = document.querySelector("#phuong_trang_id");
+            const inputGarage_TuanHung = document.querySelector("#tuan_hung_id");
+
+             // PRICE SELECTOR
+            const min_price = document.querySelector(".input-min").value;
+            const max_price = document.querySelector(".input-max").value;
+
+            // FILTER
+            const newTicketList = ticketList.filter((ele)=>{
+               if(inputGarage_PhuongTrang.checked){
+                  return ele.garageInfor.name == "Phương Trang";
+               }
+               if(inputGarage_ThanhBuoi.checked){
+                  return ele.garageInfor.name == "Thành Bưởi";
+               }
+               if(inputGarage_LacHong.checked){
+                  return ele.garageInfor.name == "Lạc Hồng";
+               }
+               if(inputGarage_TuanHung.checked){
+                  return ele.garageInfor.name == "Tuấn Hưng";
+               }
+               return ele;
+            })
+
+            const filterTicketListPrice = (min_price && max_price) ? newTicketList.filter((ele)=>{
+               console.log(ele);
+               return ele.price >= min_price && ele.price <= max_price;
+            }):newTicketList
+
+
+            let ticketListView = document.querySelector(".ticket__container");
+            ticketListView.innerHTML='<div class="ticket__header row" style="background-color: #0c86cb"> <p class="col-sm-3">Khởi chạy</p><p class="col-sm-3">Thời gian hành trình</p><p class="col-sm-3">Loại xe</p><p class="col-sm-3">Giá vé</p></div>';
+            for(let i = 0; i < filterTicketListPrice.length; i++)
+            {
+               ticketListView.innerHTML += `<a href="/ticket_info?ticket=${filterTicketListPrice[i]._id}">
+                    <div class="row mt-2 mb-2 isboder_bottom">
+                       <div class="col-sm-3 time_departure">
+                          <div>
+                             <img src="../img/brand_homecar/United Airlines.png" alt="" />
+                          </div>
+                          <div>
+                             ${filterTicketListPrice[i].tripInfor.departure_date} - ${filterTicketListPrice[i].tripInfor.departure_time}<br />
+                             ${filterTicketListPrice[i].garageInfor.name}
+                          </div>
+                       </div>
+                       <input type="checkbox" id="id_view4" class="view_detail_checkbox"></input>
+                       <label for="id_view4" class="view_message ml-3  isPurple">
+                       Chi tiết
+                       <i class="icofont-rounded-down isPurple"></i>
+                       </label>
+                       <div class="col-sm-3">${filterTicketListPrice[i].tripInfor.total_time}<br />${filterTicketListPrice[i].tripInfor.name}</div>
+                       <p class="col-sm-3">${filterTicketListPrice[i].carInfor.name}</p>
+                       <p class="col-sm-3">${filterTicketListPrice[i].price}</p>
+                    </div>
+                  </a>`;
+            }
+         })
+      </script>

@@ -17,7 +17,8 @@
         <div class="col-xl-4 d-flex justify-content-end isfont20 mt-2">
           <a href="/partner_info">
             <p class="isbold isPurple">
-              Thông tin <i class="icofont-arrow-right isfont25"></i>
+              Thông tin
+              <i class="icofont-arrow-right isfont25"></i>
             </p>
           </a>
         </div>
@@ -26,13 +27,16 @@
 
     <div class="">
       <div class="departure-place isbold">
-        <i style="color: red">Địa điểm xuất bến:</i> Bến Xe An Sương
+        <i style="color: red">Địa điểm xuất bến:</i>
+        {{ticketInfor.tripInfor.departure_place}}
       </div>
       <div class="home-car isbold">
-        <i style="color: red">Nhà xe:</i> Phương Trang
+        <i style="color: red">Nhà xe:</i>
+        {{ticketInfor.garageInfor.name}}
       </div>
       <div class="car-type isbold">
-        <i style="color: red">Loại xe:</i> Xe khách thường
+        <i style="color: red">Loại xe:</i>
+        {{ticketInfor.carInfor.name}}
       </div>
     </div>
 
@@ -42,27 +46,36 @@
           <p class="isfont25 isbold">Điểm đi</p>
           <d class="isfont20">
             <div class="row">
-              <div class="col-xl-6">Bến xe An Sương</div>
+              <div
+                class="col-xl-6"
+              >{{ticketInfor.tripInfor.departure_place}}</div>
 
             </div>
           </d>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-6">
           <p class="isfont25 isbold border border-top-0">Điểm đến</p>
-          <p class="isfont20">Bến xe Đà Lạt</p>
+          <p class="isfont20">{{ticketInfor.tripInfor.arrive_place}}</p>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12 col-12">
-          <p class="isfont25 isbold">Ngày: 21/12/2022</p>
+          <p class="isfont25 isbold">Ngày:
+            {{ticketInfor.tripInfor.departure_date}}</p>
           <div class="row">
             <div class="col-4">
-              <p class="isfont20 isbold">Giờ đi <br> 00:00</p>
+              <p class="isfont20 isbold">Giờ đi
+                <br />
+                {{ticketInfor.tripInfor.departure_time}}</p>
             </div>
             <div class="col-4">
-              <p class="isfont20 isbold">Giá vé <br> 300K</p>
+              <p class="isfont20 isbold">Giá vé <br /> {{ticketInfor.price}}</p>
             </div>
             <div class="col-4">
               <a href="/booking">
-                <button type="button" class="btn isOrange booking__btn ml-10 isfont20" style="width: ">
+                <button
+                  type="button"
+                  class="btn isOrange booking__btn ml-10 isfont20"
+                  style="width: "
+                >
                   Đặt vé
                 </button>
               </a>
@@ -83,7 +96,11 @@
           </div> -->
       <div style="text-align: center; margin: 15px">
         <a href="/ticket_list">
-          <button type="button" class="btn btn--similar isOrange isBond isfont23" style="width: 100%;padding: 10px">
+          <button
+            type="button"
+            class="btn btn--similar isOrange isBond isfont23"
+            style="width: 100%;padding: 10px"
+          >
             CÁC CHUYẾN XE KHÁC TƯƠNG TỰ
           </button>
         </a>

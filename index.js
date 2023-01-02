@@ -68,21 +68,31 @@ const handleSearch = async function (req, res) {
   const depature_date = req.body.depature_date;
   const car_type = req.body.car_type;
 
-  if (!departure_place || !arrive_place || !depature_date) {
+  if (!departure_place || !arrive_place || !depature_date || !car_type) {
     return res.render("ticket_list.hbs", {
       ticketErrorMessage: "Vui lòng nhập đủ thông tin!",
     });
   }
 
+  // FIND ID của loại xe
+  const car_id = await carModel.find({ name: car_type }, { _id: 1 }).lean();
+  const carIdList = car_id.map((ele, index) => ele._id.toString());
+
   // SEARCH NƠI ĐẾN, NƠI ĐI, THỜI GIAN
   const result = departure_place + " - " + arrive_place;
   const resultTrip = await tripModel
-    .find({ name: result, departure_date: depature_date })
+    .find({
+      name: result,
+      departure_date: depature_date,
+      car: {
+        $in: carIdList,
+      },
+    })
     .lean();
   const newTicketList = [];
   for (let i = 0; i < resultTrip.length; i++) {
     const ticket = await ticketModel
-      .findOne({ trip: resultTrip[i]._id })
+      .findOne({ trip: resultTrip[i]._id.toString() })
       .lean();
     ticket.tripInfor = resultTrip[i];
     ticket.garageInfor = await garageModel
@@ -94,6 +104,7 @@ const handleSearch = async function (req, res) {
 
   res.render("ticket_list", {
     ticketList: newTicketList,
+    ticketListJSON: JSON.stringify(newTicketList),
   });
 };
 
@@ -114,13 +125,28 @@ app.get("/ticket_list", async (req, res) => {
 
   res.render("ticket_list", {
     ticketList: newTicketList,
+    ticketListJSON: JSON.stringify(newTicketList),
   });
 });
 
 app.post("/ticket_list", handleSearch);
 
-app.get("/ticket_info", (req, res) => {
-  res.render("ticket_info");
+app.get("/ticket_info", async (req, res) => {
+  const id = req.query.ticket;
+  const ticketInfor = await ticketModel.findById(id).lean();
+
+  const ele = ticketInfor;
+  const ticket = { ...ele };
+  const tripId = ele.trip;
+  const trip = await tripModel.findById(tripId).lean();
+  ticket.tripInfor = trip;
+  ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+  ticket.carInfor = await carModel.findById(trip.car).lean();
+
+  console.log(ticket);
+  res.render("ticket_info", {
+    ticketInfor: ticket,
+  });
 });
 
 app.get("/booking", (req, res) => {
