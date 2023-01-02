@@ -5,6 +5,8 @@ const tripSchema = new mongoose.Schema({
   garage: String,
   departure_place: String,
   arrive_place: String,
+  departure_date: String,
+  arrive_date: String,
   departure_time: String,
   arrive_time: String,
   total_time: String,

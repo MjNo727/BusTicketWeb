@@ -111,69 +111,7 @@
                      <p class="col-sm-3">Loại xe</p>
                      <p class="col-sm-3">Giá vé</p>
                   </div>
-                  {{!-- <a href="/ticket_info">
-                    <div class="row mt-2 mb-2 isboder_bottom">
-                       <div class="col-sm-3 time_departure">
-                          <div>
-                             <img src="../img/brand_homecar/United Airlines.png" alt="" />
-                          </div>
-                          <div>
-                             0:00 AM<br />
-                             Phương Trang
-                          </div>
-                       </div>
-                       <input type="checkbox" id="id_view" class="view_detail_checkbox"></input>
-                       <label for="id_view" class="view_message ml-3 isPurple">
-                       Chi tiết
-                       <i class="icofont-rounded-down isPurple"></i>
-                       </label>
-                       <div class="col-sm-3">8 tiếng <br />Sài Gòn - Đà Lạt</div>
-                       <p class="col-sm-3">Xe khách</p>
-                       <p class="col-sm-3">300.000đ</p>
-                    </div>
-                   </a> 
-                   <a href="/ticket_info">
-                    <div class="row mt-2 mb-2 isboder_bottom">
-                       <div class="col-sm-3 time_departure">
-                          <div>
-                             <img src="../img/brand_homecar/United Airlines.png" alt="" />
-                          </div>
-                          <div>
-                             0:00 AM<br />
-                             Phương Trang
-                          </div>
-                       </div>
-                       <input type="checkbox" id="id_view2" class="view_detail_checkbox"></input>
-                       <label for="id_view2" class="view_message ml-3  isPurple">
-                       Chi tiết
-                       <i class="icofont-rounded-down isPurple"></i>
-                       </label>
-                       <div class="col-sm-3">8 tiếng <br />Sài Gòn - Đà Lạt</div>
-                       <p class="col-sm-3">Xe khách</p>
-                       <p class="col-sm-3">300.000đ</p>
-                    </div>
-                  </a>
-                  <a href="/ticket_info">
-                    <div class="row mt-2 mb-2 isboder_bottom">
-                       <div class="col-sm-3 time_departure">
-                          <div>
-                             <img src="../img/brand_homecar/Delta Airlines.png" alt="" />
-                          </div>
-                          <div>
-                             0:00 AM<br />
-                             Lạc Hồng
-                          </div>
-                       </div>
-                       <input type="checkbox" id="id_view3" class="view_detail_checkbox"></input>
-                       <label for="id_view3" class="view_message ml-3  isPurple">
-                       Chi tiết
-                       <i class="icofont-rounded-down isPurple"></i>
-                       </label>
-                       <div class="col-sm-3">9 tiếng <br />Sài Gòn - Đà Lạt</div>
-                       <p class="col-sm-3">Xe khách</p>
-                       <p class="col-sm-3">250.000đ</p>
-                    </div>
-                  </a> --}}
+                  
                   {{#each ticketList}}
                   <a href="/ticket_info">
                     <div class="row mt-2 mb-2 isboder_bottom">
@@ -182,7 +120,7 @@
                              <img src="../img/brand_homecar/United Airlines.png" alt="" />
                           </div>
                           <div>
-                             {{tripInfor.departure_time}}<br />
+                             {{tripInfor.departure_date}} - {{tripInfor.departure_time}}<br />
                              {{garageInfor.name}}
                           </div>
                        </div>

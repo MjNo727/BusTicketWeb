@@ -68,11 +68,33 @@ const handleSearch = async function (req, res) {
   const depature_date = req.body.depature_date;
   const car_type = req.body.car_type;
 
-  if (!departure_place || !arrive_place) {
+  if (!departure_place || !arrive_place || !depature_date) {
     return res.render("ticket_list.hbs", {
-      ticketErrorMessage: "Vui lòng nhập đủ nơi đến và nơi đi!",
+      ticketErrorMessage: "Vui lòng nhập đủ thông tin!",
     });
   }
+
+  // SEARCH NƠI ĐẾN, NƠI ĐI, THỜI GIAN
+  const result = departure_place + " - " + arrive_place;
+  const resultTrip = await tripModel
+    .find({ name: result, departure_date: depature_date })
+    .lean();
+  const newTicketList = [];
+  for (let i = 0; i < resultTrip.length; i++) {
+    const ticket = await ticketModel
+      .findOne({ trip: resultTrip[i]._id })
+      .lean();
+    ticket.tripInfor = resultTrip[i];
+    ticket.garageInfor = await garageModel
+      .findById(resultTrip[i].garage)
+      .lean();
+    ticket.carInfor = await carModel.findById(resultTrip[i].car).lean();
+    newTicketList.push(ticket);
+  }
+
+  res.render("ticket_list", {
+    ticketList: newTicketList,
+  });
 };
 
 app.get("/ticket_list", async (req, res) => {
