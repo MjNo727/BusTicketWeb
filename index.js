@@ -8,6 +8,7 @@ const { ticketModel } = require("./models/tickets.js");
 const { tripModel } = require("./models/trip.js");
 const { garageModel } = require("./models/garage.js");
 const { carModel } = require("./models/car.js");
+const { orderModel } = require("./models/orders.js");
 mongoose
   .connect("mongodb+srv://phong:123@cluster0.l1qxx8r.mongodb.net/busticket")
   .then(function () {
@@ -58,6 +59,8 @@ app.get("/createTables", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  if (req.query.login)
+    res.locals.login_errorMessage = "Please login to continue";
   res.render("index");
 });
 
@@ -143,19 +146,53 @@ app.get("/ticket_info", async (req, res) => {
   ticket.garageInfor = await garageModel.findById(trip.garage).lean();
   ticket.carInfor = await carModel.findById(trip.car).lean();
 
-  console.log(ticket);
+  // console.log(ticket);
   res.render("ticket_info", {
     ticketInfor: ticket,
   });
 });
 
-app.get("/booking", (req, res) => {
-  res.render("booking");
+// ************************ BOOKING FUNCTION **********************************************
+
+app.get("/booking", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect("/?login=true");
+  }
+  const id = req.query.ticket;
+  const ticketInfor = await ticketModel.findById(id).lean();
+
+  const ele = ticketInfor;
+  const ticket = { ...ele };
+  const tripId = ele.trip;
+  const trip = await tripModel.findById(tripId).lean();
+  ticket.tripInfor = trip;
+  ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+  ticket.carInfor = await carModel.findById(trip.car).lean();
+
+  res.render("booking", {
+    ticketInfor: ticket,
+  });
 });
 
+const bookingFunction = async function (req, res) {
+  const name = req.body.name;
+  const phone = req.body.phone;
+  const number = req.body.number;
+
+  const ticketId = req.query.ticket; // lay id ticket dang đặt
+  const ticket = await ticketModel.findOne({ _id: ticketId });
+  ticket.limit -= number;
+  ticket.save();
+};
+
+app.post("/booking", bookingFunction);
+
+//***************************** HISTORY REVIEW Vé *************************************/
 app.get("/history", (req, res) => {
   res.render("history");
 });
+
+// ***********************************************************************************
 
 app.get("/promotion", (req, res) => {
   res.render("promotion");
