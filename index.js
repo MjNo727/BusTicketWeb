@@ -9,6 +9,7 @@ const { tripModel } = require("./models/trip.js");
 const { garageModel } = require("./models/garage.js");
 const { carModel } = require("./models/car.js");
 const { orderModel } = require("./models/orders.js");
+const { userModel } = require("./models/users.js");
 mongoose
   .connect("mongodb+srv://phong:123@cluster0.l1qxx8r.mongodb.net/busticket")
   .then(function () {
@@ -169,6 +170,7 @@ app.get("/booking", async (req, res) => {
   ticket.garageInfor = await garageModel.findById(trip.garage).lean();
   ticket.carInfor = await carModel.findById(trip.car).lean();
 
+  res.locals.successMessageBooking = "";
   res.render("booking", {
     ticketInfor: ticket,
   });
@@ -176,6 +178,7 @@ app.get("/booking", async (req, res) => {
 
 const bookingFunction = async function (req, res) {
   const name = req.body.name;
+  const id_user = req.body.id_user;
   const phone = req.body.phone;
   const number = req.body.number;
 
@@ -183,13 +186,60 @@ const bookingFunction = async function (req, res) {
   const ticket = await ticketModel.findOne({ _id: ticketId });
   ticket.limit -= number;
   ticket.save();
+
+  // res.locals.successMessageBooking = "Đặt vé thành công!";
+  // add vào bảng order
+  const order = await orderModel.create({
+    user: id_user,
+    ticket: ticketId,
+    number: number
+  });
+  res.redirect("/history");
 };
 
 app.post("/booking", bookingFunction);
 
 //***************************** HISTORY REVIEW Vé *************************************/
-app.get("/history", (req, res) => {
-  res.render("history");
+app.get("/history", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect("/?login=true");
+  }
+  const orders = await orderModel.find({user: res.locals.authUser.id}).lean();
+  const  order_details = [];
+
+  const addOrder = async () => {
+    for (let i = 0; i < orders.length; ++i) {
+      const ele = orders[i];
+  
+      const ticketId = ele.ticket;
+      const ticketDetail = await ticketModel.findOne({_id: ticketId}).lean(); 
+  
+      const tripId = ticketDetail.trip;
+      const trip = await tripModel.findOne({_id: tripId}).lean(); 
+
+      const garageId = trip.garage;
+      const garage = await garageModel.findOne({_id: garageId}).lean();
+  
+      const carId = trip.car;
+      const car = await carModel.findOne({_id: carId}).lean();
+      
+      const order = {
+        number: ele.number,
+        trip_infor: trip,
+        ticket_infor: ticketDetail,
+        garage_infor: garage,
+        car_infor: car
+      }
+     
+      order_details.push(order);
+      // console.log(garage);
+    }
+  }
+  await addOrder();
+  console.log(order_details);
+  res.render("history", {
+    order_details
+  });
 });
 
 // ***********************************************************************************

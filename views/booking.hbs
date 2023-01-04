@@ -211,6 +211,11 @@
             Dưới</button>
         </div>
         <h3 class="is-text-center infor-customer">THÔNG TIN HÀNH KHÁCH</h3>
+        <div>
+            {{#if successMessageBooking}}
+              {{successMessageBooking}}
+        {{/if}}
+        </div>
         <p class="is-margin-bottom-0">Họ và tên</p>
         <div class="text-box">
           <input
@@ -240,6 +245,16 @@
             min="1"
           />
         </div>
+
+        <div class="text-box">
+          <input
+            type="text"
+            name="id_user"
+            hidden="true"
+            value='{{authUser.id}}'
+          />
+        </div>
+
         {{! <p>Ghế đã chọn: A07</p> }}
         <h3 class="is-text-center infor-customer">THANH TOÁN</h3>
         {{! <p class="is-margin-bottom-0">Mã giảm giá</p>

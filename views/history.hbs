@@ -15,20 +15,22 @@
           <button class="grid-choice-item">Đang thực hiện </button>  
         </div>
       </article>
+      
+      {{#each order_details}}
       <article class="trip">
         <div class="trip-head">
-          <p>Nhà xe Phương Trang</p>
+          <p>Nhà xe: {{garage_infor.name}}</p>
         </div>
         <hr>
         <div class="info">
           <div><img src="../img/phuongtrang.jpg" alt="" class="logogarage"></div>
           <div style="padding: 20px">
             <div>
-              <p>Chuyến đi: TP.HCM<img src="../img/arrow.png" alt="" style="width: 3%;">Đà Lạt
+              <p>Chuyến đi: {{trip_infor.name}}</p>
             </div>
-            <div>Ngày đi: 11/11/2022</div>
-            <div>Số ghế: A07</div>
-            <div>Giá vé: <p class="money">300.000đ</p>
+            <div>Ngày đi:  {{trip_infor.departure_date}}</div>
+            <div>Số lượng:  {{number}}</div>
+            <div>Giá vé: <p class="money">{{ticket_infor.price}}đ</p>
             </div>
             <div>Đánh giá của bạn:</div>
             <div class="rate">
@@ -53,50 +55,9 @@
           <p>Tình trạng: Đã hoàn tất </p>
         </div>
       </article>
-
-      <article class="trip">
-        <div class="trip-head">
-          <p>Nhà xe Phương Trang</p>
-        </div>
-        <hr>
-        <div class="info">
-          <div><img src="../img/phuongtrang.jpg" alt="" class="logogarage"></div>
-          <div style="padding: 20px">
-            <div>
-              <p>Chuyến đi: TP.HCM<img src="../img/arrow.png" alt="" style="width: 3%;">Đà Lạt
-            </div>
-            <div>Ngày đi: 12/11/2022</div>
-            <div>Số lượng vé: </div>
-            <div>Giá vé: <p class="money">350.000đ</p>
-            </div>
-            <div>Đánh giá của bạn:</div>
-            <div class="rate">
-              <input type="radio" id="star5" name="rate" value="5" />
-              <label for="star5" title="text">5 stars</label>
-              <input type="radio" id="star4" name="rate" value="4" />
-              <label for="star4" title="text">4 stars</label>
-              <input type="radio" id="star3" name="rate" value="3" />
-              <label for="star3" title="text">3 stars</label>
-              <input type="radio" id="star2" name="rate" value="2" />
-              <label for="star2" title="text">2 stars</label>
-              <input type="radio" id="star1" name="rate" value="1" />
-              <label for="star1" title="text">1 star</label>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="status">
-          <p>Tình trạng: Đang thực hiện </p>
-        </div>
-      </article>
-
-
+      {{/each}}
     </section>
-
-
   </main>
-
-  
 <script>
   function changeChoice(e) {
     let text = e.target.textContent;
