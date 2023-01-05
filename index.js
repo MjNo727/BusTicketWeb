@@ -44,6 +44,7 @@ app.use(
   })
 );
 app.use(function (req, res, next) {
+  // console.log(req.session.authUser);
   if (req.session.auth) {
     res.locals.auth = true;
     res.locals.authUser = req.session.authUser;
@@ -153,6 +154,122 @@ app.get("/ticket_info", async (req, res) => {
   });
 });
 
+//for ad
+app.get("/manage_trip_list", async function (req, res) {
+  if (!req.session.auth) {
+    return res.redirect("/?login=true");
+  }
+  console.log();
+  if (res.locals.authUser["role"] != "admin") {
+    console.log("wrong role");
+    return res.redirect("/");
+  }
+  //have some problem with database note by !
+  const ticketList = await ticketModel.find().lean(); // !
+  const newTicketList = []; // !
+
+  for (let i = 0; i < ticketList.length; ++i) { // !
+    const ele = ticketList[i]; // !
+    const ticket = { ...ele }; // !
+    const tripId = ele.trip;
+    const trip = await tripModel.findById(tripId).lean();
+    ticket.tripInfor = trip;
+    ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+    ticket.carInfor = await carModel.findById(trip.car).lean();
+    newTicketList.push(ticket);
+  }
+
+  res.render("manage_trip_list", {
+    ticketList: newTicketList, // !
+    ticketListJSON: JSON.stringify(newTicketList), // !
+  });
+});
+
+app.get("/delete_trip", async (req, res) => { // not finish
+  if (!req.session.auth) {
+    return res.redirect("/?login=true");
+  }
+  // console.log();
+  if (res.locals.authUser["role"] != "admin") {
+    console.log("wrong role");
+    return res.redirect("/");
+  }
+
+  const id = req.query.trip;
+  tripModel.destroy({
+    where: {
+      id: id
+    }
+  })
+})
+
+app.get("/manage_trip_info", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect("/?login=true");
+  }
+  if (res.locals.authUser["role"] != "admin") {
+    console.log("wrong role");
+    return res.redirect("/");
+  }
+  //have some problem with database, note by !
+  const id = req.query.trip;
+  const ticketInfor = await ticketModel.findById(id).lean(); // it should by trip model
+
+  const ele = ticketInfor; // !
+  const ticket = { ...ele }; // !
+  const tripId = ele.trip;
+  const trip = await tripModel.findById(tripId).lean();
+  ticket.tripInfor = trip;
+  ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+  ticket.carInfor = await carModel.findById(trip.car).lean();
+
+  // console.log(ticket);
+  res.render("manage_trip_info", {
+    ticketInfor: ticket, // !
+  });
+});
+
+app.post("/manage_trip_info", async (req, res) => { // for update
+  // if (!req.session.auth) {
+  //   return res.redirect("/?login=true");
+  // }
+  // if (res.locals.authUser["role"] != "admin") {
+  //   console.log("wrong role");
+  //   return res.redirect("/");
+  // }
+
+  //have some problem with database, note by !
+  let id = req.query.trip;
+  let ticketInfor = await ticketModel.findById(id).lean(); // it should by trip model
+
+  let garage_name = req.body.garage_name;
+  let trip_departure_place = req.body.trip_departure_place;
+  let trip_arrive_place = req.body.trip_arrive_place;
+  let trip_depature_date = req.body.trip_depature_date;
+  let car_type = req.body.car_type;
+
+  console.log(trip_departure_place);
+  let ele = ticketInfor; // !
+  let ticket = { ...ele }; // !
+  let tripId = ele.trip;
+
+  const trip = await tripModel.findById(tripId).lean();
+  trip.update({
+    departure_place: trip_departure_place
+  })
+
+
+  // console.log(typeof trip)
+  ticket.tripInfor = trip;
+  ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+  // console.log("real : " + ticket.garageInfor.name);
+  ticket.carInfor = await carModel.findById(trip.car).lean();
+
+  res.render("manage_trip_info", {
+    ticketInfor: ticket, // !
+  });
+});
+
 // ************************ BOOKING FUNCTION **********************************************
 
 app.get("/booking", async (req, res) => {
@@ -204,25 +321,25 @@ app.get("/history", async (req, res) => {
   if (!req.session.auth) {
     return res.redirect("/?login=true");
   }
-  const orders = await orderModel.find({user: res.locals.authUser.id}).lean();
-  const  order_details = [];
+  const orders = await orderModel.find({ user: res.locals.authUser.id }).lean();
+  const order_details = [];
 
   const addOrder = async () => {
     for (let i = 0; i < orders.length; ++i) {
       const ele = orders[i];
-  
+
       const ticketId = ele.ticket;
-      const ticketDetail = await ticketModel.findOne({_id: ticketId}).lean(); 
-  
+      const ticketDetail = await ticketModel.findOne({ _id: ticketId }).lean();
+
       const tripId = ticketDetail.trip;
-      const trip = await tripModel.findOne({_id: tripId}).lean(); 
+      const trip = await tripModel.findOne({ _id: tripId }).lean();
 
       const garageId = trip.garage;
-      const garage = await garageModel.findOne({_id: garageId}).lean();
-  
+      const garage = await garageModel.findOne({ _id: garageId }).lean();
+
       const carId = trip.car;
-      const car = await carModel.findOne({_id: carId}).lean();
-      
+      const car = await carModel.findOne({ _id: carId }).lean();
+
       const order = {
         number: ele.number,
         trip_infor: trip,
@@ -230,7 +347,7 @@ app.get("/history", async (req, res) => {
         garage_infor: garage,
         car_infor: car
       }
-     
+
       order_details.push(order);
       // console.log(garage);
     }
