@@ -32,13 +32,20 @@
         <div class="row justify-content-left">
             <div class="col-sm-12">
                 <br>
-                <h2 class="news-title bold">{{name}} - "Chất lượng là danh dự"</h2>
-                <i class="fa-solid fa-location-dot"></i>
-                <span class="news-location bold"> Takashimaya</span>
-                <span class="news-location bold">@ TP. Hồ Chí Minh</span>
-                <div class="date">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    20/12/2022 
+                <div class="name_garage_container">
+                    <img src={{imgPath}} alt="" />
+                    <div>
+                        <p class="news-title bold">{{name}}</p>
+                    </div>
+                </div>
+                <div class="detail_garage">
+                    {{!-- <span class="news-location bold"> Takashimaya</span> --}}
+                    <p class="news-location bold"><i class="fa-solid fa-location-dot"></i> TP. Hồ Chí Minh</p>
+                    {{!-- <div class="date">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        20/12/2022 
+                    </div> --}}
+                    <p><i class="fa-solid fa-phone"></i> {{phone}}</p>
                 </div>
                 {{!-- <div class="brief">
                     Thành lập 10/2022, V.exe với mục tiêu mang đến nhứng chuyến xe an toàn cho mọi người đi đến mọi nơi, mọi miền tổ quốc.

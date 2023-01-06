@@ -55,8 +55,9 @@
         }
         .comment_divisor
         {
-            font-size: 20px;
-            text-align: center;
+            font-size: 25px;
+            /* text-align: center; */
+            padding-left: 2rem;
             color: grey;
         }    
         
@@ -148,10 +149,46 @@
 /************************************
 ************************************/
 
+
+/***********************
+********************/
+.name_garage_container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.name_garage_container img {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    border: 3px solid #f15a24;
+}
+
+.name_garage_container div {
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.news-title {
+    font-size: 33px;
+}
+
+.detail_garage {
+    padding: 0 2rem;
+}
+
+.detail_garage p {
+    font-size: 1.3rem;
+}
+
+/**** FORM ****/
 .form_rating {
     width: 55rem;
     padding: 2rem 0;
-    border: solid 1px gray;
+    border: solid 3px gray;
 }
 
 .isOrange {
