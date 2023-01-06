@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="../css/ticket_info.css" />
+
+<body>
+  {{!-- <div class="container body_ticket_info"> --}}
+    <form class="container body_ticket_info" action="" method="POST">
+      <div class="">
+        <div class="row isBGLightGrey p-3 mt-5">
+          <div class="col-xl-5">
+            <span class="type-bus isbold">{{ticketInfor.garageInfor.name}}</span>
+          </div>
+          <div class="col-xl-3 d-flex justify-content-start pt-1">
+            <i class="icofont-star isfont35 isChecked"></i>
+            <i class="icofont-star isfont35 isChecked"></i>
+            <i class="icofont-star isfont35 isChecked"></i>
+            <i class="icofont-star isfont35 isChecked"></i>
+            <i class="icofont-star isfont35"></i>
+          </div>
+          <div class="col-xl-4 d-flex justify-content-end isfont20 mt-2">
+            <a href="/partner_info">
+              <p class="isbold isPurple">
+                Thông tin
+                <i class="icofont-arrow-right isfont25"></i>
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="departure-place isbold">
+          <i>Nhà xe:</i>
+          <input type="text" name="garage_name" value="{{ticketInfor.garageInfor.name}}">
+        </div>
+
+        <div class="departure-place isbold">
+          <i>Loại xe:</i>
+          <input type="text" name="car_name" value="{{ticketInfor.carInfor.name}}">
+        </div>
+
+        <div class="departure-place isbold">
+          <i>Điểm đi:</i>
+          <input type="text" name="trip_departure_place" value="{{ticketInfor.tripInfor.departure_place}}">
+        </div>
+
+        <div class="departure-place isbold">
+          <i>Điểm đến:</i>
+          <input type="text" name="trip_arrive_place" value="{{ticketInfor.tripInfor.arrive_place}}">
+        </div>
+
+        <div class="departure-place isbold">
+          <i>Ngày:</i>
+          <input type="text" name="trip_departure_date" value="{{ticketInfor.tripInfor.departure_date}}">
+        </div>
+
+        <div class="departure-place isbold">
+          <i>Giờ đi:</i>
+          <input type="text" name="trip_departure_time" value="{{ticketInfor.tripInfor.departure_time}}">
+        </div>
+
+        <div class="departure-place isbold">
+          <i>Giá vé:</i>
+          <input type="text" name="trip_price" value="{{ticketInfor.price}}">
+        </div>
+
+
+      </div>
+
+      <div class="isBGLightGrey">
+        <div class="col-4">
+          <a href="/manage_trip_info?trip={{ticketInfor._id}}">
+            <button type="submit" class="btn isOrange booking__btn ml-10 isfont20" style="width: ">
+              Cập nhật
+            </button>
+          </a>
+        </div>
+        <div class="col-4">
+          <a href="/delete_trip?trip={{ticketInfor._id}}">
+            <button type="button" class="btn isOrange booking__btn ml-10 isfont20" style="width: ">
+              Xóa
+            </button>
+          </a>
+        </div>
+      </div>
+
+      {{!--
+  </div> --}}
+  </form>
+</body>
