@@ -70,7 +70,7 @@ hr{
 
 
 /**/
-.rate {
+/* .rate {
     display: inline-block;
     height: 46px;
     padding: 0 10px;
@@ -110,11 +110,11 @@ hr{
 .rate>input:checked~label:hover~label,
 .rate>label:hover~input:checked~label {
     color: #c59b08;
-}
+} */
 
 /**/
 
-.comment{
+/* .comment{
     margin: 1rem 1rem 0 1rem;
     width: calc(100% - 2rem);
     height: 8rem;
@@ -131,7 +131,7 @@ hr{
     color:#f2754e;
     margin-right: 1rem;
     font-size: 1.5rem;
-}
+} */
 
 @media (max-width: 475px){
     .info{

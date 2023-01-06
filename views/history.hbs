@@ -30,9 +30,9 @@
             </div>
             <div>Ngày đi:  {{trip_infor.departure_date}}</div>
             <div>Số lượng:  {{number}}</div>
-            <div>Giá vé: <p class="money">{{ticket_infor.price}}đ</p>
+            <div>Giá vé: <p class="money">{{ticket_infor.price}} x {{number}}</p>
             </div>
-            <div>Đánh giá của bạn:</div>
+            {{!-- <div>Đánh giá của bạn:</div>
             <div class="rate">
               <input type="radio" id="star5" name="rate" value="5" />
               <label for="star5" title="text">5 stars</label>
@@ -44,12 +44,12 @@
               <label for="star2" title="text">2 stars</label>
               <input type="radio" id="star1" name="rate" value="1" />
               <label for="star1" title="text">1 star</label>
-            </div>
+            </div> --}}
           </div>
         </div>
-        <div>
+        {{!-- <div>
           <textarea class="comment">Nhận xét của bạn:</textarea>
-        </div>
+        </div> --}}
         <hr>
         <div class="status">
           <p>Tình trạng: Đã hoàn tất </p>

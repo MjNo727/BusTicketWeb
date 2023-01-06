@@ -10,6 +10,9 @@ const { garageModel } = require("./models/garage.js");
 const { carModel } = require("./models/car.js");
 const { orderModel } = require("./models/orders.js");
 const { userModel } = require("./models/users.js");
+const { ratingModel } = require("./models/ratings.js");
+const helper = require("./helper/helper.js");
+
 mongoose
   .connect("mongodb+srv://phong:123@cluster0.l1qxx8r.mongodb.net/busticket")
   .then(function () {
@@ -23,6 +26,7 @@ app.engine(
     defaultLayout: "layout",
     layoutsDir: __dirname + "/views/layouts",
     partialsDir: __dirname + "views/partials",
+    helpers: helper
   })
 );
 
@@ -95,13 +99,17 @@ const handleSearch = async function (req, res) {
     .lean();
   const newTicketList = [];
   for (let i = 0; i < resultTrip.length; i++) {
-    const ticket = await ticketModel
+    let ticket = await ticketModel
       .findOne({ trip: resultTrip[i]._id.toString() })
       .lean();
+    // console.log(ticket);
+
     ticket.tripInfor = resultTrip[i];
+    
     ticket.garageInfor = await garageModel
       .findById(resultTrip[i].garage)
       .lean();
+    
     ticket.carInfor = await carModel.findById(resultTrip[i].car).lean();
     newTicketList.push(ticket);
   }
@@ -188,7 +196,6 @@ const bookingFunction = async function (req, res) {
   ticket.save();
 
   // res.locals.successMessageBooking = "Đặt vé thành công!";
-  // add vào bảng order
   const order = await orderModel.create({
     user: id_user,
     ticket: ticketId,
@@ -236,7 +243,7 @@ app.get("/history", async (req, res) => {
     }
   }
   await addOrder();
-  console.log(order_details);
+  // console.log(order_details);
   res.render("history", {
     order_details
   });
@@ -246,18 +253,52 @@ app.get("/history", async (req, res) => {
 
 app.get("/promotion", (req, res) => {
   res.render("promotion");
-  // console.log('lmao');
 });
 
 app.get("/news_details", (req, res) => {
   res.render("news_details");
 });
 
-app.get("/partner_info", (req, res) => {
-  // console.log('h')
-  res.render("partner_info");
+// RATING FEATURES 
+
+app.get("/partner_info", async (req, res) => {
+  // if (!req.session.auth) {
+  //   return res.redirect("/?login=true");
+  // }
+  const garageList = await garageModel.find().lean();
+  let commentList = [];
+  for(let i = 0; i < garageList.length; i++){
+    const ratingItem = await ratingModel.findOne({garage: garageList[i]._id}).lean();
+    // console.log(ratingItem);
+    commentList.push(ratingItem);
+    garageList[i]._id = garageList[i]._id.toString();
+  }
+  console.log(commentList);
+  res.render("partner_info",{
+    garageList,
+    commentList
+  });
 });
 
+const ratingFunction = async function (req, res) {
+  const star = req.body.rate;
+  const description = req.body.description;
+
+  const garageID = req.body.garage_id;
+  const userID = req.body.user_id;
+
+  const rating = await ratingModel.create({
+    garage: garageID,
+    user: userID,
+    star: star,
+    comment: description
+  });
+  res.redirect("/history");
+}
+
+app.post("/partner_info", ratingFunction);
+
+//
 app.get("/user_info", (req, res) => {
   res.render("user_info");
 });

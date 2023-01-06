@@ -1,5 +1,6 @@
 
     <link rel="stylesheet" type="text/css" href="../css/partner_info.css">
+    {{!-- <link rel="stylesheet" type="text/css" href="../css/history.css"> --}}
 
     <!-- link fontawsome -->
     <link rel="stylesheet"
@@ -26,11 +27,12 @@
         </div>
         <br>
 
+        <h2 class="news-title bold">Thông tin nhà xe</h2>
+        {{#each garageList}}
         <div class="row justify-content-left">
             <div class="col-sm-12">
                 <br>
-                <h2 class="news-title bold">Thông tin nhà xe</h2>
-                <h2 class="news-title bold">PHƯƠNG TRANG - "Chất lượng là danh dự"</h2>
+                <h2 class="news-title bold">{{name}} - "Chất lượng là danh dự"</h2>
                 <i class="fa-solid fa-location-dot"></i>
                 <span class="news-location bold"> Takashimaya</span>
                 <span class="news-location bold">@ TP. Hồ Chí Minh</span>
@@ -38,32 +40,92 @@
                     <i class="fa-solid fa-calendar-days"></i>
                     20/12/2022 
                 </div>
-                <div class="brief">
+                {{!-- <div class="brief">
                     Thành lập 10/2022, V.exe với mục tiêu mang đến nhứng chuyến xe an toàn cho mọi người đi đến mọi nơi, mọi miền tổ quốc.
-V.exe tự hào là đơn vị đi đầu trong sự nghiệp cách mạng ngành xe khách và du lịch Việt Nam bao gồm các giải pháp: đặt vé & phương tiện thông minh cho hành khách, phần mềm quản lý hiệu quả cho nhà xe (BMS - Bus Management System) và phần mềm hỗ trợ bán vé hiệu quả cho đại lý (AMS- Agent Management System).
+                    V.exe tự hào là đơn vị đi đầu trong sự nghiệp cách mạng ngành xe khách và du lịch Việt Nam bao gồm các giải pháp: đặt vé & phương tiện thông minh cho hành khách, phần mềm quản lý hiệu quả cho nhà xe (BMS - Bus Management System) và phần mềm hỗ trợ bán vé hiệu quả cho đại lý (AMS- Agent Management System).
                 </div>
-            </div>
+                <br>
+                <h3 class="bold"> Thành tựu </h3>
+                <div class="brief">
+                    Hiện tại, V.exe là hệ thống vé xe lớn nhất Việt Nam. Không chỉ mang đến cho người dùng đa dạng lựa chọn về hãng xe, dòng xe và giải pháp đặt vé nhanh chóng, tiện lợi, VeXeRe còn có rất nhiều ưu đãi hàng tháng, giúp khách hàng đặt được vé xe khách chất lượng cao với giá thấp nhất thị trường. 
+                    Hành khách có thể dễ dàng lựa chọn trước chỗ ngồi yêu thích, thanh toán vé trực tuyến, hoặc bằng tiền mặt tại các cửa hàng tiện lợi trên cả nước.
+                    Phần mềm quản lý hãng xe V.exe (BMS) đang được hơn 700 hãng xe cả nước tin dùng. Phần mềm hỗ trợ các nhà xe thay đổi hình thức quản lý thủ công để quản lý hiệu quả và tối ưu hóa doanh thu, giảm thiểu chi phí, và tăng doanh thu từ mạng lưới đại lý rộng lớn nhất cả nước.
+                    Đây là cuộc cách mạng trong việc công nghệ hóa ngành xe khách. Phần mềm hỗ trợ đại lý bán vé AMS có hơn 5.000 đại lý sử dụng, giúp tăng doanh thu bán vé của đại lý và giúp đại lý hỗ trợ chăm sóc khách tốt hơn.
+                </div>
+                <br>
+                <br> --}}
+                 <div class ="comment_divisor bold"> Nhận xét từ người đã trải nghiệm dịch vụ của <span class = "partner_name">{{name}}</span> </div>
 
+                <section >
+                    <div class="container">
+                        <div class="image-slider">
+                            {{#each ../commentList}}
+                            {{#if (eq ../_id this.garage)}}
+                            <div class="image-item rate_item">
+                                <div class="infor-blog">
+                                    <div class="row justify-content-left">
+                                        <div class="col-lg-4">
+                                            <br>
+                                            <img class="img-responsive border_round" src="../img/user_avatar.png" width="100%"  alt="Chania">
+                                        </div>
+                                        
+                                        <div class="col-lg-8">
+                                            <br>
+                                            <div class=" comment-info bold">UserID: {{_id}}</div>
+                                        
+                                            <div class="ratings">
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star rating-color"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                    <br>
+                                    <p class="data">{{comment}}</p>
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{/each}}
+                        </div>
+                    </div>
+                 </section>   
+                 <form method="POST" action="/partner_info" style="margin: 0 auto" class="form_rating">
+                    <input type="text" name="garage_id" hidden="true" value='{{_id}}' />
+                    <input type="text" name="user_id" hidden="true" value='{{../authUser.id}}' />
+                    <div style="margin-left: 1.2rem">Đánh giá của bạn về nhà xe {{name}}:</div>
+                    <div class="rate">
+                        <input type="radio" id="star{{@index}}_5" name="rate" value="5" />
+                        <label for="star{{@index}}_5" title="text">5 stars</label>
+                        <input type="radio" id="star{{@index}}_4" name="rate" value="4" />
+                        <label for="star{{@index}}_4" title="text">4 stars</label>
+                        <input type="radio" id="star{{@index}}_3" name="rate" value="3" />
+                        <label for="star{{@index}}_3" title="text">3 stars</label>
+                        <input type="radio" id="star{{@index}}_2" name="rate" value="2" />
+                        <label for="star{{@index}}_2" title="text">2 stars</label>
+                        <input type="radio" id="star{{@index}}_1" name="rate" value="1" />
+                        <label for="star{{@index}}_1" title="text">1 star</label>
+                    </div>
+                    <div>
+                        <textarea name="description" class="comment" style="width: 50rem" placeholder="Nhận xét của bạn"></textarea>
+                     </div>
+                    <button type="submit" class="confirm_button btn isOrange booking__btn ml-10 isfont20" style="color: white; font-weight: bold" >
+                        Xác nhận
+                     </button>
+                 </form>         
+             </div>
         </div>
-        <br>
-        <h3 class="bold"> Thành tựu </h3>
-        <div class="brief">
-            Hiện tại, V.exe là hệ thống vé xe lớn nhất Việt Nam. Không chỉ mang đến cho người dùng đa dạng lựa chọn về hãng xe, dòng xe và giải pháp đặt vé nhanh chóng, tiện lợi, VeXeRe còn có rất nhiều ưu đãi hàng tháng, giúp khách hàng đặt được vé xe khách chất lượng cao với giá thấp nhất thị trường. 
-            Hành khách có thể dễ dàng lựa chọn trước chỗ ngồi yêu thích, thanh toán vé trực tuyến, hoặc bằng tiền mặt tại các cửa hàng tiện lợi trên cả nước.
-            Phần mềm quản lý hãng xe V.exe (BMS) đang được hơn 700 hãng xe cả nước tin dùng. Phần mềm hỗ trợ các nhà xe thay đổi hình thức quản lý thủ công để quản lý hiệu quả và tối ưu hóa doanh thu, giảm thiểu chi phí, và tăng doanh thu từ mạng lưới đại lý rộng lớn nhất cả nước.
-            Đây là cuộc cách mạng trong việc công nghệ hóa ngành xe khách. Phần mềm hỗ trợ đại lý bán vé AMS có hơn 5.000 đại lý sử dụng, giúp tăng doanh thu bán vé của đại lý và giúp đại lý hỗ trợ chăm sóc khách tốt hơn.
-        </div>
-        <br>
-        <br>
-        <div class ="comment_divisor bold"> Nhận xét từ người đã trải nghiệm dịch vụ của <span class = "partner_name">Phương Trang</span> </div>
+        {{/each}}
     </div>
+</div>
 
 
 
-    <section >
+    {{!-- <section >
         <div class="container">
           <div class="image-slider">
-             <div class="image-item ">
+             {{!-- <div class="image-item ">
                 <div class="infor-blog">
                     <div class="row justify-content-left">
                         <div class="col-lg-4">
@@ -89,8 +151,8 @@ V.exe tự hào là đơn vị đi đầu trong sự nghiệp cách mạng ngàn
                     <p class="data">Bữa tiệc giải trí hiện đại sôi động cạnh bờ biển đang thu hút sự chú ý của mọi người. 
                     Hãy đến với Nha Trang để cùng trải nghiệm âm nhạc của tương lai hòa cùng không khí thành phố biển dịp Giáng Sinh này.</p>
                 </div>
-             </div>
-             <div class="image-item">
+             </div> --}}
+             {{!-- <div class="image-item">
                 <div class="infor-blog">
                     <div class="row justify-content-left">
                         <div class="col-lg-4">
@@ -194,10 +256,10 @@ V.exe tự hào là đơn vị đi đầu trong sự nghiệp cách mạng ngàn
                     <p class="data">Bữa tiệc giải trí hiện đại sôi động cạnh bờ biển đang thu hút sự chú ý của mọi người. 
                     Hãy đến với Nha Trang để cùng trải nghiệm âm nhạc của tương lai hòa cùng không khí thành phố biển dịp Giáng Sinh này.</p>
                 </div>
-             </div>
+             </div> --}}
           </div>
         </div>  
-    </section>
+    </section> --}}
 
     <section >
         <div class="container">

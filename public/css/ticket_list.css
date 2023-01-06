@@ -333,3 +333,10 @@ input[type="range"]::-moz-range-thumb {
   background: #f28730;
   color: white;
 }
+
+
+/* Add more css after static web */
+.logo_garage img {
+  width: 3rem;
+  height:3rem;
+}

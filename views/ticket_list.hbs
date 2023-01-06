@@ -121,8 +121,9 @@
                   <a href="/ticket_info?ticket={{_id}}">
                     <div class="row mt-2 mb-2 isboder_bottom">
                        <div class="col-sm-3 time_departure">
-                          <div>
-                             <img src="../img/brand_homecar/United Airlines.png" alt="" />
+                          <div class="logo_garage">
+                             {{!-- <img src="../img/lachong.png" alt="" /> --}}
+                             <img src={{garageInfor.imgPath}} alt="" />
                           </div>
                           <div>
                              {{tripInfor.departure_date}} - {{tripInfor.departure_time}}<br />
@@ -189,8 +190,8 @@
                ticketListView.innerHTML += `<a href="/ticket_info?ticket=${filterTicketListPrice[i]._id}">
                     <div class="row mt-2 mb-2 isboder_bottom">
                        <div class="col-sm-3 time_departure">
-                          <div>
-                             <img src="../img/brand_homecar/United Airlines.png" alt="" />
+                          <div class="logo_garage">
+                            <img src=${filterTicketListPrice[i].garageInfor.imgPath} alt="" />
                           </div>
                           <div>
                              ${filterTicketListPrice[i].tripInfor.departure_date} - ${filterTicketListPrice[i].tripInfor.departure_time}<br />
