@@ -379,9 +379,9 @@ app.get("/news_details", (req, res) => {
 // RATING FEATURES 
 
 app.get("/partner_info", async (req, res) => {
-  // if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
-  // }
+  if (!req.session.auth) {
+    return res.redirect("/?login=true");
+  }
   const garageList = await garageModel.find().lean();
   let commentList = [];
   // for(let i = 0; i < garageList.length; i++){
@@ -416,7 +416,7 @@ const ratingFunction = async function (req, res) {
     star: star,
     comment: description
   });
-  res.redirect("/history");
+  res.redirect("/partner_info");
 }
 
 app.post("/partner_info", ratingFunction);

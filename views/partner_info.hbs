@@ -54,7 +54,7 @@
                 </div>
                 <br>
                 <br> --}}
-                 <div class ="comment_divisor bold"> Nhận xét từ người đã trải nghiệm dịch vụ của <span class = "partner_name">{{name}}</span> </div>
+                <div class ="comment_divisor bold"> Nhận xét từ người đã trải nghiệm dịch vụ của <span class = "partner_name">{{name}}</span> </div>
 
                 <section >
                     <div class="container">
@@ -71,14 +71,14 @@
                                         
                                         <div class="col-lg-8">
                                             <br>
-                                            <div class=" comment-info bold">Customer: {{userInfor}}</div>
+                                            <div class=" comment-info bold">{{userInfor}}</div>
                                         
                                             <div class="ratings">
                                                 <i class="fa fa-star{{#if (gte star 1)}} rating-color{{/if}}"></i>
                                                 <i class="fa fa-star{{#if (gte star 2)}} rating-color{{/if}}"></i>
                                                 <i class="fa fa-star{{#if (gte star 3)}} rating-color{{/if}}"></i>
                                                 <i class="fa fa-star{{#if (gte star 4)}} rating-color{{/if}}"></i>
-                                                <i class="fa fa-star{{#if (gte star 5)}} rating-color{{/if}}""></i>
+                                                <i class="fa fa-star{{#if (gte star 5)}} rating-color{{/if}}"></i>
                                             </div>
                                         </div>    
                                     </div>
@@ -94,7 +94,7 @@
                  <form method="POST" action="/partner_info" style="margin: 0 auto" class="form_rating">
                     <input type="text" name="garage_id" hidden="true" value='{{_id}}' />
                     <input type="text" name="user_id" hidden="true" value='{{../authUser.id}}' />
-                    <div style="margin-left: 1.2rem">Đánh giá của bạn về nhà xe {{name}}:</div>
+                    <div style="margin-left: 1.4rem; font-size: 20px">Đánh giá của bạn về nhà xe {{name}}:</div>
                     <div class="rate">
                         <input type="radio" id="star{{@index}}_5" name="rate" value="5" />
                         <label for="star{{@index}}_5" title="text">5 stars</label>
@@ -110,9 +110,11 @@
                     <div>
                         <textarea name="description" class="comment" style="width: 50rem" placeholder="Nhận xét của bạn"></textarea>
                      </div>
-                    <button type="submit" class="confirm_button btn isOrange booking__btn ml-10 isfont20" style="color: white; font-weight: bold" >
-                        Xác nhận
-                     </button>
+                    <div class="confirm_button_container">
+                        <button type="submit" class="confirm_button btn isOrange booking__btn ml-10 isfont20" style="color: white; font-weight: bold" >
+                            Xác nhận
+                        </button>
+                    </div>
                  </form>         
              </div>
         </div>

@@ -85,7 +85,7 @@
  .rate {
     display: inline-block;
     height: 46px;
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 .rate:not(:checked)>input {
@@ -99,7 +99,7 @@
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 40px;
     color: #ccc;
 }
 
@@ -145,6 +145,8 @@
     font-size: 1.5rem;
 }
 
+/************************************
+************************************/
 
 .form_rating {
     width: 55rem;
@@ -156,6 +158,14 @@
     background-color: #f15a24;
 }
 
+.confirm_button_container {
+    padding: 1rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .confirm_button {
-    margin: 1rem 15rem;
+    /* margin: 1rem 0; */
+    border-radius: 10px;
 }
