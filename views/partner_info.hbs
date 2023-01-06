@@ -71,14 +71,14 @@
                                         
                                         <div class="col-lg-8">
                                             <br>
-                                            <div class=" comment-info bold">UserID: {{_id}}</div>
+                                            <div class=" comment-info bold">Customer: {{userInfor}}</div>
                                         
                                             <div class="ratings">
-                                                <i class="fa fa-star rating-color"></i>
-                                                <i class="fa fa-star rating-color"></i>
-                                                <i class="fa fa-star rating-color"></i>
-                                                <i class="fa fa-star rating-color"></i>
-                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star{{#if (gte star 1)}} rating-color{{/if}}"></i>
+                                                <i class="fa fa-star{{#if (gte star 2)}} rating-color{{/if}}"></i>
+                                                <i class="fa fa-star{{#if (gte star 3)}} rating-color{{/if}}"></i>
+                                                <i class="fa fa-star{{#if (gte star 4)}} rating-color{{/if}}"></i>
+                                                <i class="fa fa-star{{#if (gte star 5)}} rating-color{{/if}}""></i>
                                             </div>
                                         </div>    
                                     </div>

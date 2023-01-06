@@ -12,7 +12,7 @@ const handleRegister = async function (req, res) {
   const confirm_password = req.body.confirm_password;
 
   const isExisted = await userModel
-    .find({
+    .findOne({
       $or: [{ phoneNumber: phone_number }, { email: email }],
     })
     .lean();
