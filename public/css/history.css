@@ -39,9 +39,23 @@ main {
 }
 
 .trip-head{
+    display: flex;
     margin: 1rem;
     color:#f2754e;
     font-size: 1.5rem;
+}
+
+.trip-head img {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+}
+
+.trip-head div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.9rem 0 0 1rem;  
 }
 
 hr{

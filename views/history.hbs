@@ -19,14 +19,18 @@
       {{#each order_details}}
       <article class="trip">
         <div class="trip-head">
-          <p>Nhà xe: {{garage_infor.name}}</p>
+          <img src="{{garage_infor.imgPath}}" alt="">
+          <div>
+            <p>{{garage_infor.name}}</p>
+          </div>
         </div>
         <hr>
         <div class="info">
-          <div><img src="../img/phuongtrang.jpg" alt="" class="logogarage"></div>
+          <div><img src={{car_infor.imgPath}} alt="" class="logogarage"></div>
           <div style="padding: 0px">
             <div>Chuyến đi: {{trip_infor.name}}</div>
             <div>Ngày đi:  {{trip_infor.departure_date}}</div>
+            <div>Loại xe:  {{car_infor.name}}</div>
             <div>Số lượng:  {{number}}</div>
             <div>Giá: {{ticket_infor.price}}đ/vé</div>
             <div>Tổng thanh toán: <p class="money">{{total_price}}đ</p></div>
