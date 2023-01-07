@@ -458,7 +458,7 @@ app.get("/news_details", (req, res) => {
 
 app.get("/partner_info", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect("/?login=true");
+    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   }
   const garageList = await garageModel.find().lean();
   let commentList = [];
@@ -474,10 +474,27 @@ app.get("/partner_info", async (req, res) => {
     ratingItems[i].userInfor = name_user.fullname;;
 
   }
+
+  // let starOfGarage = [];
+  for(let i = 0; i < garageList.length; i++){
+    let totalStar = 0;
+    let totalRating = 0;
+    for(let j = 0; j < ratingItems.length; j++){
+      // console.log(ratingItems[j].garage + " = " + garageList[i]._id);
+      if(ratingItems[j].garage === garageList[i]._id.toString()){
+        totalRating++;
+        totalStar += ratingItems[j].star;
+        // console.log(ratingItems[j].star);
+      }
+    }
+    let average = (totalStar / totalRating).toFixed(1);
+    garageList[i].avg = average;
+  }
+
   commentList = ratingItems;
   res.render("partner_info", {
     garageList,
-    commentList
+    commentList,
   });
 });
 
