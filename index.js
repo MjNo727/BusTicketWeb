@@ -356,7 +356,7 @@ app.post("/manage_trip_info", async (req, res) => { // for update
   });
 });
 
-// ************************ BOOKING FUNCTION **********************************************
+// ************************ BOOKING FUNCTION ***************
 
 app.get("/booking", async (req, res) => {
   if (!req.session.auth) {
@@ -394,7 +394,8 @@ const bookingFunction = async function (req, res) {
   const order = await orderModel.create({
     user: id_user,
     ticket: ticketId,
-    number: number
+    number: number,
+    status: "Vừa đặt"
   });
   res.redirect("/history");
 };
@@ -427,6 +428,7 @@ app.get("/history", async (req, res) => {
 
       const order = {
         order_id: ele._id.toString(),
+        order_status: ele.status,
         number: ele.number,
         trip_infor: trip,
         ticket_infor: ticketDetail,
@@ -441,7 +443,7 @@ app.get("/history", async (req, res) => {
   await addOrder();
   // console.log(order_details);
   res.render("history", {
-    order_details
+    order_details: order_details.reverse()
   });
 });
 
@@ -450,12 +452,13 @@ const destroyOrderFunction = async function (req, res){
   const ticket_id = req.body.ticket_id;
   const order_id = req.body.order_id;
   
-  const order = await orderModel.findOne({_id: order_id}).lean();
+  const order = await orderModel.findOne({_id: order_id});
   const ticket = await ticketModel.findOne({_id: ticket_id});
   ticket.limit += order.number;
   await ticket.save();
 
-  orderModel.deleteOne({_id: order_id});
+  order.status = "Đã hủy";
+  await order.save();
   res.redirect("/history");
 }
 

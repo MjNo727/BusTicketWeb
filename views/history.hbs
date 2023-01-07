@@ -44,13 +44,15 @@
               <label for="star1" title="text">1 star</label>
             </div> --}}
             <div class="status">
-              <p style="font-style: italic">Tình trạng: Đã hoàn tất </p>
+              <p style="font-style: italic; font-weight: bold">Tình trạng: {{order_status}} </p>
             </div>
           </div>
         </div>
         {{!-- <div>
           <textarea class="comment">Nhận xét của bạn:</textarea>
         </div> --}}
+        {{#if (eq order_status "Đã hủy")}}
+        {{else}}
         <hr>
         <form method="POST" action="" id="">
           <input name="ticket_id" value="{{ticket_infor._id}}" type="text" hidden="true">
@@ -60,6 +62,7 @@
               Hủy đơn hàng
           </button>
         </form>
+        {{/if}}
       </article>
       {{/each}}
     </section>
