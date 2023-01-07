@@ -82,6 +82,11 @@
           <input type="text" name="ticket_price" value="{{ticketInfor.price}}">
         </div>
 
+        <div class="departure-place isbold">
+          <i>Số vé còn:</i>
+          <input type="text" name="ticket_limit" value="{{ticketInfor.limit}}">
+        </div>
+
 
       </div>
 
@@ -89,14 +94,7 @@
         <div class="col-4">
           <a href="/manage_trip_info?trip={{ticketInfor._id}}">
             <button type="submit" class="btn isOrange booking__btn ml-10 isfont20" style="width: ">
-              Cập nhật
-            </button>
-          </a>
-        </div>
-        <div class="col-4">
-          <a href="/delete_trip?trip={{ticketInfor._id}}">
-            <button type="button" class="btn isOrange booking__btn ml-10 isfont20" style="width: ">
-              Xóa
+              Thêm
             </button>
           </a>
         </div>
