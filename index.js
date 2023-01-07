@@ -60,12 +60,12 @@ app.use(function (req, res, next) {
   }
   next();
 });
-app.get("/createTables", (req, res) => {
-  let models = require("./models");
-  models.sequelize.sync().then(() => {
-    res.send("table created");
-  });
-});
+// app.get("/createTables", (req, res) => {
+//   let models = require("./models");
+//   models.sequelize.sync().then(() => {
+//     res.send("table created");
+//   });
+// });
 
 app.get("/", (req, res) => {
   if (req.query.login)
@@ -139,9 +139,24 @@ app.get("/ticket_list", async (req, res) => {
     if(ticket.limit > 0) newTicketList.push(ticket);
   }
 
+  // Pagination
+  const number_ticket_display = 6;
+  const total_page = Math.ceil(newTicketList.length / number_ticket_display);
+
+  const current_page = req.query.page || 1;
+  const paginationList = newTicketList.slice((current_page - 1)*number_ticket_display, current_page * number_ticket_display);
+
+  const pagesList = [];
+
+  for(let i = 1; i <= total_page; i++){
+    pagesList[i - 1] = i;
+  }
+
   res.render("ticket_list", {
-    ticketList: newTicketList,
+    ticketList: paginationList,
     ticketListJSON: JSON.stringify(newTicketList),
+    pagesList,
+    current_page
   });
 });
 
