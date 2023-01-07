@@ -127,6 +127,56 @@ const handleSearch = async function (req, res) {
   });
 };
 
+const handleSearchAdmin = async function (req, res) {
+  const departure_place = req.body.departure_place;
+  const arrive_place = req.body.arrive_place;
+  const depature_date = req.body.depature_date;
+  const car_type = req.body.car_type;
+
+  if (!departure_place || !arrive_place || !depature_date || !car_type) {
+    return res.render("manage_trip_list.hbs", {
+      ticketErrorMessage: "Vui lòng nhập đủ thông tin!",
+    });
+  }
+
+  // FIND ID của loại xe
+  const car_id = await carModel.find({ name: car_type }, { _id: 1 }).lean();
+  const carIdList = car_id.map((ele, index) => ele._id.toString());
+
+  // SEARCH NƠI ĐẾN, NƠI ĐI, THỜI GIAN
+  const result = departure_place + " - " + arrive_place;
+  const resultTrip = await tripModel
+    .find({
+      name: result,
+      departure_date: depature_date,
+      car: {
+        $in: carIdList,
+      },
+    })
+    .lean();
+  const newTicketList = [];
+  for (let i = 0; i < resultTrip.length; i++) {
+    let ticket = await ticketModel
+      .findOne({ trip: resultTrip[i]._id.toString() })
+      .lean();
+    // console.log(ticket);
+
+    ticket.tripInfor = resultTrip[i];
+
+    ticket.garageInfor = await garageModel
+      .findById(resultTrip[i].garage)
+      .lean();
+
+    ticket.carInfor = await carModel.findById(resultTrip[i].car).lean();
+    if (ticket.limit > 0) newTicketList.push(ticket);
+  }
+
+  res.render("manage_trip_list", {
+    ticketList: newTicketList,
+    ticketListJSON: JSON.stringify(newTicketList),
+  });
+};
+
 app.get("/ticket_list", async (req, res) => {
   const ticketList = await ticketModel.find().lean();
   const newTicketList = [];
@@ -162,6 +212,7 @@ app.get("/ticket_list", async (req, res) => {
 });
 
 app.post("/ticket_list", handleSearch);
+
 
 app.get("/ticket_info", async (req, res) => {
   const id = req.query.ticket;
@@ -213,8 +264,8 @@ app.get("/manage_trip_list", async function (req, res) {
     ticketListJSON: JSON.stringify(newTicketList), // !
     title: "Quản lý chuyến đi",
   });
-
 });
+
 
 
 app.get("/create_trip_info", async (req, res) => {
@@ -498,8 +549,7 @@ app.post("/manager_history", async (req, res) => {
     order_details: order_details,
     title: "Quản lý đặt chỗ",
   });
-
-})
+});
 
 // ************************ BOOKING FUNCTION ***************
 
