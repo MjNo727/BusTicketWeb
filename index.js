@@ -70,7 +70,8 @@ app.get("/createTables", (req, res) => {
 app.get("/", (req, res) => {
   if (req.query.login)
     res.locals.login_errorMessage = "Please login to continue";
-  res.render("index");
+  
+  res.render("index",{ title: "Trang chủ" },);
 });
 
 // SEARCH FUNCTION
@@ -83,6 +84,7 @@ const handleSearch = async function (req, res) {
   if (!departure_place || !arrive_place || !depature_date || !car_type) {
     return res.render("ticket_list.hbs", {
       ticketErrorMessage: "Vui lòng nhập đủ thông tin!",
+      title: "Danh sách chuyến đi",
     });
   }
 
@@ -121,6 +123,7 @@ const handleSearch = async function (req, res) {
   res.render("ticket_list", {
     ticketList: newTicketList,
     ticketListJSON: JSON.stringify(newTicketList),
+    title: "Danh sách chuyến đi",
   });
 };
 
@@ -142,6 +145,7 @@ app.get("/ticket_list", async (req, res) => {
   res.render("ticket_list", {
     ticketList: newTicketList,
     ticketListJSON: JSON.stringify(newTicketList),
+    title: "Danh sách chuyến đi",
   });
 });
 
@@ -162,6 +166,7 @@ app.get("/ticket_info", async (req, res) => {
   // console.log(ticket);
   res.render("ticket_info", {
     ticketInfor: ticket,
+    title: "Thông tin chuyến đi",
   });
 });
 
@@ -194,6 +199,7 @@ app.get("/manage_trip_list", async function (req, res) {
   res.render("manage_trip_list", {
     ticketList: newTicketList, // !
     ticketListJSON: JSON.stringify(newTicketList), // !
+    title: "Quản lý chuyến đi",
   });
 
 });
@@ -208,7 +214,9 @@ app.get("/create_trip_info", async (req, res) => {
   //   return res.redirect("/");
   // }
 
-  res.render("create_trip_info", {  });
+  res.render("create_trip_info", { 
+    title: "Tạo chuyến đi",
+   });
 });
 
 app.post("/create_trip_info", async (req, res) => { // for update
@@ -252,6 +260,8 @@ app.post("/create_trip_info", async (req, res) => { // for update
   res.render("manage_trip_list", {
     ticketList: newTicketList, // !
     ticketListJSON: JSON.stringify(newTicketList), // !
+    title: "Tạo chuyến đi",
+
   });
 });
 
@@ -278,7 +288,10 @@ app.get("/delete_trip", async (req, res) => { // not finish
     const ticket = { ...ele }; // !
     const tripId = ele.trip;
     const trip = await tripModel.findById(tripId).lean();
+    if (trip == null)
+      continue;
     ticket.tripInfor = trip;
+    console.log(trip);
     ticket.garageInfor = await garageModel.findById(trip.garage).lean();
     ticket.carInfor = await carModel.findById(trip.car).lean();
     newTicketList.push(ticket);
@@ -287,6 +300,7 @@ app.get("/delete_trip", async (req, res) => { // not finish
   res.render("manage_trip_list", {
     ticketList: newTicketList, // !
     ticketListJSON: JSON.stringify(newTicketList), // !
+    title: "Quản lý chuyến đi",
   });
 
 })
@@ -314,6 +328,7 @@ app.get("/manage_trip_info", async (req, res) => {
   // console.log(ticket);
   res.render("manage_trip_info", {
     ticketInfor: ticket, // !
+    title: "Quản lý chuyến đi",
   });
 });
 
@@ -353,6 +368,59 @@ app.post("/manage_trip_info", async (req, res) => { // for update
 
   res.render("manage_trip_info", {
     ticketInfor: ticket, // !
+    title: "Quản lý chuyến đi",
+  });
+});
+
+app.get("/manage_history", async (req, res) => {
+  // if (!req.session.auth) {
+  //   return res.redirect("/?login=true");
+  // }
+  // if (res.locals.authUser["role"] != "admin") {
+  //   console.log("wrong role");
+  //   return res.redirect("/");
+  // }
+  const orders = await orderModel.find().lean();
+  const order_details = [];
+
+  const addOrder = async () => {
+    for (let i = 0; i < orders.length; ++i) {
+      const ele = orders[i];
+
+      const userId = ele.ticket;
+      const user = await userModel.findOne({ _id: userId }).lean();
+
+      const ticketId = ele.ticket;
+      const ticket = await ticketModel.findOne({ _id: ticketId }).lean();
+
+      const tripId = ticket.trip;
+      const trip = await tripModel.findOne({ _id: tripId }).lean();
+
+      const garageId = trip.garage;
+      const garage = await garageModel.findOne({ _id: garageId }).lean();
+
+      const carId = trip.car;
+      const car = await carModel.findOne({ _id: carId }).lean();
+
+      const total_price = parseInt(ele.number) * parseInt(ticket.price);
+      const order = {
+        number: ele.number,
+        price: total_price,
+        status: ele.status,
+        user_info: user,
+        trip_infor: trip,
+        ticket_infor: ticket,
+        garage_infor: garage,
+        car_infor: car
+      }
+      order_details.push(order);
+    }
+  }
+  await addOrder();
+  // console.log(order_details);
+  res.render("manage_history", {
+    order_details,
+    title: "Quản lý đặt chỗ",
   });
 });
 
@@ -360,7 +428,7 @@ app.post("/manage_trip_info", async (req, res) => { // for update
 
 app.get("/booking", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect("/?login=true");
+    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   }
   const id = req.query.ticket;
   const ticketInfor = await ticketModel.findById(id).lean();
@@ -376,6 +444,7 @@ app.get("/booking", async (req, res) => {
   res.locals.successMessageBooking = "";
   res.render("booking", {
     ticketInfor: ticket,
+    title: "Đặt vé",
   });
 });
 
@@ -394,14 +463,16 @@ const bookingFunction = async function (req, res) {
   const order = await orderModel.create({
     user: id_user,
     ticket: ticketId,
-    number: number
+    number: number,
+    status: "Vừa đặt"
   });
-  res.redirect("/history");
+  res.redirect("/history", { title: "Lịch sử" } );
 };
 
 app.post("/booking", bookingFunction);
 
 //***************************** HISTORY REVIEW Vé *************************************/
+
 app.get("/history", async (req, res) => {
   if (!req.session.auth) {
     return res.redirect("/?login=true");
@@ -425,14 +496,19 @@ app.get("/history", async (req, res) => {
       const carId = trip.car;
       const car = await carModel.findOne({ _id: carId }).lean();
 
+      const order_code = ele._id.toString().substring(1,10).toUpperCase();
+      // console.log(order_code);
       const order = {
+        order_code: order_code,
+        order_id: ele._id.toString(),
+        order_status: ele.status,
         number: ele.number,
         trip_infor: trip,
         ticket_infor: ticketDetail,
         garage_infor: garage,
-        car_infor: car
+        car_infor: car,
+        total_price: ticketDetail.price * ele.number
       }
-
       order_details.push(order);
       // console.log(garage);
     }
@@ -440,9 +516,28 @@ app.get("/history", async (req, res) => {
   await addOrder();
   // console.log(order_details);
   res.render("history", {
-    order_details
+    order_details: order_details.reverse(),
+    title: "Lịch sử",
   });
 });
+
+// Destroy an order
+const destroyOrderFunction = async function (req, res){
+  const ticket_id = req.body.ticket_id;
+  const order_id = req.body.order_id;
+  
+  const order = await orderModel.findOne({_id: order_id});
+  const ticket = await ticketModel.findOne({_id: ticket_id});
+  ticket.limit += order.number;
+  await ticket.save();
+
+  order.status = "Đã hủy";
+  await order.save();
+  res.redirect("/history", { title: "Lịch sử" } );
+}
+
+app.post("/history", destroyOrderFunction);
+
 
 // ***********************************************************************************
 
@@ -454,11 +549,12 @@ app.get("/news_details", (req, res) => {
   res.render("news_details");
 });
 
+
 // RATING FEATURES 
 
 app.get("/partner_info", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect("/?login=true");
+    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   }
   const garageList = await garageModel.find().lean();
   let commentList = [];
@@ -474,10 +570,27 @@ app.get("/partner_info", async (req, res) => {
     ratingItems[i].userInfor = name_user.fullname;;
 
   }
+
+  // let starOfGarage = [];
+  for(let i = 0; i < garageList.length; i++){
+    let totalStar = 0;
+    let totalRating = 0;
+    for(let j = 0; j < ratingItems.length; j++){
+      // console.log(ratingItems[j].garage + " = " + garageList[i]._id);
+      if(ratingItems[j].garage === garageList[i]._id.toString()){
+        totalRating++;
+        totalStar += ratingItems[j].star;
+        // console.log(ratingItems[j].star);
+      }
+    }
+    let average = (totalStar / totalRating).toFixed(1);
+    garageList[i].avg = average;
+  }
+
   commentList = ratingItems;
   res.render("partner_info", {
     garageList,
-    commentList
+    commentList,
   });
 });
 
@@ -509,10 +622,17 @@ app.get("/about_us", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  res.render("contact", { title: "Liên lạc với chúng tôi" })
 });
 
 app.use("/", userRouter.router);
+
+// LOG OUT
+app.get("/logout", (req,res)=>{
+  req.session.auth = null;
+  req.session.authUser = null;
+  res.redirect("/");
+})
 
 app.set("port", process.env.PORT || 5000);
 app.listen(app.get("port"), () => {

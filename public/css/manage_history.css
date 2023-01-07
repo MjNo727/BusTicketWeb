@@ -1,0 +1,149 @@
+main {
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+section{
+    width: 70%;
+}
+
+.is-magrin-bot-15{
+    margin-bottom: 15px
+}
+
+.grid-choice-item {
+    height: 100%;
+    color: black;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    background-color: white;
+    border: 2px solid #f2754e;
+    box-sizing: border-box;
+}
+.grid-choice-item-active {
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    color: white;
+    font-size: 1.5rem;
+    background-color: #0C86CB;
+    border: 2px solid #f2754e;
+}
+
+.trip {
+    background-color: white;
+    border: 2px solid #0C86CB;
+    margin-top: 10%;
+}
+
+.trip-hidden{
+    display: none;
+}
+
+.trip-head{
+    margin: 1rem;
+    color:#f2754e;
+    font-size: 1.5rem;
+}
+
+hr{
+    margin: 1rem;
+    background-color: black;
+    height: 0.01rem;
+}
+
+.info {
+    display: flex;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.logogarage {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 1rem;
+}
+
+
+.money {
+    color: #0C86CB;
+    display: inline;
+}
+
+
+/**/
+.rate {
+    display: inline-block;
+    height: 46px;
+    padding: 0 10px;
+}
+
+.rate:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
+}
+
+.rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+    content: '★ ';
+}
+
+.rate>input:checked~label {
+    color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+    color: #deb217;
+}
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
+    color: #c59b08;
+}
+
+/**/
+
+.comment{
+    margin: 1rem 1rem 0 1rem;
+    width: calc(100% - 2rem);
+    height: 8rem;
+    text-align:left;
+    padding: 0.5rem;
+}
+
+.status{
+    display: flex;
+    justify-content: end;
+}
+
+.status p{
+    color:#f2754e;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 475px){
+    .info{
+        display: block;
+    }
+
+    .info img{
+        width: 90%;
+        height: 100%;
+    }
+}
