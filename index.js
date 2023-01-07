@@ -426,13 +426,14 @@ app.get("/history", async (req, res) => {
       const car = await carModel.findOne({ _id: carId }).lean();
 
       const order = {
+        order_id: ele._id.toString(),
         number: ele.number,
         trip_infor: trip,
         ticket_infor: ticketDetail,
         garage_infor: garage,
-        car_infor: car
+        car_infor: car,
+        total_price: ticketDetail.price * ele.number
       }
-
       order_details.push(order);
       // console.log(garage);
     }
@@ -443,6 +444,23 @@ app.get("/history", async (req, res) => {
     order_details
   });
 });
+
+// Destroy an order
+const destroyOrderFunction = async function (req, res){
+  const ticket_id = req.body.ticket_id;
+  const order_id = req.body.order_id;
+  
+  const order = await orderModel.findOne({_id: order_id}).lean();
+  const ticket = await ticketModel.findOne({_id: ticket_id});
+  ticket.limit += order.number;
+  await ticket.save();
+
+  orderModel.deleteOne({_id: order_id});
+  res.redirect("/history");
+}
+
+
+app.post("/history", destroyOrderFunction);
 
 // ***********************************************************************************
 

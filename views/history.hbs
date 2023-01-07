@@ -24,14 +24,12 @@
         <hr>
         <div class="info">
           <div><img src="../img/phuongtrang.jpg" alt="" class="logogarage"></div>
-          <div style="padding: 20px">
-            <div>
-              <p>Chuyến đi: {{trip_infor.name}}</p>
-            </div>
+          <div style="padding: 0px">
+            <div>Chuyến đi: {{trip_infor.name}}</div>
             <div>Ngày đi:  {{trip_infor.departure_date}}</div>
             <div>Số lượng:  {{number}}</div>
-            <div>Giá vé: <p class="money">{{ticket_infor.price}} x {{number}}</p>
-            </div>
+            <div>Giá: {{ticket_infor.price}}đ/vé</div>
+            <div>Tổng thanh toán: <p class="money">{{total_price}}đ</p></div>
             {{!-- <div>Đánh giá của bạn:</div>
             <div class="rate">
               <input type="radio" id="star5" name="rate" value="5" />
@@ -45,15 +43,23 @@
               <input type="radio" id="star1" name="rate" value="1" />
               <label for="star1" title="text">1 star</label>
             </div> --}}
+            <div class="status">
+              <p style="font-style: italic">Tình trạng: Đã hoàn tất </p>
+            </div>
           </div>
         </div>
         {{!-- <div>
           <textarea class="comment">Nhận xét của bạn:</textarea>
         </div> --}}
         <hr>
-        <div class="status">
-          <p>Tình trạng: Đã hoàn tất </p>
-        </div>
+        <form method="POST" action="" id="">
+          <input name="ticket_id" value="{{ticket_infor._id}}" type="text" hidden="true">
+          <input name="order_id" value="{{order_id}}" type="text" hidden="true">
+          <button type="submit" 
+          class="btn isOrange booking__btn ml-10 isfont20" style="margin: 0 0 1rem 15.5rem; color: white; font-weight: bold; border-radius: 10px" >
+              Hủy đơn hàng
+          </button>
+        </form>
       </article>
       {{/each}}
     </section>
