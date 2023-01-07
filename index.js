@@ -501,7 +501,7 @@ app.post("/manage_history", async (req, res) => {
   ticket_update.save();
   order_update.number = req.body.order_number;
   order_update.save();
-  
+
   //save chua du nhanh
   const orders = await orderModel.find().lean();
   const order_details = [];
@@ -534,7 +534,7 @@ app.post("/manage_history", async (req, res) => {
         number: ele.number,
         price: total_price,
         status: ele.status,
-        user_info: user,
+        user_infor: user,
         trip_infor: trip,
         ticket_infor: ticket,
         garage_infor: garage,
