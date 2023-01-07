@@ -136,6 +136,9 @@
             <button class="btn btn-us"><a href="/about_us">Về chúng tôi</a></button>
             {{#if auth}}
             {{authUser.fullname}}
+            <a href="/logout" >
+              <i class="icofont-logout"></i> Log out
+            </a>
             {{else}}
             <button class="btn btn-login" onclick="signinAction()"><i class="icofont-user"></i> Đăng nhập</button>
             <button class="btn btn-signup" onclick="registerAction()"><i class="icofont-user"></i> Đăng ký</button>

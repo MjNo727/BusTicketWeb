@@ -61,6 +61,8 @@ const handleRegister = async function (req, res) {
 };
 
 const handleLogin = async function (req, res) {
+  // const prev_url = req.headers.referer;
+  // console.log(prev_url);
   const { phone_mail, password } = req.body;
 
   const isExisted = await userModel.find({
@@ -79,9 +81,10 @@ const handleLogin = async function (req, res) {
         id: user._id,
         role: user.role,
       };
-      return res.render("index.hbs", {
-        login_successMessage: "Đăng nhập thành công",
-      });
+      return res.redirect(req.query.redirect || "/");
+      // return res.render("index.hbs", {
+      //   login_successMessage: "Đăng nhập thành công",
+      // });
     }
   }
 

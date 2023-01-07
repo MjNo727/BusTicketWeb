@@ -38,6 +38,10 @@
         <i style="color: red">Loại xe:</i>
         {{ticketInfor.carInfor.name}}
       </div>
+      <div class="car-type isbold">
+        <i style="color: red">Số lượng vé còn lại:</i>
+        {{ticketInfor.limit}}
+      </div>
     </div>
 
     <div class="isBGLightGrey">
@@ -52,7 +56,7 @@
 
             </div>
           </d>
-        </div>
+        </div> 
         <div class="col-lg-4 col-md-6 col-sm-12 col-6">
           <p class="isfont25 isbold border border-top-0">Điểm đến</p>
           <p class="isfont20">{{ticketInfor.tripInfor.arrive_place}}</p>

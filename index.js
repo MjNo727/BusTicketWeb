@@ -115,7 +115,7 @@ const handleSearch = async function (req, res) {
       .lean();
 
     ticket.carInfor = await carModel.findById(resultTrip[i].car).lean();
-    newTicketList.push(ticket);
+    if (ticket.limit > 0) newTicketList.push(ticket);
   }
 
   res.render("ticket_list", {
@@ -136,7 +136,7 @@ app.get("/ticket_list", async (req, res) => {
     ticket.tripInfor = trip;
     ticket.garageInfor = await garageModel.findById(trip.garage).lean();
     ticket.carInfor = await carModel.findById(trip.car).lean();
-    newTicketList.push(ticket);
+    if(ticket.limit > 0) newTicketList.push(ticket);
   }
 
   res.render("ticket_list", {
@@ -360,7 +360,7 @@ app.post("/manage_trip_info", async (req, res) => { // for update
 
 app.get("/booking", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect("/?login=true");
+    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   }
   const id = req.query.ticket;
   const ticketInfor = await ticketModel.findById(id).lean();
@@ -513,6 +513,13 @@ app.get("/contact", (req, res) => {
 });
 
 app.use("/", userRouter.router);
+
+// LOG OUT
+app.get("/logout", (req,res)=>{
+  req.session.auth = null;
+  req.session.authUser = null;
+  res.redirect("/");
+})
 
 app.set("port", process.env.PORT || 5000);
 app.listen(app.get("port"), () => {
