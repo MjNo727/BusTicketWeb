@@ -656,7 +656,7 @@ app.get("/history", async (req, res) => {
   await addOrder();
   // console.log(order_details);
   res.render("history", {
-    order_details: order_details.reverse()
+    order_details: order_details.reverse(),
     title : "Lịch sử đặt vé"
   });
 });
