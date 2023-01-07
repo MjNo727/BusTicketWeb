@@ -1,70 +1,81 @@
+<link rel="stylesheet" type="text/css" href="../css/manage_history.css">
 
-  <link rel="stylesheet" type="text/css" href="../css/manage_history.css">
-  
 
-  <main>
-    <section class="this_section">
-      <article class="row grid-choice">
-        <div class="col-lg-4 col-sm-12 is-magrin-bot-15">
-          <button class="grid-choice-item-active">Tất cả </button>  
+<main>
+  <section>
+    <article class="row grid-choice">
+      <div class="col-lg-4 col-sm-12 is-magrin-bot-15">
+        <button class="grid-choice-item-active">Tất cả </button>
+      </div>
+      <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
+        <button class="grid-choice-item">Vừa đặt </button>
+      </div>
+      <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
+        <button class="grid-choice-item">Đã hủy </button>
+      </div>
+    </article>
+
+    {{#each order_details}}
+    <from class="trip" method="POST">
+      <div class="trip-head">
+        <img src="{{garage_infor.imgPath}}" alt="">
+        <div>
+          <p>{{garage_infor.name}}</p>
         </div>
-        <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
-          <button class="grid-choice-item">Đã hoàn tất </button>  
-        </div>
-        <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
-          <button class="grid-choice-item">Đang thực hiện </button>  
-        </div>
-      </article>
-      
-      {{#each order_details}}
-      <article class="trip">
-        <div class="trip-head">
-          <p>Nhà xe: {{garage_infor.name}}</p>
-        </div>
-        <hr>
-        <div class="info">
-          <div><img src="{{garage_infor.imgPath}}" alt="" class="logogarage"></div>
-          <div style="padding: 20px">
-            <div>Chuyến đi: {{trip_infor.name}}</div>
-            <div>Người mua: {{user_infor.fullname}}</div>
-            <div>Ngày đi: {{trip_infor.departure_date}}</div>
-            <div>Số lượng: {{number}}</div>
-            <div>Giá vé: <p class="money">{{price}}</p>
-            </div>
-            {{!-- <div>Đánh giá của bạn:</div>
-            <div class="rate">
-              <input type="radio" id="star5" name="rate" value="5" />
-              <label for="star5" title="text">5 stars</label>
-              <input type="radio" id="star4" name="rate" value="4" />
-              <label for="star4" title="text">4 stars</label>
-              <input type="radio" id="star3" name="rate" value="3" />
-              <label for="star3" title="text">3 stars</label>
-              <input type="radio" id="star2" name="rate" value="2" />
-              <label for="star2" title="text">2 stars</label>
-              <input type="radio" id="star1" name="rate" value="1" />
-              <label for="star1" title="text">1 star</label>
-            </div> --}}
+      </div>
+      <hr>
+      <div class="info">
+        <div><img src={{car_infor.imgPath}} alt="" class="car_img"></div>
+        <div style="padding: 0px">
+          <div>Mã vé: {{id}}</div>
+          <div>Chuyến đi: {{trip_infor.name}}</div>
+          <div>Người đặt: {{user_infor.fullname}}</div>
+          <div>Ngày đi: {{trip_infor.departure_date}}</div>
+          <div>Loại xe: {{car_infor.name}}</div>
+          <div>Số lượng: <input type="text" name="order_number" value="{{number}}"></div>
+          <div>Giá: {{ticket_infor.price}}đ/vé</div>
+          <div>Tổng thanh toán: <p class="money">{{price}}đ</p>
+          </div>
+          {{!-- <div>Đánh giá của bạn:</div>
+          <div class="rate">
+            <input type="radio" id="star5" name="rate" value="5" />
+            <label for="star5" title="text">5 stars</label>
+            <input type="radio" id="star4" name="rate" value="4" />
+            <label for="star4" title="text">4 stars</label>
+            <input type="radio" id="star3" name="rate" value="3" />
+            <label for="star3" title="text">3 stars</label>
+            <input type="radio" id="star2" name="rate" value="2" />
+            <label for="star2" title="text">2 stars</label>
+            <input type="radio" id="star1" name="rate" value="1" />
+            <label for="star1" title="text">1 star</label>
+          </div> --}}
+          <div class="status">
+            <p style="font-style: italic; font-weight: bold">Tình trạng: <input type="text" name="order_status"
+                value="{{order_status}}"> </p>
           </div>
         </div>
-        {{!-- <div>
-          <textarea class="comment">Nhận xét của bạn:</textarea>
-        </div> --}}
-        <hr>
-        <div class="status">
-          <p>Tình trạng: {{status}} </p>
-        </div>
-      </article>
-      {{/each}}
-    </section>
-  </main>
+      </div>
+      {{!-- <div>
+        <textarea class="comment">Nhận xét của bạn:</textarea>
+      </div> --}}
+      <a href="/manage_history?order={{id}}">
+      <button type="submit" class="btn isBlue booking__btn ml-10 isfont20"
+        style="margin: 0 0 1rem 19rem; color: white; font-weight: bold; border-radius: 10px">
+        Cập nhật
+      </button>
+      </a>
+    </from>
+    {{/each}}
+  </section>
+</main>
 <script>
   function changeChoice(e) {
     let text = e.target.textContent;
-    let value = text == "Đang thực hiện " ? 0 : text == "Đã hoàn tất " ?1 : 2;
+    let value = text == "Đang thực hiện " ? 0 : text == "Đã hoàn tất " ? 1 : 2;
     let count = 0;
     trips.forEach(trip => {
       trip.className = "trip";
-      if (count == value){
+      if (count == value) {
         trip.className = "trip-hidden";
       }
       ++count;
