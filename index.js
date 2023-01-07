@@ -11,6 +11,7 @@ const { carModel } = require("./models/car.js");
 const { orderModel } = require("./models/orders.js");
 const { userModel } = require("./models/users.js");
 const { ratingModel } = require("./models/ratings.js");
+const { replyModel } = require("./models/reply.js");
 const helper = require("./helper/helper.js");
 
 mongoose
@@ -173,11 +174,12 @@ const handleSearchAdmin = async function (req, res) {
 
   res.render("manage_trip_list", {
     ticketList: newTicketList,
+    tilte: "Quản lý chuyến đi",
     ticketListJSON: JSON.stringify(newTicketList),
   });
 };
 
-app.get("/ticket_list", async (req, res) => {
+app.get("/ticket_list", async (req, res)  => {
   const ticketList = await ticketModel.find().lean();
   const newTicketList = [];
 
@@ -207,6 +209,7 @@ app.get("/ticket_list", async (req, res) => {
 
   res.render("ticket_list", {
     ticketList: paginationList,
+    tilte: "Danh sách chuyến đi",
     ticketListJSON: JSON.stringify(newTicketList),
   });
 });
@@ -266,7 +269,19 @@ app.get("/manage_trip_list", async function (req, res) {
   });
 });
 
+app.get("/manage_garage", async (req, res) => {
+  // if (!req.session.auth) {
+  //   return res.redirect("/?login=true");
+  // }
+  // if (res.locals.authUser["role"] != "admin") {
+  //   console.log("wrong role");
+  //   return res.redirect("/");
+  // }
 
+  res.render("manage_garage", { 
+    title: "Quản lý nhà xe",
+   });
+});
 
 app.get("/create_trip_info", async (req, res) => {
   // if (!req.session.auth) {
@@ -363,7 +378,7 @@ app.get("/delete_trip", async (req, res) => { // not finish
   res.render("manage_trip_list", {
     ticketList: newTicketList, // !
     ticketListJSON: JSON.stringify(newTicketList), // !
-    title: "Quản lý chuyến đi",
+    title: "Danh sách chuyến đi",
   });
 
 })
@@ -392,7 +407,7 @@ app.get("/manage_trip_info", async (req, res) => {
   // console.log(ticket);
   res.render("manage_trip_info", {
     ticketInfor: ticket, // !
-    title: "Quản lý chuyến đi",
+    title: "Chỉnh sửa chuyến đi",
   });
 });
 
@@ -432,7 +447,7 @@ app.post("/manage_trip_info", async (req, res) => { // for update
 
   res.render("manage_trip_info", {
     ticketInfor: ticket, // !
-    title: "Quản lý chuyến đi",
+    title: "Chỉnh sửa chuyến đi",
   });
 });
 
@@ -642,6 +657,7 @@ app.get("/history", async (req, res) => {
   // console.log(order_details);
   res.render("history", {
     order_details: order_details.reverse()
+    title : "Lịch sử đặt vé"
   });
 });
 
@@ -666,11 +682,15 @@ app.post("/history", destroyOrderFunction);
 // ***********************************************************************************
 
 app.get("/promotion", (req, res) => {
-  res.render("promotion");
+  res.render("promotion", { title: "Khuyến mãi" });
+});
+
+app.get("/manage_admin", (req, res) => {
+  res.render("manage_admin", { title: "Quản lý hệ thống" });
 });
 
 app.get("/news_details", (req, res) => {
-  res.render("news_details");
+  res.render("news_details", { title: "Tin tức" });
 });
 
 // RATING FEATURES 
@@ -713,6 +733,7 @@ app.get("/partner_info", async (req, res) => {
   commentList = ratingItems;
   res.render("partner_info", {
     garageList,
+    tilte : "Đối tác",
     commentList,
   });
 });
@@ -737,15 +758,15 @@ app.post("/partner_info", ratingFunction);
 
 //
 app.get("/user_info", (req, res) => {
-  res.render("user_info");
+  res.render("user_info", { title: "Thông tin cá nhân" });
 });
 
 app.get("/about_us", (req, res) => {
-  res.render("about_us");
+  res.render("about_us", { title: "Về chúng tôi" });
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  res.render("contact", { title: "Liên hệ" })
 });
 
 app.use("/", userRouter.router);

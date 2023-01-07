@@ -7,5 +7,5 @@ const replySchema = new mongoose.Schema({
   reply: String
 });
 
-const replyModel = mongoose.model("reply", ratingSchema);
+const replyModel = mongoose.model("reply", replySchema);
 exports.replyModel = replyModel;
