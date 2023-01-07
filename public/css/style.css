@@ -24,6 +24,14 @@
   padding-left: 50px;
 }
 
+.background-box2{
+  background: #f08230;
+  color: white;
+  border-radius: 0 30px 30px 0;
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
 .is-margin-rl-20{
   margin: 0 20px !important;
 }
@@ -225,7 +233,7 @@ header{
 }
 
 .btn-more{
-  padding: 1px 20px;
+  padding: 10px 20px;
   background: #e3852f;
   color: white;
   border-radius: 10px;
@@ -233,6 +241,48 @@ header{
   border: none;
 }
 
+.btn-blue{
+  padding: 70px 175px;
+  background: #0C86CB;
+  color: white;
+  border-radius: 10px;
+  font-weight: bolder;
+  font-size: 25px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border: none;
+}
+
+.btn-org{
+  padding: 70px 200px;
+  background: #e3852f;
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border: none;
+}
+.btn-yellow{
+  padding: 70px 177px;
+  background: #f3b90c;
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border: none;
+}
+
+.btn-green{
+  padding: 70px 202px;
+  background: #099909;
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border: none;
+}
 .mr-bot{
   margin-bottom: 30px;
 }

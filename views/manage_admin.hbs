@@ -1,43 +1,33 @@
+<main>
+    <div class="container">
+        <h2 class="title">Quản lý hệ thống</h2>
+        <br>
+        <div class="row">
+            <div class="col-xl-6 col-md-12 col-12 col mr-bot wow bounceInLeft">
+                <div class="row is-margin-rl-20">
+                   <a href="/manage_garage">
+                        <button class="btn-org" style="margin-bottom: 20px">Quản lý nhà xe</button></a>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-12 col-12 col mr-bot wow bounceInRight">
+                <div class="row is-margin-rl-20">
+                        <a href="/manage_trip_list">
+                        <button class="btn-yellow" style="margin-bottom: 20px">Quản lý chuyến xe</button></a>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-12 col-12 col mr-bot wow bounceInLeft">
+                <div class="row is-margin-rl-20">
+                    <a href="/manage_history">
+                        <button class="btn-green" style="margin-bottom: 20px">Quản lý vé đặt</button></a>
+                </div>
+            </div>
 
-  <link rel="stylesheet" type="text/css" href="../css/history.css">
-  
+            <div class="col-xl-6 col-md-12 col-12 col mr-bot wow bounceInRight">
+                <div class="row is-margin-rl-20">
+                    <a href="/manage_contact"><button class="btn-blue" style="margin-bottom: 20px">Nội dung phản  hồi</button></a>
+                 </div>
+            </div>
 
-  <main>
-    <section style="width: 30rem">
-      <article class="row grid-choice">
-        <div class="col-lg-4 col-sm-12 is-magrin-bot-15">
-          <button class="grid-choice-item-active">Nhà xe </button>  
         </div>
-        <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
-          <button class="grid-choice-item">Chuyến xe</button>  
-        </div>
-        <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
-          <button class="grid-choice-item">Vé Xe </button>  
-        </div>
-      </article>
-      
-      
-    </section>
-  </main>
-<script>
-  function changeChoice(e) {
-    let text = e.target.textContent;
-    let value = text == "Đang thực hiện " ? 0 : text == "Đã hoàn tất " ?1 : 2;
-    let count = 0;
-    trips.forEach(trip => {
-      trip.className = "trip";
-      if (count == value){
-        trip.className = "trip-hidden";
-      }
-      ++count;
-    });
-    choices.forEach((c) => {
-      c.className = "grid-choice-item";
-    })
-    e.target.className = "grid-choice-item-active";
-  }
-  var choices = document.querySelectorAll(".grid-choice button");
-  choices.forEach(choice => choice.addEventListener("click", changeChoice));
-  var trips = document.querySelectorAll("article.trip");
-
-</script>
+    </div>
+</main>

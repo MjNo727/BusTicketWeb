@@ -24,7 +24,7 @@
             </li>
           <li>
             {{#if (eq authUser.role "admin")}}
-             <a href="/manage_trip_list"><i class="icofont-school-bus"></i>Quản Lý Vé</a>
+             <a href="/manage_admin"><i class="icofont-school-bus"></i>Quản Lý Vé</a>
             {{else}}
             <a href="/history"><i class="icofont-school-bus"></i>Quản Lý Vé</a>
             {{/if}}
@@ -136,7 +136,7 @@
                 <li><a href="/ticket_list">Lịch Trình</a></li>
                 <li>
                   {{#if (eq authUser.role "admin")}}
-                  <a href="/manage_trip_list"></i>Quản Lý Vé</a>
+                  <a href="/manage_admin"></i>Quản Lý Vé</a>
                   {{else}}
                   <a href="/history"></i>Quản Lý Vé</a>
                   {{/if}}</li>
