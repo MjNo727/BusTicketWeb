@@ -3,16 +3,16 @@
   
 
   <main>
-    <section>
+    <section style="width: 30rem">
       <article class="row grid-choice">
         <div class="col-lg-4 col-sm-12 is-magrin-bot-15">
           <button class="grid-choice-item-active">Tất cả </button>  
         </div>
         <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
-          <button class="grid-choice-item">Đã hoàn tất </button>  
+          <button class="grid-choice-item">Vừa đặt </button>  
         </div>
         <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
-          <button class="grid-choice-item">Đang thực hiện </button>  
+          <button class="grid-choice-item">Đã hủy </button>  
         </div>
       </article>
       
@@ -26,8 +26,9 @@
         </div>
         <hr>
         <div class="info">
-          <div><img src={{car_infor.imgPath}} alt="" class="logogarage"></div>
+          <div><img src={{car_infor.imgPath}} alt="" class="car_img"></div>
           <div style="padding: 0px">
+            <div>Mã vé: {{order_code}}</div>
             <div>Chuyến đi: {{trip_infor.name}}</div>
             <div>Ngày đi:  {{trip_infor.departure_date}}</div>
             <div>Loại xe:  {{car_infor.name}}</div>
@@ -62,7 +63,7 @@
           <input name="ticket_id" value="{{ticket_infor._id}}" type="text" hidden="true">
           <input name="order_id" value="{{order_id}}" type="text" hidden="true">
           <button type="submit" 
-          class="btn isOrange booking__btn ml-10 isfont20" style="margin: 0 0 1rem 15.5rem; color: white; font-weight: bold; border-radius: 10px" >
+          class="btn isBlue booking__btn ml-10 isfont20" style="margin: 0 0 1rem 19rem; color: white; font-weight: bold; border-radius: 10px" >
               Hủy đơn hàng
           </button>
         </form>

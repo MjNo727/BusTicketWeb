@@ -426,7 +426,10 @@ app.get("/history", async (req, res) => {
       const carId = trip.car;
       const car = await carModel.findOne({ _id: carId }).lean();
 
+      const order_code = ele._id.toString().substring(1,10).toUpperCase();
+      // console.log(order_code);
       const order = {
+        order_code: order_code,
         order_id: ele._id.toString(),
         order_status: ele.status,
         number: ele.number,

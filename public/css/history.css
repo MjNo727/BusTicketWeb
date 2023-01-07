@@ -67,12 +67,14 @@ hr{
 .info {
     display: flex;
     font-size: 1.2rem;
+    /* gap: 1rem; */
     margin-top: 1rem;
 }
 
-.logogarage {
-    width: 5rem;
-    height: 5rem;
+.car_img {
+    border-radius: 20px;
+    width: 11rem;
+    height: 11rem;
     margin: 0 1rem;
 }
 
@@ -160,4 +162,12 @@ hr{
 
 .isOrange {
     background-color: #f15a24;
+}
+
+.isBlue{
+    background-color:  #0C86CB;
+}
+
+.status {
+    padding-top: 2rem;
 }
