@@ -1,5 +1,30 @@
 <main>
     <section>
+         <form class="container" method="POST">
+      <div class="row search-bar">
+        <div class="col-xl-3 col-md-3 col-12">
+          <input type="text" name="departure_place" placeholder="Nơi đi" class="search-items">
+        </div>
+        <div class="col-xl-3 col-md-3 col-12">
+          <input type="text" name="arrive_place" placeholder="Nơi đến" class="search-items">
+        </div>
+        <div class="col-xl-2 col-md-3 col-12">
+          <input type="text" name="depature_date" placeholder="Ngày đi" class="search-items">
+        </div>
+        <div class="col-xl-2 col-md-3 col-12">
+          <input type="text" name="car_type" placeholder="Loại xe" class="search-items">
+        </div>
+        <div class="col-xl-2 col-md-12 col-12">
+          <a href="/ticket_list">
+            <button type="submit" class="search-items btn-search">Tìm vé</button></a>
+        </div>
+        <div>
+        {{#if ticketErrorMessage}}
+              {{ticketErrorMessage}}
+        {{/if}}
+      </div>
+      </div>
+    </form>
     </section>
     <section>
         <div class="container wow bounceInLeft">

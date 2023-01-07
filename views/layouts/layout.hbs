@@ -19,8 +19,16 @@
       <div class="center-flex">
         <ul>
           <li><a href="/promotion"> <i class="icofont-school-bus"></i>Khuyến mãi</a></li>
-          <li><a href="/ticket_list"><i class="icofont-school-bus"></i>Lịch Trình</a></li>
-          <li><a href="/history"><i class="icofont-school-bus"></i>Quản Lý Vé</a></li>
+          <li>
+            <a href="/ticket_list"><i class="icofont-school-bus"></i>Lịch Trình</a>
+            </li>
+          <li>
+            {{#if (eq authUser.role "admin")}}
+             <a href="/manage_trip_list"><i class="icofont-school-bus"></i>Quản Lý Vé</a>
+            {{else}}
+            <a href="/history"><i class="icofont-school-bus"></i>Quản Lý Vé</a>
+            {{/if}}
+          </li>
           <li><a href="/contact"><i class="icofont-school-bus"></i>Liên Hệ</a></li>
         </ul>
       </div>
@@ -126,7 +134,12 @@
               <ul>
                 <li><a href="/promotion">Khuyến Mãi</a></li>
                 <li><a href="/ticket_list">Lịch Trình</a></li>
-                <li><a href="/history">Quản Lý Vé</a></li>
+                <li>
+                  {{#if (eq authUser.role "admin")}}
+                  <a href="/manage_trip_list"></i>Quản Lý Vé</a>
+                  {{else}}
+                  <a href="/history"></i>Quản Lý Vé</a>
+                  {{/if}}</li>
                 <li><a href="/contact">Liên Hệ</a></li>
                 <li><a href="/partner_info">Nhà xe</a></li>
               </ul>
@@ -166,31 +179,7 @@
       <p>V.exe - Cam kết hoàn 150% nếu nhà xe không giữ vé</p>
     </div>
     <img src="./img/banner-img.png" class="banner-img">
-    <form class="container" method="POST">
-      <div class="row search-bar">
-        <div class="col-xl-3 col-md-3 col-12">
-          <input type="text" name="departure_place" placeholder="Nơi đi" class="search-items">
-        </div>
-        <div class="col-xl-3 col-md-3 col-12">
-          <input type="text" name="arrive_place" placeholder="Nơi đến" class="search-items">
-        </div>
-        <div class="col-xl-2 col-md-3 col-12">
-          <input type="text" name="depature_date" placeholder="Ngày đi" class="search-items">
-        </div>
-        <div class="col-xl-2 col-md-3 col-12">
-          <input type="text" name="car_type" placeholder="Loại xe" class="search-items">
-        </div>
-        <div class="col-xl-2 col-md-12 col-12">
-          <a href="/ticket_list">
-            <button type="submit" class="search-items btn-search">Tìm vé</button></a>
-        </div>
-        <div>
-        {{#if ticketErrorMessage}}
-              {{ticketErrorMessage}}
-        {{/if}}
-      </div>
-      </div>
-    </form>
+   
   </header>
 
   {{{body}}}
@@ -284,6 +273,7 @@
       });
     });
   </script>
+
   <script type="text/javascript">
     const images = document.querySelectorAll(".img-click");
     images.forEach((el) => el.addEventListener("click", handleChangeImage));
@@ -293,6 +283,7 @@
       featureImage.setAttribute("src", source);
     }
   </script>
+
   <script type="text/javascript">
     function menuDisplay() {
       var list = document.getElementById("nav-list-mb");
@@ -320,6 +311,7 @@
       formSignin.classList.toggle("opacityDisplay");
       formRegis.classList.toggle("opacityDisplay");
     }
+    
   </script>
   <script type="text/javascript" src="js/wow.min.js"></script>
   <script>new WOW().init();</script>

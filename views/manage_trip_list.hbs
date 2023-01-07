@@ -121,8 +121,9 @@
                   <a href="/manage_trip_info?trip={{_id}}">
                     <div class="row mt-2 mb-2 isboder_bottom">
                        <div class="col-sm-3 time_departure">
-                          <div>
-                             <img src="../img/brand_homecar/United Airlines.png" alt="" />
+                          <div class="logo_garage">
+                             {{!-- <img src="../img/lachong.png" alt="" /> --}}
+                             <img src={{garageInfor.imgPath}} alt="" />
                           </div>
                           <div>
                              {{tripInfor.departure_date}} - {{tripInfor.departure_time}}<br />
@@ -139,6 +140,11 @@
                        <p class="col-sm-3">{{price}}</p>
                     </div>
                   </a>
+                  {{/each}}
+                   {{#each pagesList}}
+                     <a href='?page={{this}}' class="pagination {{#if (eq ../current_page this)}} active {{/if}}">
+                        {{this}}
+                     </a>
                   {{/each}}
                </div>
             </div>
@@ -186,11 +192,11 @@
             ticketListView.innerHTML='<div class="ticket__header row" style="background-color: #0c86cb"> <p class="col-sm-3">Khởi chạy</p><p class="col-sm-3">Thời gian hành trình</p><p class="col-sm-3">Loại xe</p><p class="col-sm-3">Giá vé</p></div>';
             for(let i = 0; i < filterTicketListPrice.length; i++)
             {
-               ticketListView.innerHTML += `<a href="/ticket_info?ticket=${filterTicketListPrice[i]._id}">
+               ticketListView.innerHTML += `<a href="/manage_trip_info?trip=${filterTicketListPrice[i]._id}">
                     <div class="row mt-2 mb-2 isboder_bottom">
                        <div class="col-sm-3 time_departure">
-                          <div>
-                             <img src="../img/brand_homecar/United Airlines.png" alt="" />
+                          <div class="logo_garage">
+                            <img src=${filterTicketListPrice[i].garageInfor.imgPath} alt="" />
                           </div>
                           <div>
                              ${filterTicketListPrice[i].tripInfor.departure_date} - ${filterTicketListPrice[i].tripInfor.departure_time}<br />
