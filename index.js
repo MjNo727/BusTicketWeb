@@ -60,12 +60,12 @@ app.use(function (req, res, next) {
   }
   next();
 });
-app.get("/createTables", (req, res) => {
-  let models = require("./models");
-  models.sequelize.sync().then(() => {
-    res.send("table created");
-  });
-});
+// app.get("/createTables", (req, res) => {
+//   let models = require("./models");
+//   models.sequelize.sync().then(() => {
+//     res.send("table created");
+//   });
+// });
 
 app.get("/", (req, res) => {
   if (req.query.login)
@@ -117,7 +117,7 @@ const handleSearch = async function (req, res) {
       .lean();
 
     ticket.carInfor = await carModel.findById(resultTrip[i].car).lean();
-    newTicketList.push(ticket);
+    if (ticket.limit > 0) newTicketList.push(ticket);
   }
 
   res.render("ticket_list", {
@@ -139,13 +139,25 @@ app.get("/ticket_list", async (req, res) => {
     ticket.tripInfor = trip;
     ticket.garageInfor = await garageModel.findById(trip.garage).lean();
     ticket.carInfor = await carModel.findById(trip.car).lean();
-    newTicketList.push(ticket);
+    if(ticket.limit > 0) newTicketList.push(ticket);
+  }
+
+  // Pagination
+  const number_ticket_display = 6;
+  const total_page = Math.ceil(newTicketList.length / number_ticket_display);
+
+  const current_page = req.query.page || 1;
+  const paginationList = newTicketList.slice((current_page - 1)*number_ticket_display, current_page * number_ticket_display);
+
+  const pagesList = [];
+
+  for(let i = 1; i <= total_page; i++){
+    pagesList[i - 1] = i;
   }
 
   res.render("ticket_list", {
-    ticketList: newTicketList,
+    ticketList: paginationList,
     ticketListJSON: JSON.stringify(newTicketList),
-    title: "Danh sách chuyến đi",
   });
 });
 
@@ -424,7 +436,7 @@ app.get("/manage_history", async (req, res) => {
   });
 });
 
-// ************************ BOOKING FUNCTION **********************************************
+// ************************ BOOKING FUNCTION ***************
 
 app.get("/booking", async (req, res) => {
   if (!req.session.auth) {
@@ -516,28 +528,9 @@ app.get("/history", async (req, res) => {
   await addOrder();
   // console.log(order_details);
   res.render("history", {
-    order_details: order_details.reverse(),
-    title: "Lịch sử",
+    order_details
   });
 });
-
-// Destroy an order
-const destroyOrderFunction = async function (req, res){
-  const ticket_id = req.body.ticket_id;
-  const order_id = req.body.order_id;
-  
-  const order = await orderModel.findOne({_id: order_id});
-  const ticket = await ticketModel.findOne({_id: ticket_id});
-  ticket.limit += order.number;
-  await ticket.save();
-
-  order.status = "Đã hủy";
-  await order.save();
-  res.redirect("/history", { title: "Lịch sử" } );
-}
-
-app.post("/history", destroyOrderFunction);
-
 
 // ***********************************************************************************
 

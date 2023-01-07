@@ -141,6 +141,12 @@
                     </div>
                   </a>
                   {{/each}}
+
+                  {{#each pagesList}}
+                     <a href='?page={{this}}' class="pagination {{#if (eq ../current_page this)}} active {{/if}}">
+                        {{this}}
+                     </a>
+                  {{/each}}
                </div>
             </div>
          </div>
@@ -153,7 +159,7 @@
          advanceBtn.addEventListener('click', ()=>{
             const inputGarage_PhuongTrang = document.querySelector("#phuong_trang_id");
             const inputGarage_ThanhBuoi = document.querySelector("#thanh_buoi_id");
-            const inputGarage_LacHong = document.querySelector("#phuong_trang_id");
+            const inputGarage_LacHong = document.querySelector("#lac_hong_id");
             const inputGarage_TuanHung = document.querySelector("#tuan_hung_id");
 
              // PRICE SELECTOR

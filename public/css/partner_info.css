@@ -207,3 +207,11 @@
     /* margin: 1rem 0; */
     border-radius: 10px;
 }
+
+.big_star {
+    font-size: 3rem;
+}
+
+.rate_item {
+    height: 12rem;
+}

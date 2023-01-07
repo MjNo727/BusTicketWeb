@@ -39,9 +39,23 @@ main {
 }
 
 .trip-head{
+    display: flex;
     margin: 1rem;
     color:#f2754e;
     font-size: 1.5rem;
+}
+
+.trip-head img {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+}
+
+.trip-head div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.9rem 0 0 1rem;  
 }
 
 hr{
@@ -53,12 +67,14 @@ hr{
 .info {
     display: flex;
     font-size: 1.2rem;
+    /* gap: 1rem; */
     margin-top: 1rem;
 }
 
-.logogarage {
-    width: 5rem;
-    height: 5rem;
+.car_img {
+    border-radius: 20px;
+    width: 11rem;
+    height: 11rem;
     margin: 0 1rem;
 }
 
@@ -142,4 +158,16 @@ hr{
         width: 90%;
         height: 100%;
     }
+}
+
+.isOrange {
+    background-color: #f15a24;
+}
+
+.isBlue{
+    background-color:  #0C86CB;
+}
+
+.status {
+    padding-top: 2rem;
 }
