@@ -174,7 +174,7 @@ const handleSearchAdmin = async function (req, res) {
 
   res.render("manage_trip_list", {
     ticketList: newTicketList,
-    tilte: "Quản lý chuyến đi",
+    title: "Quản lý chuyến đi",
     ticketListJSON: JSON.stringify(newTicketList),
   });
 };
@@ -209,7 +209,7 @@ app.get("/ticket_list", async (req, res) => {
 
   res.render("ticket_list", {
     ticketList: paginationList,
-    tilte: "Danh sách chuyến đi",
+    title: "Danh sách chuyến đi",
     ticketListJSON: JSON.stringify(newTicketList),
   });
 });
@@ -594,7 +594,7 @@ app.get("/manage_parner", async (req, res) => {
   commentList = ratingItems;
   res.render("manage_parner", {
     garageList,
-    tilte: "Quản lý nhà xe",
+    title: "Quản lý nhà xe",
     commentList,
   });
 })
@@ -766,7 +766,7 @@ app.get("/partner_info", async (req, res) => {
   commentList = ratingItems;
   res.render("partner_info", {
     garageList,
-    tilte: "Đối tác",
+    title: "Đối tác",
     commentList,
   });
 });
