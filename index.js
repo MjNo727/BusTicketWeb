@@ -378,6 +378,7 @@ app.get("/manage_trip_info", async (req, res) => {
   // }
   //have some problem with database, note by !
   const id = req.query.trip;
+  // console.log(typeof id)
   const ticketInfor = await ticketModel.findById(id).lean(); // it should by trip model
 
   const ele = ticketInfor; // !
@@ -443,9 +444,12 @@ app.get("/manage_history", async (req, res) => {
   //   console.log("wrong role");
   //   return res.redirect("/");
   // }
+
+  console.log("a")
+
   const orders = await orderModel.find().lean();
   const order_details = [];
-
+  
   const addOrder = async () => {
     for (let i = 0; i < orders.length; ++i) {
       const ele = orders[i];
@@ -490,19 +494,15 @@ app.get("/manage_history", async (req, res) => {
   });
 });
 
-app.post("/manager_history", async (req, res) => {
-  // const order_update = await ticketModel.findOne({ _id: req.query.order });
-  // const ticket_update = await ticketModel.findOne({ _id: order_update.ticket });
-  // // ticket.limit += order.number;
-  // ticket_update.limit += (order_update - req.body.order_number);
-  // ticket_update.save();
-  // console.log(" con cu: "+  order_update.number);
-  // order_update.number = req.body.order_number;
-  // console.log(" con cac: "+  order_update.number);
-  // order_update.save();
-  console.log(req.query.order);
-  console.log(req.body.order_number);
-
+app.post("/manage_history", async (req, res) => {
+  const order_update = await orderModel.findOne({ _id: req.body.order_id });
+  const ticket_update = await ticketModel.findOne({ _id: order_update.ticket });
+  ticket_update.limit += (order_update.number - req.body.order_number);
+  ticket_update.save();
+  order_update.number = req.body.order_number;
+  order_update.save();
+  
+  //save chua du nhanh
   const orders = await orderModel.find().lean();
   const order_details = [];
 

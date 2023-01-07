@@ -16,7 +16,7 @@
     </article>
 
     {{#each order_details}}
-    <from class="trip" method="POST">
+    <form class="trip" action="" method="POST">
       <div class="trip-head">
         <img src="{{garage_infor.imgPath}}" alt="">
         <div>
@@ -28,6 +28,7 @@
         <div><img src={{car_infor.imgPath}} alt="" class="car_img"></div>
         <div style="padding: 0px">
           <div>Mã vé: {{id}}</div>
+          <input type="hidden" name="order_id" value={{id}}>
           <div>Chuyến đi: {{trip_infor.name}}</div>
           <div>Người đặt: {{user_infor.fullname}}</div>
           <div>Ngày đi: {{trip_infor.departure_date}}</div>
@@ -51,20 +52,20 @@
           </div> --}}
           <div class="status">
             <p style="font-style: italic; font-weight: bold">Tình trạng: <input type="text" name="order_status"
-                value="{{order_status}}"> </p>
+                value="{{status}}"> </p>
           </div>
         </div>
       </div>
       {{!-- <div>
         <textarea class="comment">Nhận xét của bạn:</textarea>
       </div> --}}
-      <a href="/manage_history?order={{id}}">
-      <button type="submit" class="btn isBlue booking__btn ml-10 isfont20"
-        style="margin: 0 0 1rem 19rem; color: white; font-weight: bold; border-radius: 10px">
-        Cập nhật
-      </button>
+      <a href="/manage_history">
+        <button type="submit" class="btn isBlue booking__btn ml-10 isfont20"
+          style="margin: 0 0 1rem 19rem; color: white; font-weight: bold; border-radius: 10px">
+          Cập nhật
+        </button>
       </a>
-    </from>
+    </form>
     {{/each}}
   </section>
 </main>
