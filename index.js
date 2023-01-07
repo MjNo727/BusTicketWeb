@@ -179,7 +179,7 @@ const handleSearchAdmin = async function (req, res) {
   });
 };
 
-app.get("/ticket_list", async (req, res)  => {
+app.get("/ticket_list", async (req, res) => {
   const ticketList = await ticketModel.find().lean();
   const newTicketList = [];
 
@@ -267,20 +267,6 @@ app.get("/manage_trip_list", async function (req, res) {
     ticketListJSON: JSON.stringify(newTicketList), // !
     title: "Quản lý chuyến đi",
   });
-});
-
-app.get("/manage_garage", async (req, res) => {
-  // if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
-  // }
-  // if (res.locals.authUser["role"] != "admin") {
-  //   console.log("wrong role");
-  //   return res.redirect("/");
-  // }
-
-  res.render("manage_garage", { 
-    title: "Quản lý nhà xe",
-   });
 });
 
 app.get("/create_trip_info", async (req, res) => {
@@ -464,7 +450,7 @@ app.get("/manage_history", async (req, res) => {
 
   const orders = await orderModel.find().lean();
   const order_details = [];
-  
+
   const addOrder = async () => {
     for (let i = 0; i < orders.length; ++i) {
       const ele = orders[i];
@@ -485,7 +471,7 @@ app.get("/manage_history", async (req, res) => {
       const car = await carModel.findOne({ _id: carId }).lean();
 
       const total_price = parseInt(ele.number) * parseInt(ticket.price);
-      
+
       // console.log(ele.number + " <> " + ticket.price)
       const order = {
         id: ele._id,
@@ -565,6 +551,53 @@ app.post("/manage_history", async (req, res) => {
     title: "Quản lý đặt chỗ",
   });
 });
+
+app.get("/manage_parner", async (req, res) => {
+  //if (!req.session.auth) {
+  //   return res.redirect("/?login=true");
+  // }
+  // if (res.locals.authUser["role"] != "admin") {
+  //   console.log("wrong role");
+  //   return res.redirect("/");
+  // }
+  const garageList = await garageModel.find().lean();
+  let commentList = [];
+  // for(let i = 0; i < garageList.length; i++){
+  //   garageList[i]._id = garageList[i]._id.toString();
+  // }
+  const ratingItems = await ratingModel.find().lean();
+  // console.log(ratingItems.length);
+  for (let i = 0; i < ratingItems.length; i++) {
+    // console.log(ratingItems[i].user);
+    const name_user = await userModel.findOne({ _id: ratingItems[i].user }).lean();
+    // console.log(name_user);
+    ratingItems[i].userInfor = name_user.fullname;;
+
+  }
+
+  // let starOfGarage = [];
+  for (let i = 0; i < garageList.length; i++) {
+    let totalStar = 0;
+    let totalRating = 0;
+    for (let j = 0; j < ratingItems.length; j++) {
+      // console.log(ratingItems[j].garage + " = " + garageList[i]._id);
+      if (ratingItems[j].garage === garageList[i]._id.toString()) {
+        totalRating++;
+        totalStar += ratingItems[j].star;
+        // console.log(ratingItems[j].star);
+      }
+    }
+    let average = (totalStar / totalRating).toFixed(1);
+    garageList[i].avg = average;
+  }
+
+  commentList = ratingItems;
+  res.render("manage_parner", {
+    garageList,
+    tilte: "Quản lý nhà xe",
+    commentList,
+  });
+})
 
 // ************************ BOOKING FUNCTION ***************
 
@@ -657,7 +690,7 @@ app.get("/history", async (req, res) => {
   // console.log(order_details);
   res.render("history", {
     order_details: order_details.reverse(),
-    title : "Lịch sử đặt vé"
+    title: "Lịch sử đặt vé"
   });
 });
 
@@ -685,8 +718,8 @@ app.get("/promotion", (req, res) => {
   res.render("promotion", { title: "Khuyến mãi" });
 });
 
-app.get("/manage_admin", (req, res) => {
-  res.render("manage_admin", { title: "Quản lý hệ thống" });
+app.get("/manage", (req, res) => {
+  res.render("manage", { title: "Quản lý hệ thống" });
 });
 
 app.get("/news_details", (req, res) => {
@@ -733,7 +766,7 @@ app.get("/partner_info", async (req, res) => {
   commentList = ratingItems;
   res.render("partner_info", {
     garageList,
-    tilte : "Đối tác",
+    tilte: "Đối tác",
     commentList,
   });
 });
