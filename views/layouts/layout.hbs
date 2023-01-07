@@ -148,7 +148,7 @@
           <div class="col-xl-5 col-md-5 col-5 col action-btn">
             <button class="btn btn-us" style="margin-right: 3rem"><a href="/about_us">Về chúng tôi</a></button>
             {{#if auth}}
-            {{authUser.fullname}}
+            <a href='/user_info?userId={{authUser.id}}'>{{authUser.fullname}}</a>
             <a href="/logout" style="margin-left: 1rem">
               <i class="icofont-logout"></i> Log out
             </a>

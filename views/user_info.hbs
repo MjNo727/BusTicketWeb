@@ -6,15 +6,15 @@
     <div class="acount--title">Thông tin cá nhân</div>
     <article>
       <div class="avatar">
-        <img src="../img/ava.jfif" alt="">
+        {{!-- <img src={{avatar}} alt=""> --}}
       </div>
-      <div class="info">
+      <form class="info" method="POST">
         <div class="info-head">Thông tin cá nhân:</div>
 
         <div class="flex-info">
           <div class="title-info">Họ và tên:</div>
           <div class="detail-info">
-            <div class="leftt-info"><input type="text" id="name" name="name" value="Trần Dần"></div>
+            <div class="leftt-info"><input type="text" name="user_fullname" value={{user.fullname}}></div>
             <div class="right-info"> </div>
           </div>
         </div>
@@ -22,51 +22,50 @@
         <div class="flex-info">
           <div class="title-info">Email:</div>
           <div class="detail-info">
-            <div class="leftt-info"><input type="text" id="name" name="name" value="denhatquocsu@gmail.com"></div>
+            <div class="leftt-info"><input type="text" name="user_email" value={{user.email}}></div>
             <div class="right-info"><img src="../img/addButton.png" alt=""> </div>
           </div>
         </div>
 
-        <div class="flex-info">
+        {{!-- <div class="flex-info">
           <div class="title-info">CMMD/CCCD:</div>
           <div class="detail-info">
-            <div class="leftt-info"><input type="text" id="name" name="name" value="_"></div>
+            <div class="leftt-info"><input type="text" name="user_code" value="_"></div>
             <div class="right-info"><img src="../img/addButton.png" alt=""> </div>
           </div>
-        </div>
+        </div> --}}
 
-        <div class="flex-info">
+        {{!-- <div class="flex-info">
           <div class="title-info">Giới tính:</div>
           <div class="detail-info">
-            <div class="leftt-info"><input type="text" id="name" name="name" value="_"></div>
+            <div class="leftt-info"><input type="text" name="user_sex" value="_"></div>
             <div class="right-info"><img src="../img/addButton.png" alt=""> </div>
           </div>
-        </div>
+        </div> --}}
 
 
-        <div class="flex-info">
+        {{!-- <div class="flex-info">
           <div class="title-info">Địa chỉ:</div>
           <div class="detail-info">
-            <div class="leftt-info"><input type="text" id="name" name="name" value="_"></div>
+            <div class="leftt-info"><input type="text" name="user_address" value="_"></div>
             <div class="right-info"><img src="../img/addButton.png" alt=""> </div>
           </div>
-        </div>
+        </div> --}}
 
 
         <div class="flex-info">
           <div class="title-info">Số điện thoại:</div>
           <div class="detail-info">
-            <div class="leftt-info"><input type="text" id="name" name="name" value="0901 456 525"></div>
+            <div class="leftt-info"><input type="text" name="user_phoneNumber" value={{user.phoneNumber}}></div>
             <div class="right-info"><img src="../img/addButton.png" alt=""> </div>
           </div>
         </div>
-
-
-      </div>
+        <aside>
+          <a href="/user_info?userId={{user._id}}"><button class="update" type="submit">Cập nhật thông tin</button></a>
+        </aside>
+      </form>
     </article>
-    <aside>
-      <button class="update">Cập nhật thông tin</button>
-    </aside>
+
 
     <!-- <canvas data-v-393a465a="" class="editor-canvas__canvas" id="paper-view-0" style="-webkit-user-drag: none; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 256px; height: 256px;" width="320" height="320"></canvas> -->
     <!-- <img src="https://img.icons8.com/fluency/48/000000/plus-2-math.png"/> -->

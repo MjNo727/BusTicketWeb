@@ -65,6 +65,11 @@ input{
 aside {
     display: flex;
     justify-content: center;
+    text-align: center;
+}
+
+aside a{
+    width: 100%;
 }
 
 .update {

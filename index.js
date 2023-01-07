@@ -719,6 +719,13 @@ app.get("/promotion", (req, res) => {
 });
 
 app.get("/manage", (req, res) => {
+  // if (!req.session.auth) {
+  //   return res.redirect("/?login=true");
+  // }
+  // if (res.locals.authUser["role"] != "admin") {
+  //   console.log("wrong role");
+  //   return res.redirect("/");
+  // }
   res.render("manage", { title: "Quản lý hệ thống" });
 });
 
@@ -790,8 +797,37 @@ const ratingFunction = async function (req, res) {
 app.post("/partner_info", ratingFunction);
 
 //
-app.get("/user_info", (req, res) => {
-  res.render("user_info", { title: "Thông tin cá nhân" });
+app.get("/user_info", async (req, res) => {
+  // if (!req.session.auth) {
+  //   return res.redirect("/?login=true");
+  // }
+  const userId = req.query.userId;
+  // if (res.locals.authUser["id"] != userId) {
+  //   console.log("wrong user");
+  //   return res.redirect("/");
+  // }
+  const user = await userModel.findOne({ _id: userId }).lean();
+  
+  res.render("user_info", { 
+    user: user,
+    title: "Thông tin cá nhân",
+   });
+});
+
+app.post("/user_info", async (req, res) => {
+  const userId = req.query.userId;
+  const user_update = await userModel.findOne({ _id: userId })
+  user_update.fullname = req.body.user_fullname
+  user_update.email = req.body.user_email
+  user_update.phoneNumber = req.body.user_phoneNumber
+  user_update.save()
+
+  //load qua cham
+  const user = await userModel.findOne({ _id: userId }).lean();
+  res.render("user_info", { 
+    user: user,
+    title: "Thông tin cá nhân",
+   });
 });
 
 app.get("/about_us", (req, res) => {
