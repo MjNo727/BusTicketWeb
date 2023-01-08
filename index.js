@@ -470,8 +470,6 @@ app.get("/manage_history", async (req, res) => {
   //   return res.redirect("/");
   // }
 
-  console.log("a")
-
   const orders = await orderModel.find().lean();
   const order_details = [];
 
@@ -643,6 +641,7 @@ app.get("/booking", async (req, res) => {
   res.locals.successMessageBooking = "";
   res.render("booking", {
     ticketInfor: ticket,
+    title: "Booking",
   });
 });
 
@@ -888,6 +887,34 @@ app.post("/contact", async (req, res) => { // for update
     user: user,
     title: "Liên hệ",
   });
+});
+
+
+app.get("/create_partner", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
+  }
+  
+res.render("create_partner", { 
+  title: "Thêm đối tác",
+ })
+});
+
+app.post("/create_partner", async (req, res) => { // for update
+
+//have some problem with database, note by !
+const gartage_new = await garageModel.create({
+  car: req.body.xz,
+  name: req.body.name,
+  phone: req.body.phone,
+  imgPath: "../img/user_avatar.png",
+  
+});
+
+res.render("create_partner", {
+   // !
+  title: "Thêm đối tác",
+});
 });
 
 

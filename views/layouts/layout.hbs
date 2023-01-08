@@ -38,9 +38,18 @@
     <div class="action-btn-mb center-flex" id="action-btn-mb">
       <div>
         <div class="logo-mb "><img src="./img/logo.png"></div>
-        <div><button class="btn btn-exit btn-login"><i class="icofont-user"></i> Đăng nhập</button></div>
-        <div><button class="btn btn-exit btn-signup"><i class="icofont-user"></i> Đăng ký</button></div>
-        <div class="logo-mb"><button class="btn-exit" onclick="userDisplay()"><i class="icofont-exit"></i> Trở về
+           {{#if auth}}
+            <div><a href='/user_info?userId={{authUser.id}}'><button class="btn btn-exit btn-login"  onclick="signinAction()">
+            <i class="icofont-user"></i> {{authUser.fullname}}</button></a></div>
+            <div><a href="/logout" >
+            <button class="btn btn-exit btn-signup"><i class="icofont-user"></i> Đăng xuất</button></a></div>
+            <div class="logo-mb"><button class="btn-exit" onclick="userDisplay()"><i class="icofont-exit"></i> Trở về
+            
+            {{else}}
+              <div><button class="btn btn-exit btn-login"  onclick="signinAction()"><i class="icofont-user"></i> Đăng nhập</button></div>
+              <div><button class="btn btn-exit btn-signup" onclick="registerAction()"><i class="icofont-user"></i> Đăng ký</button></div>
+              <div class="logo-mb"><button class="btn-exit" onclick="userDisplay()"><i class="icofont-exit"></i> Trở về
+            {{/if}}
           </button></div>
       </div>
     </div>
