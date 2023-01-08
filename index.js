@@ -831,7 +831,7 @@ app.get("/user_info", async (req, res) => {
   //   return res.redirect("/");
   // }
   const user = await userModel.findOne({ _id: userId }).lean();
-  
+  console.log(user.email);
   res.render("user_info", { 
     user: user,
     title: "Thông tin cá nhân",
@@ -858,13 +858,14 @@ app.get("/about_us", (req, res) => {
   res.render("about_us", { title: "Về chúng tôi" });
 });
 
+
 app.get("/contact", async (req, res) => {
-  if (!req.session.auth) {
-    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
-  }
-  const userId = req.query.userId;
-  const user = await userModel.findOne({ _id: userId }).lean();
-  
+    if (!req.session.auth) {
+      return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
+    }
+    
+    const userId = res.locals.authUser["id"];
+    const user = await userModel.findOne({ _id: userId }).lean();
   res.render("contact", { 
     user: user, 
     title: "Liên hệ",
@@ -872,7 +873,7 @@ app.get("/contact", async (req, res) => {
 });
 
 app.post("/contact", async (req, res) => { // for update
-  const userId = req.query.userId;
+  const userId = res.locals.authUser["id"];
   //have some problem with database, note by !
   const trip_new = await replyModel.create({
     name: req.body.name,
