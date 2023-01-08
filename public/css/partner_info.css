@@ -215,3 +215,14 @@
 .rate_item {
     height: 12rem;
 }
+
+/* UPDATE user comment */
+.avatar_user {
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+}
+
+.data {
+    padding: 0 1rem;
+}

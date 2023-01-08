@@ -751,7 +751,7 @@ app.get("/partner_info", async (req, res) => {
     const name_user = await userModel.findOne({ _id: ratingItems[i].user }).lean();
     // console.log(name_user);
     ratingItems[i].userInfor = name_user.fullname;;
-
+    ratingItems[i].userAvatar = name_user.imgPath;
   }
 
   // let starOfGarage = [];
