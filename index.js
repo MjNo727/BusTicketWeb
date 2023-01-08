@@ -269,6 +269,27 @@ app.get("/manage_trip_list", async function (req, res) {
   });
 });
 
+app.post("/manage_trip_list", handleSearchAdmin);
+
+
+app.get("/manage_contact", async (req, res)  => {
+  const contactList = await replyModel.find().lean(); // !
+  const newContactList = []; // !
+
+  for (let i = 0; i < contactList.length; ++i) { // !
+    const ele = contactList[i]; // !
+    const contact = { ...ele }; // !
+    newContactList.push(contact);
+  }
+  // Pagination
+
+  res.render("manage_contact", {
+    contactList2: newContactList,
+    title: "Nội dung phản hồi",
+    contactListJSON: JSON.stringify(newContactList),
+  });
+});
+
 app.get("/create_trip_info", async (req, res) => {
   // if (!req.session.auth) {
   //   return res.redirect("/?login=true");
@@ -328,6 +349,9 @@ app.post("/create_trip_info", async (req, res) => { // for update
 
   });
 });
+
+
+
 
 app.get("/delete_trip", async (req, res) => { // not finish
   // if (!req.session.auth) {
@@ -418,8 +442,6 @@ app.post("/manage_trip_info", async (req, res) => { // for update
   trip_update.total_time = req.body.trip_total_time;
   trip_update.save();
 
-
-
   let ticketInfor = await ticketModel.findById(id).lean(); // it should by trip model
 
   let ele = ticketInfor; // !
@@ -436,6 +458,8 @@ app.post("/manage_trip_info", async (req, res) => { // for update
     title: "Chỉnh sửa chuyến đi",
   });
 });
+
+
 
 app.get("/manage_history", async (req, res) => {
   // if (!req.session.auth) {
@@ -834,9 +858,37 @@ app.get("/about_us", (req, res) => {
   res.render("about_us", { title: "Về chúng tôi" });
 });
 
-app.get("/contact", (req, res) => {
-  res.render("contact", { title: "Liên hệ" })
+app.get("/contact", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
+  }
+  const userId = req.query.userId;
+  const user = await userModel.findOne({ _id: userId }).lean();
+  
+  res.render("contact", { 
+    user: user, 
+    title: "Liên hệ",
+   })
 });
+
+app.post("/contact", async (req, res) => { // for update
+  const userId = req.query.userId;
+  //have some problem with database, note by !
+  const trip_new = await replyModel.create({
+    name: req.body.name,
+    phone: req.body.phone,
+    email: req.body.email,
+    reply: req.body.reply,
+  });
+  const user = await userModel.findOne({ _id: userId }).lean();
+  
+  res.render("contact", {
+     // !
+    user: user,
+    title: "Liên hệ",
+  });
+});
+
 
 app.use("/", userRouter.router);
 
