@@ -5,20 +5,10 @@
     <form class="container body_ticket_info" action="" method="POST">
       <div class="">
         <div class="row isBGLightGrey p-3 mt-5">
-          <div class="col-xl-5">
-            <span class="type-bus isbold">{{ticketInfor.garageInfor.name}}</span>
-          </div>
-          <div class="col-xl-3 d-flex justify-content-start pt-1">
-            <i class="icofont-star isfont35 isChecked"></i>
-            <i class="icofont-star isfont35 isChecked"></i>
-            <i class="icofont-star isfont35 isChecked"></i>
-            <i class="icofont-star isfont35 isChecked"></i>
-            <i class="icofont-star isfont35"></i>
-          </div>
-          <div class="col-xl-4 d-flex justify-content-end isfont20 mt-2">
+          <div class="col-xl-4 d-flex  isfont20 mt-2">
             <a href="/partner_info">
               <p class="isbold isPurple">
-                Thông tin
+                Thông tin các nhà xe
                 <i class="icofont-arrow-right isfont25"></i>
               </p>
             </a>
@@ -29,12 +19,20 @@
       <div class="">
         <div class="departure-place isbold">
           <i>Nhà xe:</i>
-          <input type="text" name="garage_name" value="{{ticketInfor.garageInfor.name}}">
+          <select name="garage_name" id="cars">
+            {{#each gaList}}
+              <option   value="{{name}}">{{name}}</option>
+            {{/each}}
+           </select>
         </div>
 
         <div class="departure-place isbold">
           <i>Loại xe:</i>
-          <input type="text" name="car_name" value="{{ticketInfor.carInfor.name}}">
+          <select name="car_name" id="carsname">
+              <option   value="Ghế ngồi">Ghế ngồi</option>
+              <option   value="Giường nằm">Giường nằm</option>
+              <option   value="Limousine">Limousine</option>
+           </select>
         </div>
 
         <div class="departure-place isbold">
@@ -99,6 +97,7 @@
           </a>
         </div>
       </div>
+      <br>
 
       {{!--
   </div> --}}

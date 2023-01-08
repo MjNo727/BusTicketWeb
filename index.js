@@ -298,8 +298,16 @@ app.get("/create_trip_info", async (req, res) => {
   //   console.log("wrong role");
   //   return res.redirect("/");
   // }
-
+  const garageList = await garageModel.find().lean(); // !
+  const newGarageList = []; // !
+  const newCarList = []; // !
+  for (let i = 0; i < garageList.length; ++i) { // !
+    const ele = garageList[i]; // !
+    const garage = { ...ele }; // !
+    newGarageList.push(garage);
+  }
   res.render("create_trip_info", {
+    gaList: newGarageList,
     title: "Tạo chuyến đi",
   });
 });
