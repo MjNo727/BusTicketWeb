@@ -15,6 +15,16 @@
     margin-right: 1rem;
 }
 
+
+.checkboxes input{
+  margin: 0px 0px 0px 0px;
+}
+
+.checkboxes label{
+  margin: 0px 200px 0px 40px;
+}
+
+
 .bold {
     font-weight: bold;
 }

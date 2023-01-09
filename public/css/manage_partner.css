@@ -1,0 +1,130 @@
+.type-bus {
+    margin-right: 1rem;
+}
+
+.icon {
+    background: white;
+    padding-top: 1px;
+    text-align: center;
+    border: solid #4F4CEE 1.5px;
+    width: 35px;
+    height: 30px;
+    font-size: 25px;
+    color: #4F4CEE;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.font25 {
+    font-size: 25px;
+}
+
+.header {
+    padding-top: 1rem;
+    padding-bottom: 1rem
+}
+
+.info {
+    padding-right: 5%;
+}
+
+.news-brief {
+    padding-left: 40px;
+}
+
+.items {
+    width: 100%;
+    height: auto;
+    text-align: left;
+    background: white;
+}
+
+.partner_name {
+    color: orange;
+}
+
+.comment_divisor {
+    font-size: 25px;
+    /* text-align: center; */
+    padding-left: 2rem;
+    color: grey;
+}
+
+.border_round {
+    border-radius: 50%;
+}
+
+.rating-color {
+    color: #fbc634 !important;
+}
+/****************/
+
+.detail_garage{
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid #2a87cb;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.logo_gara {
+    width: 20%;
+}
+
+.logo_gara img {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+    border: 3px solid #f15a24;
+}
+
+.information{
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.name input{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.buttons{
+    width: 30%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttons button,
+.button a{
+    
+    width: 50%;
+    height: 30%;
+    
+    background: #e3852f;
+    color: white;
+    border-radius: 10px;
+    /* box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px; */
+    border: none;
+}
+
+.news-title{
+    font-size: 28px;
+    font-weight: bold;
+}

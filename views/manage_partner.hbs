@@ -1,0 +1,64 @@
+<link rel="stylesheet" type="text/css" href="../css/manage_partner.css">
+{{!--
+<link rel="stylesheet" type="text/css" href="../css/history.css"> --}}
+
+<!-- link fontawsome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script src="https://kit.fontawesome.com/040bc95231.js" crossorigin="anonymous"></script>
+
+
+<br>
+<div class="container">
+   <div class="row justify-content-center">
+
+      <div class="col-sm-1 text-end">
+         <p class="type-bus ">Share</p>
+         <div class="icon fa-solid fa-link"></div>
+         <div class="icon fa-brands fa-instagram"></div>
+         <div class="icon fa-brands fa-twitter"></div>
+         <div class="icon fa-brands fa-facebook"></div>
+      </div>
+
+      <div class="col-sm-10">
+         <img class="img-responsive " src="../img/busVexe.png" width="100%" alt="VEXE">
+      </div>
+   </div>
+   <br>
+
+   <div class="row">
+      <div class="col-sm-10 ">
+         <h1 class="title">Quản lý nhà xe</h1>
+      </div>
+      <div class=" p-3 col-sm-2 float-end">
+         <a href="/create_partner">
+            <button class="btn-more">Thêm nhà xe </button></a>
+      </div>
+   </div>
+   {{#each garageList}}
+   <form class="detail_garage" method="POST">
+      <div class="logo_gara">
+         <img src={{imgPath}} alt="">
+      </div>
+      <div class="information">
+         <div class="name">
+            {{!-- <p class="news-title bold">{{name}}: {{avg}} <i class="big_star fa fa-star rating-color"></i></p> --}}
+            <input type="text" name="garage_name" value="{{name}}">
+            <input type="hidden" name="garage_id" value="{{_id}}">
+            <p class="news-title">{{total}} Ratings - {{average}} <i class="big_star fa fa-star rating-color"></i></p>
+
+         </div>
+         <div>
+            <p> TP. Hồ Chí Minh</p>
+            {{!-- <p class="news-location bold"><i class="fa-solid fa-location-dot"></i> TP. Hồ Chí Minh</p> --}}
+         </div>
+         <div>
+            <input type="text" name="garage_phone" value="{{phone}}">
+         </div>
+      </div>
+      <div class="buttons">
+         <button type="submit">Cập nhật</button>
+         <button type="button"><a href="delete_partner?garage={{_id}}">Xóa</button></a>
+      </div>
+   </form>
+   {{/each}}
+</div>
