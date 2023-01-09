@@ -873,7 +873,7 @@ app.get("/history", async (req, res) => {
 
   res.render("history", {
     order_details: order_details.reverse(),
-    order_detailsJSON: JSON.stringify(order_details.reverse()),
+    order_detailsJSON: JSON.stringify(order_details),
     title: "Lịch sử đặt vé"
   });
 });
