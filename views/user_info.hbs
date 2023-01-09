@@ -6,7 +6,7 @@
     <div class="acount--title">Thông tin cá nhân</div>
     <article>
       <div class="avatar">
-        {{!-- <img src={{avatar}} alt=""> --}}
+        <img src="{{user.imgPath}}" alt="">
       </div>
       <form class="info" method="POST">
         <div class="info-head">Thông tin cá nhân:</div>
@@ -23,7 +23,7 @@
           <div class="title-info">Email:</div>
           <div class="detail-info">
             <div class="leftt-info"><input type="text" name="user_email" value={{user.email}}></div>
-            <div class="right-info"><img src="../img/addButton.png" alt=""> </div>
+            <div class="right-info"><button><img src="../img/addButton.png" alt=""></button> </div>
           </div>
         </div>
 
@@ -57,7 +57,7 @@
           <div class="title-info">Số điện thoại:</div>
           <div class="detail-info">
             <div class="leftt-info"><input type="text" name="user_phoneNumber" value={{user.phoneNumber}}></div>
-            <div class="right-info"><img src="../img/addButton.png" alt=""> </div>
+            <div class="right-info"><button><img src="../img/addButton.png" alt=""> </button></div>
           </div>
         </div>
         <aside>
@@ -76,16 +76,12 @@
 
 
 <script>
-  function changeChoice(e) {
-    console.log(e.target);
-    choices.forEach((c) => {
-      c.className = "grid-choice-item";
-      // console.log(c);
-    })
-    e.target.className = "grid-choice-item-active";
-    // console.log(e.target.parentNode);
 
-  }
-  var choices = document.querySelectorAll(".grid-choice button");
-  choices.forEach(choice => choice.addEventListener("click", changeChoice));
+  document.querySelectorAll('.right-info button').forEach((item) => item.addEventListener("click", enableInput));
+  function enableInput (e) {
+    e.preventDefault();
+    e.target.parentNode.parentNode.parentNode.childNodes[0].disabled = true;
+    //console.log(  e.target.parentNode.parentNode.parentNode );
+    console.log(  e.target.parentNode.parentNode.parentNode.childNodes[0].className );
+  };
 </script>

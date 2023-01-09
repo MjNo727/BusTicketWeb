@@ -27,7 +27,7 @@
       </div>
 
       <div class="">
-        <div class="departure-place isbold">
+        {{!-- <div class="departure-place isbold">
           <i>Nhà xe:</i>
           <input type="text" name="garage_name" value="{{ticketInfor.garageInfor.name}}">
         </div>
@@ -35,6 +35,23 @@
         <div class="departure-place isbold">
           <i>Loại xe:</i>
           <input type="text" name="car_name" value="{{ticketInfor.carInfor.name}}">
+        </div> --}}
+        <div class="departure-place isbold">
+          <i>Nhà xe:</i>
+          <select name="garage_name" id="garages">
+            {{#each gaList}}
+            <option value="{{name}}">{{name}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div class="departure-place isbold">
+          <i>Loại xe:</i>
+          <select name="car_name" id="cars">
+            {{#each carList}}
+            <option value="{{name}}">{{name}}</option>
+            {{/each}}
+          </select>
         </div>
 
         <div class="departure-place isbold">
@@ -82,6 +99,11 @@
           <input type="text" name="ticket_price" value="{{ticketInfor.price}}">
         </div>
 
+        <div class="departure-place isbold">
+          <i>Số vé còn:</i>
+          <input type="text" name="ticket_limit" value="{{ticketInfor.limit}}">
+        </div>
+
 
       </div>
 
@@ -106,3 +128,20 @@
   </div> --}}
   </form>
 </body>
+<script>
+  var gaChoice = document.getElementById('garages');
+  for (var i, j = 0; i = gaChoice.options[j]; j++) {
+    if (i.value == "{{ticketInfor.garageInfor.name}}") {
+      gaChoice.selectedIndex = j;
+      break;
+    }
+  }
+
+  var carChoice = document.getElementById('cars');
+  for (var i, j = 0; i = carChoice.options[j]; j++) {
+    if (i.value == "{{ticketInfor.carInfor.name}}") {
+      carChoice.selectedIndex = j;
+      break;
+    }
+  }
+</script>

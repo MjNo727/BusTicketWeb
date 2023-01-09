@@ -25,6 +25,11 @@ article {
     margin: 2rem;
 }
 
+.avatar img{
+    width: 200px;
+    height: auto;
+}
+
 
 .info {
     margin: 5rem 2rem 4rem;
@@ -55,6 +60,12 @@ article {
     justify-content: space-between;
 }
 
+.right-info button{
+    border: none;
+    padding: 0;
+    background-color: #ff9404;
+}
+
 
 input{
     width: 100%;
@@ -74,7 +85,7 @@ aside a{
 
 .update {
     margin: 3rem;
-    width: 40%;
+    width: 30%;
     height: 4rem;
     border: 2px solid #E9830D;
     border-radius: 2rem;

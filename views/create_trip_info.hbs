@@ -25,15 +25,24 @@
             {{/each}}
            </select>
         </div>
-
+        
         <div class="departure-place isbold">
+          <i>Loại xe:</i>
+          <select name="car_name" id="cars">
+            {{#each carList}}
+            <option value="{{name}}">{{name}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        {{!-- <div class="departure-place isbold">
           <i>Loại xe:</i>
           <select name="car_name" id="carsname">
               <option   value="Ghế ngồi">Ghế ngồi</option>
               <option   value="Giường nằm">Giường nằm</option>
               <option   value="Limousine">Limousine</option>
            </select>
-        </div>
+        </div> --}}
 
         <div class="departure-place isbold">
           <i>Tên:</i>

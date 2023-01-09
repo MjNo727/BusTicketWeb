@@ -306,15 +306,17 @@ app.get("/create_trip_info", async (req, res) => {
   //   return res.redirect("/");
   // }
   const garageList = await garageModel.find().lean(); // !
-  const newGarageList = []; // !
-  const newCarList = []; // !
-  for (let i = 0; i < garageList.length; ++i) { // !
-    const ele = garageList[i]; // !
-    const garage = { ...ele }; // !
-    newGarageList.push(garage);
-  }
+  // const newGarageList = []; // !
+  const carList = await carModel.find().lean();
+  // for (let i = 0; i < garageList.length; ++i) { // !
+  //   const ele = garageList[i]; // !
+  //   const garage = { ...ele }; // !
+  //   newGarageList.push(garage);
+  // }
+  // console.log(newGarageList);
   res.render("create_trip_info", {
-    gaList: newGarageList,
+    gaList: garageList,
+    carList: carList,
     title: "Tạo chuyến đi",
   });
 });
@@ -431,8 +433,14 @@ app.get("/manage_trip_info", async (req, res) => {
   ticket.garageInfor = await garageModel.findById(trip.garage).lean();
   ticket.carInfor = await carModel.findById(trip.car).lean();
 
+  const gaList = await garageModel.find().lean();
+  const carList = await carModel.find().lean();
+  // console.log(gaList)
+
   // console.log(ticket);
   res.render("manage_trip_info", {
+    gaList: gaList,
+    carList: carList,
     ticketInfor: ticket, // !
     title: "Chỉnh sửa chuyến đi",
   });
@@ -729,6 +737,9 @@ app.get("/delete_partner", async (req, res) => {
     // console.log(trips[i].name)
     trips[i].delete();
   }
+  const ratings = await orderModel.find({ garage: garage_id });
+  for (var i=0;i<ratings.length;++i)
+    ratings[i].delete();
   const garage = (await garageModel.findOne({ _id:garage_id }))
   garage.delete();
   // console.log(garage.name);
@@ -991,7 +1002,7 @@ app.get("/user_info", async (req, res) => {
   //   return res.redirect("/");
   // }
   const user = await userModel.findOne({ _id: userId }).lean();
-  console.log(user.email);
+  // console.log(user.imgPath);
   res.render("user_info", {
     user: user,
     title: "Thông tin cá nhân",
@@ -1006,12 +1017,14 @@ app.post("/user_info", async (req, res) => {
   user_update.phoneNumber = req.body.user_phoneNumber
   user_update.save()
 
+  
+  return res.redirect("/user_info");
   //load qua cham
-  const user = await userModel.findOne({ _id: userId }).lean();
-  res.render("user_info", {
-    user: user,
-    title: "Thông tin cá nhân",
-  });
+  // const user = await userModel.findOne({ _id: userId }).lean();
+  // res.render("user_info", {
+  //   user: user,
+  //   title: "Thông tin cá nhân",
+  // });
 });
 
 app.get("/about_us", (req, res) => {
