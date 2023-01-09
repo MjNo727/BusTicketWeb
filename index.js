@@ -195,19 +195,21 @@ app.get("/ticket_list", async (req, res) => {
   }
 
   // Pagination
-  const number_ticket_display = 6;
+  const number_ticket_display = 5;
   const total_page = Math.ceil(newTicketList.length / number_ticket_display);
 
   const current_page = req.query.page || 1;
   const paginationList = newTicketList.slice((current_page - 1) * number_ticket_display, current_page * number_ticket_display);
 
   const pagesList = [];
-
+  console.log(current_page);
   for (let i = 1; i <= total_page; i++) {
     pagesList[i - 1] = i;
   }
-
+  // console.log(current_page);
   res.render("ticket_list", {
+    current_page: current_page,
+    pagesList: pagesList,
     ticketList: paginationList,
     title: "Danh sách chuyến đi",
     ticketListJSON: JSON.stringify(newTicketList),
@@ -446,7 +448,6 @@ app.get("/manage_history", async (req, res) => {
   //   return res.redirect("/");
   // }
 
-  console.log("a")
 
   const orders = await orderModel.find().lean();
   const order_details = [];
