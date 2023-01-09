@@ -12,64 +12,53 @@
           <button class="grid-choice-item">Vừa đặt </button>  
         </div>
         <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
-          <button class="grid-choice-item">Đã hủy </button>  
+          <button id="destroyBtn" class="grid-choice-item">Đã hủy </button>  
         </div>
       </article>
       
-      {{#each order_details}}
-      <article class="trip">
-        <div class="trip-head">
-          <img src="{{garage_infor.imgPath}}" alt="">
-          <div>
-            <p>{{garage_infor.name}}</p>
-          </div>
-        </div>
-        <hr>
-        <div class="info">
-          <div><img src={{car_infor.imgPath}} alt="" class="car_img"></div>
-          <div style="padding: 0px">
-            <div>Mã vé: {{order_code}}</div>
-            <div>Chuyến đi: {{trip_infor.name}}</div>
-            <div>Ngày đi:  {{trip_infor.departure_date}}</div>
-            <div>Loại xe:  {{car_infor.name}}</div>
-            <div>Số lượng:  {{number}}</div>
-            <div>Giá: {{ticket_infor.price}}đ/vé</div>
-            <div>Tổng thanh toán: <p class="money">{{total_price}}đ</p></div>
-            {{!-- <div>Đánh giá của bạn:</div>
-            <div class="rate">
-              <input type="radio" id="star5" name="rate" value="5" />
-              <label for="star5" title="text">5 stars</label>
-              <input type="radio" id="star4" name="rate" value="4" />
-              <label for="star4" title="text">4 stars</label>
-              <input type="radio" id="star3" name="rate" value="3" />
-              <label for="star3" title="text">3 stars</label>
-              <input type="radio" id="star2" name="rate" value="2" />
-              <label for="star2" title="text">2 stars</label>
-              <input type="radio" id="star1" name="rate" value="1" />
-              <label for="star1" title="text">1 star</label>
-            </div> --}}
-            <div class="status">
-              <p style="font-style: italic; font-weight: bold">Tình trạng: {{order_status}} </p>
+      <div class="section_view">
+        {{#each order_details}}
+        <article class="trip">
+          <div class="trip-head">
+            <img src="{{garage_infor.imgPath}}" alt="">
+            <div>
+              <p>{{garage_infor.name}}</p>
             </div>
           </div>
-        </div>
-        {{!-- <div>
-          <textarea class="comment">Nhận xét của bạn:</textarea>
-        </div> --}}
-        {{#if (eq order_status "Đã hủy")}}
-        {{else}}
-        <hr>
-        <form method="POST" action="" id="">
-          <input name="ticket_id" value="{{ticket_infor._id}}" type="text" hidden="true">
-          <input name="order_id" value="{{order_id}}" type="text" hidden="true">
-          <button type="submit" 
-          class="btn isBlue booking__btn ml-10 isfont20" style="margin: 0 0 1rem 19rem; color: white; font-weight: bold; border-radius: 10px" >
-              Hủy đơn hàng
-          </button>
-        </form>
-        {{/if}}
-      </article>
-      {{/each}}
+          <hr>
+          <div class="info">
+            <div><img src={{car_infor.imgPath}} alt="" class="car_img"></div>
+            <div style="padding: 0px">
+              <div>Mã vé: {{order_code}}</div>
+              <div>Chuyến đi: {{trip_infor.name}}</div>
+              <div>Ngày đi:  {{trip_infor.departure_date}}</div>
+              <div>Loại xe:  {{car_infor.name}}</div>
+              <div>Số lượng:  {{number}}</div>
+              <div>Giá: {{ticket_infor.price}}đ/vé</div>
+              <div>Tổng thanh toán: <p class="money">{{total_price}}đ</p></div>
+              <div class="status">
+                <p style="font-style: italic; font-weight: bold">Tình trạng: {{order_status}} </p>
+              </div>
+            </div>
+          </div>
+          {{!-- <div>
+            <textarea class="comment">Nhận xét của bạn:</textarea>
+          </div> --}}
+          {{#if (eq order_status "Đã hủy")}}
+          {{else}}
+          <hr>
+          <form method="POST" action="" id="">
+            <input name="ticket_id" value="{{ticket_infor._id}}" type="text" hidden="true">
+            <input name="order_id" value="{{order_id}}" type="text" hidden="true">
+            <button type="submit" 
+            class="btn isBlue booking__btn ml-10 isfont20" style="margin: 0 0 1rem 19rem; color: white; font-weight: bold; border-radius: 10px" >
+                Hủy đơn hàng
+            </button>
+          </form>
+          {{/if}}
+        </article>
+        {{/each}}
+      </div>
     </section>
   </main>
 <script>
@@ -93,4 +82,46 @@
   choices.forEach(choice => choice.addEventListener("click", changeChoice));
   var trips = document.querySelectorAll("article.trip");
 
+</script>
+
+<script>
+    const destroyBtn = document.querySelector("#destroyBtn");
+    destroyBtn.addEventListener('click', ()=>{
+      // Get destroyed tickets
+      const ticketList = JSON.parse(`{{{order_detailsJSON}}}`);
+
+      const newTicketList = ticketList.filter((ele)=>{
+        return ele.order_status == "Đã hủy";
+      })
+
+      let ticketView = document.querySelector(".section_view");
+      ticketView.innerHTML = '';
+      for(let i = 0; i < newTicketList.length; i++){
+        ticketView.innerHTML+=`
+        <article class="trip">
+          <div class="trip-head">
+            <img src="${newTicketList[i].garage_infor.imgPath}" alt="">
+            <div>
+              <p>${newTicketList[i].garage_infor.name}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="info">
+            <div><img src=${newTicketList[i].car_infor.imgPath} alt="" class="car_img"></div>
+            <div style="padding: 0px">
+              <div>Mã vé: ${newTicketList[i].order_code}</div>
+              <div>Chuyến đi: ${newTicketList[i].trip_infor.name}</div>
+              <div>Ngày đi:  ${newTicketList[i].trip_infor.departure_date}</div>
+              <div>Loại xe:  ${newTicketList[i].car_infor.name}</div>
+              <div>Số lượng:  ${newTicketList[i].number}}</div>
+              <div>Giá: ${newTicketList[i].ticket_infor.price}đ/vé</div>
+              <div>Tổng thanh toán: <p class="money">${newTicketList[i].total_price}đ</p></div>
+              <div class="status">
+                <p style="font-style: italic; font-weight: bold">Tình trạng: ${newTicketList[i].order_status} </p>
+              </div>
+            </div>
+          </div>
+        </article>`
+      }
+    })
 </script>

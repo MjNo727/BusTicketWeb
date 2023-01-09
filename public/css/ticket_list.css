@@ -344,6 +344,15 @@ input[type="range"]::-moz-range-thumb {
 
 /* PAGINATION */
 
+.pagination_container i {
+  font-size: 2rem;
+}
+
+.pagination_container{
+  text-align: center;
+  justify-content: center;
+}
+
 .pagination {
   text-align: center;
   width: 2.5rem;

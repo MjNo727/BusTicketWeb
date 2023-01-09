@@ -121,6 +121,19 @@ const handleSearch = async function (req, res) {
     if (ticket.limit > 0) newTicketList.push(ticket);
   }
 
+  // // Pagination
+  // const number_ticket_display = 5;
+  // const total_page = Math.ceil(newTicketList.length / number_ticket_display);
+
+  // const current_page = req.query.page || 1;
+  // const paginationList = newTicketList.slice((current_page - 1) * number_ticket_display, current_page * number_ticket_display);
+
+  // const pagesList = [];
+  // // console.log(current_page);
+  // for (let i = 1; i <= total_page; i++) {
+  //   pagesList[i - 1] = i;
+  // }
+
   res.render("ticket_list", {
     ticketList: newTicketList,
     ticketListJSON: JSON.stringify(newTicketList),
@@ -195,19 +208,30 @@ app.get("/ticket_list", async (req, res) => {
   }
 
   // Pagination
-  const number_ticket_display = 5;
+  const number_ticket_display = 6;
   const total_page = Math.ceil(newTicketList.length / number_ticket_display);
 
   const current_page = req.query.page || 1;
   const paginationList = newTicketList.slice((current_page - 1) * number_ticket_display, current_page * number_ticket_display);
 
   const pagesList = [];
-  console.log(current_page);
+  // console.log(current_page);
   for (let i = 1; i <= total_page; i++) {
     pagesList[i - 1] = i;
   }
   // console.log(current_page);
+
+  // GET all garage name
+  const garagesObj = await garageModel.find().lean();
+  
+  const garage_name = [];
+  for(let i = 0; i < garagesObj.length; i++){
+    garage_name[i] = garagesObj[i].name;
+    // console.log(garagesObj[i].name);
+  }
+
   res.render("ticket_list", {
+    garage_option: garage_name,
     current_page: current_page,
     pagesList: pagesList,
     ticketList: paginationList,
@@ -846,9 +870,10 @@ app.get("/history", async (req, res) => {
     }
   }
   await addOrder();
-  // console.log(order_details);
+
   res.render("history", {
     order_details: order_details.reverse(),
+    order_detailsJSON: JSON.stringify(order_details.reverse()),
     title: "Lịch sử đặt vé"
   });
 });

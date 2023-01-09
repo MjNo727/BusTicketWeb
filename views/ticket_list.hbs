@@ -167,11 +167,13 @@
                   </a>
                   {{/each}}
 
-                  {{#each pagesList}}
-                     <a href='?page={{this}}' class="pagination {{#if (eq ../current_page this)}} active {{/if}}">
-                        {{this}}
-                     </a>
-                  {{/each}}
+                  <div class="pagination_container">
+                     {{#each pagesList}}
+                        <a href='?page={{this}}' class="pagination {{#if (eq ../current_page this)}} active {{/if}}">
+                           {{this}}
+                        </a>
+                     {{/each}}
+                  </div>
                </div>
             </div>
          </div>
