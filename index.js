@@ -1100,7 +1100,7 @@ app.post("/about_us", (req, res) => {
 
 app.get("/contact", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
+    return res.redirect(`/?login=true`)//&redirect=${req.originalUrl}`);
   }
 
   const userId = res.locals.authUser["id"];
