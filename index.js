@@ -13,6 +13,15 @@ const { userModel } = require("./models/users.js");
 const { ratingModel } = require("./models/ratings.js");
 const { replyModel } = require("./models/reply.js");
 const helper = require("./helper/helper.js");
+const nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ceblekingt@gmail.com',
+    pass: 'blsjuyzyaborqgbd'
+  }
+});
 
 mongoose
   .connect("mongodb+srv://phong:123@cluster0.l1qxx8r.mongodb.net/busticket")
@@ -453,6 +462,7 @@ app.post("/manage_trip_info", async (req, res) => { // for update
 
   const ticket_update = await ticketModel.findOne({ _id: id });
   ticket_update.price = req.body.ticket_price;
+  ticket_update.limit = req.body.ticket_limit;
   ticket_update.save();
   const trip_update = await tripModel.findOne({ _id: ticket_update.trip });
   trip_update.garage = (await garageModel.findOne({ name: req.body.garage_name })).id;
@@ -468,7 +478,7 @@ app.post("/manage_trip_info", async (req, res) => { // for update
   trip_update.save();
 
   
-  return res.redirect("/manage_trip_info");
+  return res.redirect("/manage_trip_info?trip="+id);
   // let ticketInfor = await ticketModel.findById(id).lean(); // it should by trip model
 
   // let ele = ticketInfor; // !
@@ -820,10 +830,12 @@ const bookingFunction = async function (req, res) {
   const name = req.body.name;
   const id_user = req.body.id_user;
   const phone = req.body.phone;
+  const email = req.body.email;
   const number = req.body.number;
 
   const ticketId = req.query.ticket; // lay id ticket dang đặt
   const ticket = await ticketModel.findOne({ _id: ticketId });
+  const trip = await tripModel.findOne({ _id: ticket.trip });
   ticket.limit -= number;
   ticket.save();
 
@@ -832,8 +844,41 @@ const bookingFunction = async function (req, res) {
     user: id_user,
     ticket: ticketId,
     number: number,
+    phone4order: phone,
+    email4order: email,
     status: "Vừa đặt"
   });
+  
+var mailContain = 'Chào ' + name + 
+                  '.\nCảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi trong suốt thời gian qua.' +
+                  '\nChúng tôi đã nhận được yêu cầu đặt vé của bạn và muốn thông báo đến bạn yêu cầu đặt vé đã thành công.' +
+                  '\nVui lòng kiểm tra lại thông tin và thanh toán trước giờ lên xe.' +
+                  '\n         Họ và tên: ' + name +
+                  '\n         Số điện thoại: ' + phone +
+                  '\n         Email: ' + email +
+                  '\n         Mã đơn hàng: ' + order.id +
+                  '\n         Chuyến đi: ' + trip.name + 
+                  '\n         Thời gian khởi hành: ' + trip.departure_time + ' ' + trip.departure_date +
+                  '\n         Số ghế: ' + number +
+                  '\n         Tổng tiền: ' + number * ticket.price + 
+                  '\n         Lên xe tại: ' + trip.departure_place +
+                  '\nĐược phục vụ quý khách là niềm vinh hạnh của chúng tôi.\nThân ái!';
+
+var mailOptions = {
+  from: 'doctor strange',
+  to: '20127439clc1@gmail.com',
+  subject: 'Xác nhận đặt thành công vé xe',
+  text: mailContain,
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
   res.redirect("/history");
 };
 

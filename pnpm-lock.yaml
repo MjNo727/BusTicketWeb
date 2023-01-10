@@ -6,6 +6,7 @@ specifiers:
   express-handlebars: ^6.0.6
   express-session: ^1.17.3
   mongoose: ^6.8.2
+  nodemailer: ^6.8.0
 
 dependencies:
   bcrypt: 5.1.0
@@ -13,6 +14,7 @@ dependencies:
   express-handlebars: 6.0.6
   express-session: 1.17.3
   mongoose: 6.8.2
+  nodemailer: 6.8.0
 
 packages:
 
@@ -1534,6 +1536,11 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
+    dev: false
+
+  /nodemailer/6.8.0:
+    resolution: {integrity: sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ==}
+    engines: {node: '>=6.0.0'}
     dev: false
 
   /nopt/5.0.0:
