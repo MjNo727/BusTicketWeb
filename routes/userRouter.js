@@ -1,14 +1,22 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { userModel } = require("../models/users");
+const nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ceblekingt@gmail.com',
+    pass: 'blsjuyzyaborqgbd'
+  }
+});
 
 const router = express.Router();
 
 router.get("/", function (req, res) {
   if (req.query.login)
     res.locals.login_errorMessage = "Please login to continue";
-
-  res.render("index", { title: "Trang chủ" },);
+  res.render("index",{ title: "Trang chủ"});
 })
 
 const handleRegister = async function (req, res) {
@@ -57,7 +65,8 @@ const handleRegister = async function (req, res) {
       email: email,
     });
 
-    res.render("index.hbs", {
+    res.render(req.query.redirect.slice(1) || "index", {
+      title: "Ok bạn nhé",
       successMessage: "Đăng ký thành công",
     });
   } catch (error) {
@@ -88,10 +97,10 @@ const handleLogin = async function (req, res) {
         id: user._id,
         role: user.role,
       };
-      return res.redirect(req.query.redirect || "/");
-      // return res.render("index.hbs", {
-      //   login_successMessage: "Đăng nhập thành công",
-      // });
+      // return res.redirect(req.query.redirect || "/");
+      return res.render("index", {
+        login_successMessage: "Đăng nhập thành công",
+      });
     }
   }
 
@@ -100,11 +109,82 @@ const handleLogin = async function (req, res) {
   });
 };
 
+
+const handleResetPass = async function (req, res) {
+  // const prev_url = req.headers.referer;
+  // console.log(prev_url);
+  const { phone_mail, password } = req.body;
+
+  const isExisted = await userModel.find({
+    $or: [{ phoneNumber: phone_mail }, { email: phone_mail }],
+  });
+  if (!isExisted.length) {
+    return res.render("index.hbs", {
+      resetpass_Message: "Tài khoản không chính xác",
+    });
+  }
+  else {
+    const user = isExisted[0];
+    var randomstring = Math.random().toString(36).slice(-8);
+    // var check = false;
+    var hash_pw = await bcrypt.hash(randomstring, 12);
+    user.password = hash_pw;
+    user.save();
+
+    var mailContain = 'Chào ' + user.fullname +
+                      '.\nChúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn tới trang web v.exe.' +
+                      '\nMật khẩu mới của bạn là: ' + randomstring +
+                      '.\nVui lòng không cung cấp thông tin này cho bất kì ai.\nChúc bạn có những trải nghiệm tốt nhất với dịch vụ của chúng tôi';
+    var mailOptions = {
+      from: 'doctor strange',
+      to: user.email,
+      subject: 'Đặt lại mật khẩu!',
+      text: mailContain,
+    };
+    try {
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          return res.redirect("index.hbs", { title: "Trang chủ" },);
+        } else {
+          return res.render( "index", {
+            resetpass_Message: "Mật khẩu mới đã được gửi tới email của bạn.",
+          });
+        }
+      });
+    } catch(error){
+      return res.redirect("index.hbs", { title: "Trang chủ" }, );
+    } 
+  }
+};
+
 router.post("/", function (req, res, next) {
   const { submit } = req.body;
   if (submit === "register") handleRegister(req, res);
   else if (submit === "login") handleLogin(req, res);
+  else if (submit === "resetpass") handleResetPass(req, res);
   else res.redirect(req.query.redirect || "/");
 });
+
+
+// //trick fix when log in or sign up at promotion // how better?
+router.post("/promotion", function (req, res, next) {
+  const { submit } = req.body;
+  if (submit === "register") handleRegister(req, res);
+  else if (submit === "login") handleLogin(req, res);
+  else if (submit === "resetpass") handleResetPass(req, res);
+  else res.redirect(req.query.redirect || "/");
+});
+
+
+//trick fix when log in or sign up at new detail // how better?
+router.post("/news_details", function (req, res, next) {
+  const { submit } = req.body;
+  if (submit === "register") handleRegister(req, res);
+  else if (submit === "login") handleLogin(req, res);
+  else if (submit === "resetpass") handleResetPass(req, res);
+  else res.redirect(req.query.redirect || "/");
+});
+
 
 exports.router = router;

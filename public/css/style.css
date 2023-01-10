@@ -113,6 +113,18 @@ form h2{
   border-radius: 50px;
 }
 
+.forgetpass-btn-action{
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .signin-btn-action{
   background: #2a86cc;
   color: white;

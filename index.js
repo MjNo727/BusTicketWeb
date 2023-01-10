@@ -242,9 +242,9 @@ app.get("/ticket_list", async (req, res) => {
 
   // GET all garage name
   const garagesObj = await garageModel.find().lean();
-  
+
   const garage_name = [];
-  for(let i = 0; i < garagesObj.length; i++){
+  for (let i = 0; i < garagesObj.length; i++) {
     garage_name[i] = garagesObj[i].name;
     // console.log(garagesObj[i].name);
   }
@@ -362,7 +362,7 @@ app.post("/create_trip_info", async (req, res) => { // for update
     price: req.body.ticket_price,
     limit: req.body.ticket_limit
   });
-  
+
   return res.redirect("/manage_trip_list");
 
   // const ticketList = await ticketModel.find().lean(); // !
@@ -400,9 +400,9 @@ app.get("/delete_trip", async (req, res) => { // not finish
   const ticket = (await ticketModel.findOne({ _id: id }));
   const trip = (await tripModel.findOne({ _id: ticket.trip }));
   const orders = (await orderModel.find({ ticket: ticket.id }));
-  for (var i=0;i<orders.length;++i)
+  for (var i = 0; i < orders.length; ++i)
     orders[i].delete();
-    // console.log(orders[i].status);
+  // console.log(orders[i].status);
   ticket.delete();
   trip.delete();
 
@@ -487,8 +487,8 @@ app.post("/manage_trip_info", async (req, res) => { // for update
   trip_update.total_time = req.body.trip_total_time;
   trip_update.save();
 
-  
-  return res.redirect("/manage_trip_info?trip="+id);
+
+  return res.redirect("/manage_trip_info?trip=" + id);
   // let ticketInfor = await ticketModel.findById(id).lean(); // it should by trip model
 
   // let ele = ticketInfor; // !
@@ -529,8 +529,8 @@ app.get("/manage_history", async (req, res) => {
 
       const ticketId = ele.ticket;
       const ticket = await ticketModel.findOne({ _id: ticketId }).lean();
-      
-      
+
+
       const tripId = ticket.trip;
       const trip = await tripModel.findOne({ _id: tripId }).lean();
 
@@ -591,7 +591,7 @@ app.post("/manage_history", async (req, res) => {
 
   //     const ticketId = ele.ticket;
   //     const ticket = await ticketModel.findOne({ _id: ticketId }).lean();
-      
+
   //     const tripId = ticket.trip;
   //     const trip = await tripModel.findOne({ _id: tripId }).lean();
 
@@ -635,9 +635,9 @@ app.get("/manage_partner", async (req, res) => {
   //   console.log("wrong role");
   //   return res.redirect("/");
   // }
-  const garageList = await garageModel.find().lean();  
+  const garageList = await garageModel.find().lean();
   const ratingItems = await ratingModel.find().lean();
-  
+
   for (let i = 0; i < garageList.length; i++) {
     let totalStar = 0;
     let totalRating = 0;
@@ -660,13 +660,13 @@ app.get("/manage_partner", async (req, res) => {
 })
 
 app.post("/manage_partner", async (req, res) => {
-  
+
   const gararge_update = await garageModel.findOne({ _id: req.body.garage_id });
   gararge_update.name = req.body.garage_name;
   gararge_update.phone = req.body.garage_phone;
   gararge_update.save();
   // console.log(req.body.garage_name)
-  
+
   return res.redirect("/manage_partner"); //speed is good now!!
   // const garageList = await garageModel.find().lean();  
   // const ratingItems = await ratingModel.find().lean();
@@ -707,7 +707,7 @@ app.get("/create_partner", async (req, res) => {
 });
 
 app.post("/create_partner", async (req, res) => { // for update
-  
+
   //have some problem with database, note by !
   const gartage_new = await garageModel.create({
     car: req.body.xz,
@@ -719,7 +719,7 @@ app.post("/create_partner", async (req, res) => { // for update
   return res.redirect("/manage_partner");
   // const garageList = await garageModel.find().lean();  
   // const ratingItems = await ratingModel.find().lean();
-  
+
   // for (let i = 0; i < garageList.length; i++) {
   //   let totalStar = 0;
   //   let totalRating = 0;
@@ -739,15 +739,15 @@ app.post("/create_partner", async (req, res) => { // for update
   // });
 });
 
-app.get("/delete_partner", async (req, res) => { 
+app.get("/delete_partner", async (req, res) => {
   const garage_id = req.query.garage;
   console.log()
-  const trips = await tripModel.find({ garage: garage_id});
-  for (var i = 0; i<trips.length;++i){
-    const tickets = await ticketModel.find({ trip: trips[i].id});
-    for (var j = 0; j<tickets.length;++j){
+  const trips = await tripModel.find({ garage: garage_id });
+  for (var i = 0; i < trips.length; ++i) {
+    const tickets = await ticketModel.find({ trip: trips[i].id });
+    for (var j = 0; j < tickets.length; ++j) {
       const orders = await orderModel.find({ ticket: tickets[i].id })
-      for (var k=0;k<orders.length;++k){
+      for (var k = 0; k < orders.length; ++k) {
         orders[k].delete();
         // console.log(orders[i].status)
       }
@@ -758,18 +758,18 @@ app.get("/delete_partner", async (req, res) => {
     trips[i].delete();
   }
   const ratings = await orderModel.find({ garage: garage_id });
-  for (var i=0;i<ratings.length;++i)
+  for (var i = 0; i < ratings.length; ++i)
     ratings[i].delete();
-  const garage = (await garageModel.findOne({ _id:garage_id }))
+  const garage = (await garageModel.findOne({ _id: garage_id }))
   garage.delete();
   // console.log(garage.name);
 
-  
+
   return res.redirect("/manage_partner");
 
   // const garageList = await garageModel.find().lean();  
   // const ratingItems = await ratingModel.find().lean();
-  
+
   // for (let i = 0; i < garageList.length; i++) {
   //   if (garageList[i] == null)
   //     continue
@@ -816,7 +816,7 @@ app.get("/manage_contact", async (req, res) => {
 
 app.get("/booking", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
+    return res.redirect(`/?login=true`)//&redirect=${req.originalUrl}`);
   }
   const id = req.query.ticket;
   const ticketInfor = await ticketModel.findById(id).lean();
@@ -858,36 +858,36 @@ const bookingFunction = async function (req, res) {
     email4order: email,
     status: "Vừa đặt"
   });
-  
-var mailContain = 'Chào ' + name + 
-                  '.\nCảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi trong suốt thời gian qua.' +
-                  '\nChúng tôi đã nhận được yêu cầu đặt vé của bạn và muốn thông báo đến bạn yêu cầu đặt vé đã thành công.' +
-                  '\nVui lòng kiểm tra lại thông tin và thanh toán trước giờ lên xe.' +
-                  '\n         Họ và tên: ' + name +
-                  '\n         Số điện thoại: ' + phone +
-                  '\n         Email: ' + email +
-                  '\n         Mã đơn hàng: ' + order.id +
-                  '\n         Chuyến đi: ' + trip.name + 
-                  '\n         Thời gian khởi hành: ' + trip.departure_time + ' ' + trip.departure_date +
-                  '\n         Số ghế: ' + number +
-                  '\n         Tổng tiền: ' + number * ticket.price + 
-                  '\n         Lên xe tại: ' + trip.departure_place +
-                  '\nĐược phục vụ quý khách là niềm vinh hạnh của chúng tôi.\nThân ái!';
 
-var mailOptions = {
-  from: 'doctor strange',
-  to: '20127439clc1@gmail.com',
-  subject: 'Xác nhận đặt thành công vé xe',
-  text: mailContain,
-};
+  var mailContain = 'Chào ' + name +
+    '.\nCảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi trong suốt thời gian qua.' +
+    '\nChúng tôi đã nhận được yêu cầu đặt vé của bạn và muốn thông báo đến bạn yêu cầu đặt vé đã thành công.' +
+    '\nVui lòng kiểm tra lại thông tin và thanh toán trước giờ lên xe.' +
+    '\n         Họ và tên: ' + name +
+    '\n         Số điện thoại: ' + phone +
+    '\n         Email: ' + email +
+    '\n         Mã đơn hàng: ' + order.id +
+    '\n         Chuyến đi: ' + trip.name +
+    '\n         Thời gian khởi hành: ' + trip.departure_time + ' ' + trip.departure_date +
+    '\n         Số ghế: ' + number +
+    '\n         Tổng tiền: ' + number * ticket.price +
+    '\n         Lên xe tại: ' + trip.departure_place +
+    '\nĐược phục vụ quý khách là niềm vinh hạnh của chúng tôi.\nThân ái!';
 
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+  var mailOptions = {
+    from: 'doctor strange',
+    to: email,
+    subject: 'Xác nhận đặt thành công vé xe',
+    text: mailContain,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
 
   res.redirect("/history");
 };
@@ -897,7 +897,7 @@ app.post("/booking", bookingFunction);
 //***************************** HISTORY REVIEW Vé *************************************/
 app.get("/history", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
+    return res.redirect(`/?login=true`)//&redirect=${req.originalUrl}`);
   }
   const orders = await orderModel.find({ user: res.locals.authUser.id }).lean();
   const order_details = [];
@@ -968,11 +968,6 @@ app.get("/promotion", (req, res) => {
   res.render("promotion", { title: "Khuyến mãi" });
 });
 
-//trick fix when log in or sign up at promotion // how better?
-app.post("/promotion", (req, res) => {
-  res.render("promotion", { title: "Khuyến mãi" });
-});
-
 app.get("/manage", (req, res) => {
   // if (!req.session.auth) {
   //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
@@ -988,16 +983,12 @@ app.get("/news_details", (req, res) => {
   res.render("news_details", { title: "Tin tức" });
 });
 
-//trick fix when log in or sign up at new detail // how better?
-app.post("/news_details", (req, res) => {
-  res.render("news_details", { title: "Tin tức" });
-});
-
 // RATING FEATURES 
 
 app.get("/partner_info", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
+    return res.redirect(`/?login=true`); // &redirect=${req.originalUrl}`);
+    
   }
   const garageList = await garageModel.find().lean();
   let commentList = [];
@@ -1039,6 +1030,8 @@ app.get("/partner_info", async (req, res) => {
 });
 
 const ratingFunction = async function (req, res) {
+  // if (req.query.login)
+  //   return;
   const star = req.body.rate;
   const description = req.body.description;
 
@@ -1051,6 +1044,7 @@ const ratingFunction = async function (req, res) {
     star: star,
     comment: description
   });
+  // console.log("t")
   res.redirect("/partner_info");
 }
 
@@ -1058,14 +1052,14 @@ app.post("/partner_info", ratingFunction);
 
 //
 app.get("/user_info", async (req, res) => {
-  // if (!req.session.auth) {
-  //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
-  // }
+  if (!req.session.auth) {
+    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
+  }
   const userId = req.query.userId;
-  // if (res.locals.authUser["id"] != userId) {
-  //   console.log("wrong user");
-  //   return res.redirect("/");
-  // }
+  if (res.locals.authUser["id"] != userId) {
+    console.log("wrong user");
+    return res.redirect("/");
+  }
   const user = await userModel.findOne({ _id: userId }).lean();
   // console.log(user.imgPath);
   res.render("user_info", {
@@ -1082,7 +1076,7 @@ app.post("/user_info", async (req, res) => {
   user_update.phoneNumber = req.body.user_phoneNumber
   user_update.save()
 
-  
+
   return res.redirect("/user_info");
   //load qua cham
   // const user = await userModel.findOne({ _id: userId }).lean();
@@ -1099,6 +1093,7 @@ app.get("/about_us", (req, res) => {
 });
 
 app.post("/about_us", (req, res) => {
+  
   res.render("about_us", { title: "Về chúng tôi" });
 });
 
@@ -1125,7 +1120,7 @@ app.post("/contact", async (req, res) => { // for update
     reply: req.body.reply,
   });
 
-  
+
   return res.redirect("/contact");
   // const userId = res.locals.authUser["id"];
   // const user = await userModel.findOne({ _id: userId }).lean();
@@ -1136,6 +1131,8 @@ app.post("/contact", async (req, res) => { // for update
   //   title: "Liên hệ",
   // });
 });
+
+app.use("/", userRouter.router);
 
 
 app.set("port", process.env.PORT || 5000);
