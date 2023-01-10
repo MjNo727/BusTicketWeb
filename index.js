@@ -77,12 +77,22 @@ app.use(function (req, res, next) {
 //   });
 // });
 
-app.get("/", (req, res) => {
-  if (req.query.login)
-    res.locals.login_errorMessage = "Please login to continue";
+// app.get("/", (req, res) => {
+//   if (req.query.login)
+//     res.locals.login_errorMessage = "Please login to continue";
 
-  res.render("index", { title: "Trang chủ" },);
-});
+//   res.render("index", { title: "Trang chủ" },);
+// });
+
+app.use("/", userRouter.router);
+
+// LOG OUT
+app.get("/logout", (req, res) => {
+  req.session.auth = null;
+  req.session.authUser = null;
+  res.redirect("/");
+})
+
 
 // SEARCH FUNCTION
 const handleSearch = async function (req, res) {
@@ -275,7 +285,7 @@ app.get("/ticket_info", async (req, res) => {
 
 app.get("/manage_trip_list", async function (req, res) {
   // if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
+  //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   // }
   // console.log();
   // if (res.locals.authUser["role"] != "admin") {
@@ -308,7 +318,7 @@ app.post("/manage_trip_list", handleSearchAdmin);
 
 app.get("/create_trip_info", async (req, res) => {
   // if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
+  //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   // }
   // if (res.locals.authUser["role"] != "admin") {
   //   console.log("wrong role");
@@ -423,7 +433,7 @@ app.get("/delete_trip", async (req, res) => { // not finish
 
 app.get("/manage_trip_info", async (req, res) => {
   // if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
+  //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   // }
   // if (res.locals.authUser["role"] != "admin") {
   //   console.log("wrong role");
@@ -500,7 +510,7 @@ app.post("/manage_trip_info", async (req, res) => { // for update
 
 app.get("/manage_history", async (req, res) => {
   // if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
+  //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   // }
   // if (res.locals.authUser["role"] != "admin") {
   //   console.log("wrong role");
@@ -619,7 +629,7 @@ app.post("/manage_history", async (req, res) => {
 
 app.get("/manage_partner", async (req, res) => {
   //if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
+  //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   // }
   // if (res.locals.authUser["role"] != "admin") {
   //   console.log("wrong role");
@@ -887,7 +897,7 @@ app.post("/booking", bookingFunction);
 //***************************** HISTORY REVIEW Vé *************************************/
 app.get("/history", async (req, res) => {
   if (!req.session.auth) {
-    return res.redirect("/?login=true");
+    return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   }
   const orders = await orderModel.find({ user: res.locals.authUser.id }).lean();
   const order_details = [];
@@ -958,9 +968,14 @@ app.get("/promotion", (req, res) => {
   res.render("promotion", { title: "Khuyến mãi" });
 });
 
+//trick fix when log in or sign up at promotion // how better?
+app.post("/promotion", (req, res) => {
+  res.render("promotion", { title: "Khuyến mãi" });
+});
+
 app.get("/manage", (req, res) => {
   // if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
+  //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   // }
   // if (res.locals.authUser["role"] != "admin") {
   //   console.log("wrong role");
@@ -970,6 +985,11 @@ app.get("/manage", (req, res) => {
 });
 
 app.get("/news_details", (req, res) => {
+  res.render("news_details", { title: "Tin tức" });
+});
+
+//trick fix when log in or sign up at new detail // how better?
+app.post("/news_details", (req, res) => {
   res.render("news_details", { title: "Tin tức" });
 });
 
@@ -1039,7 +1059,7 @@ app.post("/partner_info", ratingFunction);
 //
 app.get("/user_info", async (req, res) => {
   // if (!req.session.auth) {
-  //   return res.redirect("/?login=true");
+  //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
   // }
   const userId = req.query.userId;
   // if (res.locals.authUser["id"] != userId) {
@@ -1072,7 +1092,13 @@ app.post("/user_info", async (req, res) => {
   // });
 });
 
+
+
 app.get("/about_us", (req, res) => {
+  res.render("about_us", { title: "Về chúng tôi" });
+});
+
+app.post("/about_us", (req, res) => {
   res.render("about_us", { title: "Về chúng tôi" });
 });
 
@@ -1111,16 +1137,6 @@ app.post("/contact", async (req, res) => { // for update
   // });
 });
 
-
-
-app.use("/", userRouter.router);
-
-// LOG OUT
-app.get("/logout", (req, res) => {
-  req.session.auth = null;
-  req.session.authUser = null;
-  res.redirect("/");
-})
 
 app.set("port", process.env.PORT || 5000);
 app.listen(app.get("port"), () => {

@@ -4,6 +4,13 @@ const { userModel } = require("../models/users");
 
 const router = express.Router();
 
+router.get("/", function (req, res) {
+  if (req.query.login)
+    res.locals.login_errorMessage = "Please login to continue";
+
+  res.render("index", { title: "Trang chủ" },);
+})
+
 const handleRegister = async function (req, res) {
   const name = req.body.name;
   const password = req.body.password;
@@ -97,7 +104,7 @@ router.post("/", function (req, res, next) {
   const { submit } = req.body;
   if (submit === "register") handleRegister(req, res);
   else if (submit === "login") handleLogin(req, res);
-  else res.render("index.hbs");
+  else res.redirect(req.query.redirect || "/");
 });
 
 exports.router = router;
