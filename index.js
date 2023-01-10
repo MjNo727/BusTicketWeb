@@ -1046,7 +1046,6 @@ app.get("/contact", async (req, res) => {
 });
 
 app.post("/contact", async (req, res) => { // for update
-  const userId = res.locals.authUser["id"];
   //have some problem with database, note by !
   const trip_new = await replyModel.create({
     name: req.body.name,
@@ -1054,13 +1053,17 @@ app.post("/contact", async (req, res) => { // for update
     email: req.body.email,
     reply: req.body.reply,
   });
-  const user = await userModel.findOne({ _id: userId }).lean();
 
-  res.render("contact", {
-    // !
-    user: user,
-    title: "Liên hệ",
-  });
+  
+  return res.redirect("/contact");
+  // const userId = res.locals.authUser["id"];
+  // const user = await userModel.findOne({ _id: userId }).lean();
+
+  // res.render("contact", {
+  //   // !
+  //   user: user,
+  //   title: "Liên hệ",
+  // });
 });
 
 
