@@ -406,29 +406,65 @@ app.get("/delete_trip", async (req, res) => { // not finish
   ticket.delete();
   trip.delete();
 
-  const ticketList = await ticketModel.find().lean(); // !
-  const newTicketList = []; // !
+  
+  return res.redirect("/manage_trip_list");
+  // const ticketList = await ticketModel.find().lean(); // !
+  // const newTicketList = []; // !
 
-  for (let i = 0; i < ticketList.length; ++i) { // !
-    const ele = ticketList[i]; // !
-    const ticket = { ...ele }; // !
-    const tripId = ele.trip;
-    const trip = await tripModel.findById(tripId).lean();
-    if (trip == null)
-      continue;
-    ticket.tripInfor = trip;
-    // console.log(trip);
-    ticket.garageInfor = await garageModel.findById(trip.garage).lean();
-    ticket.carInfor = await carModel.findById(trip.car).lean();
-    newTicketList.push(ticket);
-  }
+  // for (let i = 0; i < ticketList.length; ++i) { // !
+  //   const ele = ticketList[i]; // !
+  //   const ticket = { ...ele }; // !
+  //   const tripId = ele.trip;
+  //   const trip = await tripModel.findById(tripId).lean();
+  //   if (trip == null)
+  //     continue;
+  //   ticket.tripInfor = trip;
+  //   // console.log(trip);
+  //   ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+  //   ticket.carInfor = await carModel.findById(trip.car).lean();
+  //   newTicketList.push(ticket);
+  // }
 
-  res.render("manage_trip_list", {
-    ticketList: newTicketList, // !
-    ticketListJSON: JSON.stringify(newTicketList), // !
-    title: "Danh sách chuyến đi",
+  // res.render("manage_trip_list", {
+  //   ticketList: newTicketList, // !
+  //   ticketListJSON: JSON.stringify(newTicketList), // !
+  //   title: "Danh sách chuyến đi",
+  // });
+
+})
+
+app.get("/replication_trip", async (req, res) => { // not finish
+  // if (!req.session.auth) {
+  //   return res.redirect("/?login=true");
+  // }
+  // if (res.locals.authUser["role"] != "admin") {
+  //   console.log("wrong role");
+  //   return res.redirect("/");
+  // }
+
+  const id = req.query.trip;
+  const ticket = (await ticketModel.findOne({ _id: id }));
+  const trip = (await tripModel.findOne({ _id: ticket.trip }));
+  const trip_replication = await tripModel.create({
+    garage: trip.garage,
+    car: trip.car,
+    name: trip.name,
+    departure_place: trip.departure_place,
+    arrive_place: trip.arrive_place,
+    departure_date: trip.departure_date,
+    arrive_date: trip.arrive_date,
+    departure_time: trip.departure_time,
+    arrive_time: trip.arrive_time,
+    total_time: trip.total_time,
+
+  });
+  await ticketModel.create({
+    trip: trip_replication.id,
+    price: ticket.price,
+    limit: ticket.limit,
   });
 
+  return res.redirect("/manage_trip_list");
 })
 
 app.get("/manage_trip_info", async (req, res) => {
