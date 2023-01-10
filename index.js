@@ -343,11 +343,11 @@ app.get("/create_trip_info", async (req, res) => {
 app.post("/create_trip_info", async (req, res) => { // for update
 
   //have some problem with database, note by !
-  const trip_garage = (await garageModel.findOne({ name: req.body.garage_name }));
-  const trip_car = (await carModel.findOne({ name: req.body.car_name }))
+  // const trip_garage = (await garageModel.findOne({ name: req.body.garage_name }));
+  // const trip_car = (await carModel.findOne({ name: req.body.car_name }))
   const trip_new = await tripModel.create({
-    garage: trip_garage.id,
-    car: trip_car.id,
+    garage: req.body.garage_id,
+    car: req.body.car_id,
     name: req.body.trip_name,
     departure_place: req.body.trip_departure_place,
     arrive_place: req.body.trip_arrive_place,
@@ -450,7 +450,7 @@ app.get("/manage_trip_info", async (req, res) => {
   const trip = await tripModel.findById(tripId).lean();
   ticket.tripInfor = trip;
   ticket.garageInfor = await garageModel.findById(trip.garage).lean();
-  ticket.carInfor = await carModel.findById(trip.car).lean();
+  // ticket.carInfor = await carModel.findById(trip.car).lean();
 
   const gaList = await garageModel.find().lean();
   const carList = await carModel.find().lean();
@@ -475,8 +475,8 @@ app.post("/manage_trip_info", async (req, res) => { // for update
   ticket_update.limit = req.body.ticket_limit;
   ticket_update.save();
   const trip_update = await tripModel.findOne({ _id: ticket_update.trip });
-  trip_update.garage = (await garageModel.findOne({ name: req.body.garage_name })).id;
-  trip_update.car = (await carModel.findOne({ name: req.body.car_name })).id;
+  trip_update.garage = req.body.garage_id;
+  trip_update.car = req.body.car_id;
   trip_update.name = req.body.trip_name;
   trip_update.departure_place = req.body.trip_departure_place;
   trip_update.arrive_place = req.body.trip_arrive_place;

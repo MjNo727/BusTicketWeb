@@ -38,18 +38,18 @@
         </div> --}}
         <div class="departure-place isbold">
           <i>Nhà xe:</i>
-          <select name="garage_name" id="garages">
+          <select name="garage_id" id="garages">
             {{#each gaList}}
-            <option value="{{name}}">{{name}}</option>
+            <option value="{{_id}}">{{name}}</option>
             {{/each}}
           </select>
         </div>
 
         <div class="departure-place isbold">
           <i>Loại xe:</i>
-          <select name="car_name" id="cars">
+          <select name="car_id" id="cars">
             {{#each carList}}
-            <option value="{{name}}">{{name}}</option>
+            <option value="{{_id}}">{{name}}</option>
             {{/each}}
           </select>
         </div>
@@ -131,7 +131,7 @@
 <script>
   var gaChoice = document.getElementById('garages');
   for (var i, j = 0; i = gaChoice.options[j]; j++) {
-    if (i.value == "{{ticketInfor.garageInfor.name}}") {
+    if (i.value == "{{ticketInfor.tripInfor.garage}}") {
       gaChoice.selectedIndex = j;
       break;
     }
@@ -139,7 +139,7 @@
 
   var carChoice = document.getElementById('cars');
   for (var i, j = 0; i = carChoice.options[j]; j++) {
-    if (i.value == "{{ticketInfor.carInfor.name}}") {
+    if (i.value == "{{ticketInfor.tripInfor.car}}") {
       carChoice.selectedIndex = j;
       break;
     }

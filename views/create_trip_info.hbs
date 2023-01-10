@@ -19,18 +19,18 @@
       <div class="">
         <div class="departure-place isbold">
           <i>Nhà xe:</i>
-          <select name="garage_name" id="cars">
+          <select name="garage_id" id="cars">
             {{#each gaList}}
-              <option   value="{{name}}">{{name}}</option>
+              <option   value="{{_id}}">{{name}}</option>
             {{/each}}
            </select>
         </div>
         
         <div class="departure-place isbold">
           <i>Loại xe:</i>
-          <select name="car_name" id="cars">
+          <select name="car_id" id="cars">
             {{#each carList}}
-            <option value="{{name}}">{{name}}</option>
+            <option value="{{_id}}">{{name}}</option>
             {{/each}}
           </select>
         </div>
