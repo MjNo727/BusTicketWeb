@@ -74,6 +74,7 @@
               <p class="isfont20 isbold">Giá vé <br /> {{ticketInfor.price}}</p>
             </div>
             <div class="col-4">
+              {{#if (eq authUser.role "user")}}
               <a href="/booking?ticket={{ticketInfor._id}}">
                 <button
                   type="button"
@@ -83,6 +84,17 @@
                   Đặt vé
                 </button>
               </a>
+              {{else}}
+            <a href="manage_trip_info?trip={{ticketInfor._id}}">
+                <button
+                  type="button"
+                  class="btn isOrange booking__btn ml-7 isfont16"
+                  style="width: "
+                >
+                  Quản lý vé
+                </button>
+              </a>
+            {{/if}}
             </div>
           </div>
         </div>
