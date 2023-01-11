@@ -4,13 +4,16 @@
 <main>
   <section>
     <article class="row grid-choice">
-      <div class="col-lg-4 col-sm-12 is-magrin-bot-15">
+      <div class="col col-sm-6 is-magrin-bot-15">
         <button class="grid-choice-item-active">Tất cả</button>
       </div>
-      <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
+      <div class="col col-sm-6 is-magrin-bot-15">
         <button class="grid-choice-item">Vừa đặt</button>
       </div>
-      <div class="col-lg-4 col-sm-6 is-magrin-bot-15">
+      <div class="col col-sm-6 is-magrin-bot-15">
+        <button class="grid-choice-item">Đã thanh toán</button>
+      </div>
+      <div class="col col-sm-6 is-magrin-bot-15">
         <button class="grid-choice-item">Đã hủy</button>
       </div>
     </article>
@@ -37,6 +40,9 @@
           <div>Giá: {{ticket_infor.price}}đ/vé</div>
           <div>Tổng thanh toán: <p class="money">{{price}}đ</p>
           </div>
+          <div class="status">
+            <p style="font-style: italic; font-weight: bold">Tình trạng: <input type="text" name="order_status"
+                value="{{status}}"> </p>
           {{!-- <div>Đánh giá của bạn:</div>
           <div class="rate">
             <input type="radio" id="star5" name="rate" value="5" />
@@ -50,9 +56,6 @@
             <input type="radio" id="star1" name="rate" value="1" />
             <label for="star1" title="text">1 star</label>
           </div> --}}
-          <div class="status">
-            <p style="font-style: italic; font-weight: bold">Tình trạng: <input type="text" name="order_status"
-                value="{{status}}"> </p>
           </div>
         </div>
       </div>
