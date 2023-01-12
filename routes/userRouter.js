@@ -1,6 +1,15 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
-const { userModel } = require("../models/users");
+const session = require("express-session");
+// const { userModel } = require("../models/users");
+
+const { ticketModel } = require("../models/tickets.js");
+const { tripModel } = require("../models/trip.js");
+const { garageModel } = require("../models/garage.js");
+const { carModel } = require("../models/car.js");
+const { orderModel } = require("../models/orders.js");
+const { userModel } = require("../models/users.js");
+const { ratingModel } = require("../models/ratings.js");
+const { replyModel } = require("../models/reply.js");
 const nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
@@ -13,178 +22,454 @@ var transporter = nodemailer.createTransport({
 
 const router = express.Router();
 
-router.get("/", function (req, res) {
-  if (req.query.login)
-    res.locals.login_errorMessage = "Please login to continue";
-  res.render("index",{ title: "Trang chủ"});
-})
+//trip list
+const handleSearch = async function (req, res) {
+  const departure_place = req.body.departure_place;
+  const arrive_place = req.body.arrive_place;
+  const depature_date = req.body.depature_date;
+  const car_type = req.body.car_type;
 
-const handleRegister = async function (req, res) {
-  const name = req.body.name;
-  const password = req.body.password;
-  const phone_number = req.body.phone_number;
-  const email = req.body.email;
-  const confirm_password = req.body.confirm_password;
+  if (!departure_place || !arrive_place || !depature_date || !car_type) {
+    return res.render("ticket_list.hbs", {
+      ticketErrorMessage: "Vui lòng nhập đủ thông tin!",
+      title: "Danh sách chuyến đi",
+    });
+  }
 
-  const isExisted = await userModel
+  // FIND ID của loại xe
+  const car_id = await carModel.find({ name: car_type }, { _id: 1 }).lean();
+  const carIdList = car_id.map((ele, index) => ele._id.toString());
+
+  // SEARCH NƠI ĐẾN, NƠI ĐI, THỜI GIAN
+  const result = departure_place + " - " + arrive_place;
+  const resultTrip = await tripModel
     .find({
-      $or: [{ phoneNumber: phone_number }, { email: email }],
+      name: result,
+      departure_date: depature_date,
+      car: {
+        $in: carIdList,
+      },
     })
     .lean();
+  const newTicketList = [];
+  for (let i = 0; i < resultTrip.length; i++) {
+    let ticket = await ticketModel
+      .findOne({ trip: resultTrip[i]._id.toString() })
+      .lean();
+    // console.log(ticket);
 
-  if (isExisted.length > 0)
-    return res.render("index.hbs", {
-      errorMessage: "Tài khoản đã tồn tại!",
-    });
+    ticket.tripInfor = resultTrip[i];
 
-  if (!name || !phone_number || !email || !password || !confirm_password) {
-    return res.render("index.hbs", {
-      errorMessage: "Vui lòng nhập đầy đủ thông tin",
-    });
+    ticket.garageInfor = await garageModel
+      .findById(resultTrip[i].garage)
+      .lean();
+
+    ticket.carInfor = await carModel.findById(resultTrip[i].car).lean();
+    if (ticket.limit > 0) newTicketList.push(ticket);
   }
 
-  if (password != confirm_password) {
-    return res.render("index.hbs", {
-      errorMessage: "Mật khẩu không trùng khớp",
-    });
-  }
+  // // Pagination
+  // const number_ticket_display = 5;
+  // const total_page = Math.ceil(newTicketList.length / number_ticket_display);
 
-  const email_re = /\S+@\S+\.\S+/;
-  if (!email_re.test(email)) {
-    return res.render("index.hbs", {
-      errorMessage: "Email không hợp lệ",
-    });
-  }
+  // const current_page = req.query.page || 1;
+  // const paginationList = newTicketList.slice((current_page - 1) * number_ticket_display, current_page * number_ticket_display);
 
-  const hash_pw = await bcrypt.hash(password, 12); // size: 12
-  try {
-    await userModel.create({
-      fullname: name,
-      password: hash_pw,
-      phoneNumber: phone_number,
-      email: email,
-    });
+  // const pagesList = [];
+  // // console.log(current_page);
+  // for (let i = 1; i <= total_page; i++) {
+  //   pagesList[i - 1] = i;
+  // }
 
-    res.render(req.query.redirect.slice(1) || "index", {
-      title: "Ok bạn nhé",
-      successMessage: "Đăng ký thành công",
-    });
-  } catch (error) {
-    res.render("index.hbs", {
-      errorMessage: "Hệ thống đang xảy ra lỗi! Đăng ký không thành công",
-    });
-  }
+  res.render("ticket_list", {
+    ticketList: newTicketList,
+    ticketListJSON: JSON.stringify(newTicketList),
+    title: "Danh sách chuyến đi",
+  });
 };
 
-const handleLogin = async function (req, res) {
-  // const prev_url = req.headers.referer;
-  // console.log(prev_url);
-  const { phone_mail, password } = req.body;
+router.get("/ticket_list", async (req, res) => {
+  const ticketList = await ticketModel.find().lean();
+  const newTicketList = [];
 
-  const isExisted = await userModel.find({
-    $or: [{ phoneNumber: phone_mail }, { email: phone_mail }],
+  for (let i = 0; i < ticketList.length; ++i) {
+    const ele = ticketList[i];
+    const ticket = { ...ele };
+    const tripId = ele.trip;
+    const trip = await tripModel.findById(tripId).lean();
+    ticket.tripInfor = trip;
+    ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+    ticket.carInfor = await carModel.findById(trip.car).lean();
+    if (ticket.limit > 0) newTicketList.push(ticket);
+  }
+
+  // Pagination
+  const number_ticket_display = 6;
+  const total_page = Math.ceil(newTicketList.length / number_ticket_display);
+
+  const current_page = req.query.page || 1;
+  const paginationList = newTicketList.slice((current_page - 1) * number_ticket_display, current_page * number_ticket_display);
+
+  const pagesList = [];
+  // console.log(current_page);
+  for (let i = 1; i <= total_page; i++) {
+    pagesList[i - 1] = i;
+  }
+  // console.log(current_page);
+
+  // GET all garage name
+  const garagesObj = await garageModel.find().lean();
+
+  const garage_name = [];
+  for (let i = 0; i < garagesObj.length; i++) {
+    garage_name[i] = garagesObj[i].name;
+    // console.log(garagesObj[i].name);
+  }
+
+  res.render("ticket_list", {
+    garage_option: garage_name,
+    current_page: current_page,
+    pagesList: pagesList,
+    ticketList: paginationList,
+    title: "Danh sách chuyến đi",
+    ticketListJSON: JSON.stringify(newTicketList),
+  });
+});
+
+router.post("/ticket_list", handleSearch);
+
+
+//trip info
+router.get("/ticket_info", async (req, res) => {
+  const id = req.query.ticket;
+  const ticketInfor = await ticketModel.findById(id).lean();
+
+  const ele = ticketInfor;
+  const ticket = { ...ele };
+  const tripId = ele.trip;
+  const trip = await tripModel.findById(tripId).lean();
+  ticket.tripInfor = trip;
+  ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+  ticket.carInfor = await carModel.findById(trip.car).lean();
+
+  // console.log(ticket);
+  res.render("ticket_info", {
+    ticketInfor: ticket,
+    title: "Thông tin chuyến đi",
+  });
+});
+
+
+// ************************ BOOKING FUNCTION ***************
+
+router.get("/booking", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect(`/login?login=true`)//&redirect=${req.originalUrl}`);
+  }
+  const id = req.query.ticket;
+  const ticketInfor = await ticketModel.findById(id).lean();
+
+  const ele = ticketInfor;
+  const ticket = { ...ele };
+  const tripId = ele.trip;
+  const trip = await tripModel.findById(tripId).lean();
+  ticket.tripInfor = trip;
+  ticket.garageInfor = await garageModel.findById(trip.garage).lean();
+  ticket.carInfor = await carModel.findById(trip.car).lean();
+
+  res.locals.successMessageBooking = "";
+  res.render("booking", {
+    ticketInfor: ticket,
+    title: "Booking",
+  });
+});
+
+const bookingFunction = async function (req, res) {
+  const name = req.body.name;
+  const id_user = req.body.id_user;
+  const phone = req.body.phone;
+  const email = req.body.email;
+  const number = req.body.number;
+
+  const ticketId = req.query.ticket; // lay id ticket dang đặt
+  const ticket = await ticketModel.findOne({ _id: ticketId });
+  const trip = await tripModel.findOne({ _id: ticket.trip });
+  ticket.limit -= number;
+  ticket.save();
+
+  // res.locals.successMessageBooking = "Đặt vé thành công!";
+  const order = await orderModel.create({
+    user: id_user,
+    ticket: ticketId,
+    number: number,
+    phone4order: phone,
+    email4order: email,
+    status: "Vừa đặt"
   });
 
-  if (isExisted.length) {
-    const user = isExisted[0];
-    const matchingPassword = await bcrypt.compare(password, user.password);
-    if (matchingPassword) {
-      req.session.auth = true;
-      req.session.authUser = {
-        fullname: user.fullname,
-        phoneNumber: user.phoneNumber,
-        email: user.email,
-        id: user._id,
-        role: user.role,
-      };
-      // return res.redirect(req.query.redirect || "/");
-      return res.render("index", {
-        login_successMessage: "Đăng nhập thành công",
-      });
+  var mailContain = 'Chào ' + name +
+    '.\nCảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi trong suốt thời gian qua.' +
+    '\nChúng tôi đã nhận được yêu cầu đặt vé của bạn và muốn thông báo đến bạn yêu cầu đặt vé đã thành công.' +
+    '\nVui lòng kiểm tra lại thông tin và thanh toán trước giờ lên xe.' +
+    '\n         Họ và tên: ' + name +
+    '\n         Số điện thoại: ' + phone +
+    '\n         Email: ' + email +
+    '\n         Mã đơn hàng: ' + order.id +
+    '\n         Chuyến đi: ' + trip.name +
+    '\n         Thời gian khởi hành: ' + trip.departure_time + ' ' + trip.departure_date +
+    '\n         Số ghế: ' + number +
+    '\n         Tổng tiền: ' + number * ticket.price +
+    '\n         Lên xe tại: ' + trip.departure_place +
+    '\nĐược phục vụ quý khách là niềm vinh hạnh của chúng tôi.\nThân ái!';
+
+  var mailOptions = {
+    from: 'doctor strange',
+    to: email,
+    subject: 'Xác nhận đặt thành công vé xe',
+    text: mailContain,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
+  res.redirect("/history");
+};
+
+router.post("/booking", bookingFunction);
+
+
+//***************************** HISTORY REVIEW Vé *************************************/
+router.get("/history", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect(`/login?login=true&redirect=${req.originalUrl}`);
+  }
+  const orders = await orderModel.find({ user: res.locals.authUser.id }).lean();
+  const order_details = [];
+
+  const addOrder = async () => {
+    for (let i = 0; i < orders.length; ++i) {
+      const ele = orders[i];
+
+      const ticketId = ele.ticket;
+      const ticketDetail = await ticketModel.findOne({ _id: ticketId }).lean();
+
+      const tripId = ticketDetail.trip;
+      const trip = await tripModel.findOne({ _id: tripId }).lean();
+
+      const garageId = trip.garage;
+      const garage = await garageModel.findOne({ _id: garageId }).lean();
+
+      const carId = trip.car;
+      const car = await carModel.findOne({ _id: carId }).lean();
+
+      const order_code = ele._id.toString().substring(1, 10).toUpperCase();
+      // console.log(order_code);
+      const order = {
+        order_code: order_code,
+        order_id: ele._id.toString(),
+        order_status: ele.status,
+        number: ele.number,
+        trip_infor: trip,
+        ticket_infor: ticketDetail,
+        garage_infor: garage,
+        car_infor: car,
+        total_price: ticketDetail.price * ele.number
+      }
+      order_details.push(order);
+      // console.log(garage);
     }
   }
+  await addOrder();
 
-  res.render("index.hbs", {
-    login_errorMessage: "Tài khoản hoặc mật khẩu không chính xác",
+  res.render("history", {
+    order_details: order_details.reverse(),
+    order_detailsJSON: JSON.stringify(order_details),
+    title: "Lịch sử đặt vé"
   });
-};
+});
+
+// Destroy an order
+const destroyOrderFunction = async function (req, res) {
+  const ticket_id = req.body.ticket_id;
+  const order_id = req.body.order_id;
+
+  const order = await orderModel.findOne({ _id: order_id });
+  const ticket = await ticketModel.findOne({ _id: ticket_id });
+  ticket.limit += order.number;
+  await ticket.save();
+
+  order.status = "Đã hủy";
+  await order.save();
+  res.redirect("/history");
+}
+
+router.post("/history", destroyOrderFunction);
 
 
-const handleResetPass = async function (req, res) {
-  // const prev_url = req.headers.referer;
-  // console.log(prev_url);
-  const { phone_mail, password } = req.body;
+// ***********************************************************************************
+//promotion
+router.get("/promotion", (req, res) => {
+  res.render("promotion", { title: "Khuyến mãi" });
+});
 
-  const isExisted = await userModel.find({
-    $or: [{ phoneNumber: phone_mail }, { email: phone_mail }],
+
+//new details
+router.get("/news_details", (req, res) => {
+  res.render("news_details", { title: "Tin tức" });
+});
+
+
+// parner -  RATING FEATURES 
+router.get("/partner_info", async (req, res) => {
+  // if (!req.session.auth) {
+  //   return res.redirect(`/login?login=true`); // &redirect=${req.originalUrl}`);
+    
+  // }
+  const garageList = await garageModel.find().lean();
+  let commentList = [];
+  // for(let i = 0; i < garageList.length; i++){
+  //   garageList[i]._id = garageList[i]._id.toString();
+  // }
+  const ratingItems = await ratingModel.find().lean();
+  // console.log(ratingItems.length);
+  for (let i = 0; i < ratingItems.length; i++) {
+    // console.log(ratingItems[i].user);
+    const name_user = await userModel.findOne({ _id: ratingItems[i].user }).lean();
+    // console.log(name_user);
+    ratingItems[i].userInfor = name_user.fullname;;
+    ratingItems[i].userAvatar = name_user.imgPath;
+  }
+
+  // let starOfGarage = [];
+  for (let i = 0; i < garageList.length; i++) {
+    let totalStar = 0;
+    let totalRating = 0;
+    for (let j = 0; j < ratingItems.length; j++) {
+      // console.log(ratingItems[j].garage + " = " + garageList[i]._id);
+      if (ratingItems[j].garage === garageList[i]._id.toString()) {
+        totalRating++;
+        totalStar += ratingItems[j].star;
+        // console.log(ratingItems[j].star);
+      }
+    }
+    let average = (totalStar / totalRating).toFixed(1);
+    garageList[i].avg = average;
+  }
+
+  commentList = ratingItems;
+  res.render("partner_info", {
+    garageList,
+    title: "Đối tác",
+    commentList,
   });
-  if (!isExisted.length) {
-    return res.render("index.hbs", {
-      resetpass_Message: "Tài khoản không chính xác",
-    });
+});
+
+const ratingFunction = async function (req, res) {
+  // if (req.query.login)
+  //   return;
+  const star = req.body.rate;
+  const description = req.body.description;
+
+  const garageID = req.body.garage_id;
+  const userID = req.body.user_id;
+
+  const rating = await ratingModel.create({
+    garage: garageID,
+    user: userID,
+    star: star,
+    comment: description
+  });
+  // console.log("t")
+  res.redirect("/partner_info");
+}
+
+router.post("/partner_info", ratingFunction);
+
+
+//user info
+router.get("/user_info", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect(`/login?login=true&redirect=${req.originalUrl}`);
   }
-  else {
-    const user = isExisted[0];
-    var randomstring = Math.random().toString(36).slice(-8);
-    // var check = false;
-    var hash_pw = await bcrypt.hash(randomstring, 12);
-    user.password = hash_pw;
-    user.save();
-
-    var mailContain = 'Chào ' + user.fullname +
-                      '.\nChúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn tới trang web v.exe.' +
-                      '\nMật khẩu mới của bạn là: ' + randomstring +
-                      '.\nVui lòng không cung cấp thông tin này cho bất kì ai.\nChúc bạn có những trải nghiệm tốt nhất với dịch vụ của chúng tôi';
-    var mailOptions = {
-      from: 'doctor strange',
-      to: user.email,
-      subject: 'Đặt lại mật khẩu!',
-      text: mailContain,
-    };
-    try {
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-          return res.redirect("index.hbs", { title: "Trang chủ" },);
-        } else {
-          return res.render( "index", {
-            resetpass_Message: "Mật khẩu mới đã được gửi tới email của bạn.",
-          });
-        }
-      });
-    } catch(error){
-      return res.redirect("index.hbs", { title: "Trang chủ" }, );
-    } 
+  const userId = req.query.userId;
+  if (res.locals.authUser["id"] != userId) {
+    console.log("wrong user");
+    return res.redirect("/");
   }
-};
+  const user = await userModel.findOne({ _id: userId }).lean();
+  // console.log(user.imgPath);
+  res.render("user_info", {
+    user: user,
+    title: "Thông tin cá nhân",
+  });
+});
 
-router.post("/", function (req, res, next) {
-  const { submit } = req.body;
-  if (submit === "register") handleRegister(req, res);
-  else if (submit === "login") handleLogin(req, res);
-  else if (submit === "resetpass") handleResetPass(req, res);
-  else res.redirect(req.query.redirect || "/");
+router.post("/user_info", async (req, res) => {
+  const userId = req.query.userId;
+  const user_update = await userModel.findOne({ _id: userId })
+  user_update.fullname = req.body.user_fullname
+  user_update.email = req.body.user_email
+  user_update.phoneNumber = req.body.user_phoneNumber
+  user_update.save()
+
+
+  return res.redirect("/user_info");
+  //load qua cham
+  // const user = await userModel.findOne({ _id: userId }).lean();
+  // res.render("user_info", {
+  //   user: user,
+  //   title: "Thông tin cá nhân",
+  // });
 });
 
 
-// //trick fix when log in or sign up at promotion // how better?
-router.post("/promotion", function (req, res, next) {
-  const { submit } = req.body;
-  if (submit === "register") handleRegister(req, res);
-  else if (submit === "login") handleLogin(req, res);
-  else if (submit === "resetpass") handleResetPass(req, res);
-  else res.redirect(req.query.redirect || "/");
+//about us
+router.get("/about_us", (req, res) => {
+  res.render("about_us", { title: "Về chúng tôi" });
 });
 
 
-//trick fix when log in or sign up at new detail // how better?
-router.post("/news_details", function (req, res, next) {
-  const { submit } = req.body;
-  if (submit === "register") handleRegister(req, res);
-  else if (submit === "login") handleLogin(req, res);
-  else if (submit === "resetpass") handleResetPass(req, res);
-  else res.redirect(req.query.redirect || "/");
+//contact
+router.get("/contact", async (req, res) => {
+  if (!req.session.auth) {
+    return res.redirect(`/?login=true`)//&redirect=${req.originalUrl}`);
+  }
+
+  const userId = res.locals.authUser["id"];
+  const user = await userModel.findOne({ _id: userId }).lean();
+  res.render("contact", {
+    user: user,
+    title: "Liên hệ",
+  })
 });
+
+router.post("/contact", async (req, res) => { // for update
+  //have some problem with database, note by !
+  const trip_new = await replyModel.create({
+    name: req.body.name,
+    phone: req.body.phone,
+    email: req.body.email,
+    reply: req.body.reply,
+  });
+
+
+  return res.redirect("/contact");
+  // const userId = res.locals.authUser["id"];
+  // const user = await userModel.findOne({ _id: userId }).lean();
+
+  // res.render("contact", {
+  //   // !
+  //   user: user,
+  //   title: "Liên hệ",
+  // });
+});
+
 
 
 exports.router = router;
+

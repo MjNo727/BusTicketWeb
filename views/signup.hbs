@@ -1,0 +1,50 @@
+<!-- pop up register account -->
+{{!-- <div class="login-popup {{#if errorMessage}}opacityDisplay{{/if}} {{#if successMessage}}opacityDisplay{{/if}}"
+    id="action-btn-register"> --}}
+    <div class="login-popup opacityDisplay" id="action-btn-register">
+        <div class="position-center-flex">
+            <div class="form-login">
+                <form action="" method="POST">
+                    <h2>Tạo tài khoản của bạn</h2>
+
+                    <div>
+                        {{#if errorMessage}}
+                        {{errorMessage}}
+                        {{/if}}
+
+                        {{#if successMessage}}
+                        {{successMessage}}
+                        {{/if}}
+                    </div>
+
+                    <div class="form-items">
+                        <input type="text" name="name" placeholder="Họ và tên">
+                    </div>
+                    <div class="form-items">
+                        <input type="text" name="phone_number" placeholder="Số điện thoại">
+                    </div>
+                    <div class="form-items">
+                        <input type="text" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-items">
+                        <input type="password" name="password" placeholder="Mật Khẩu">
+                    </div>
+                    <div class="form-items">
+                        <input type="password" name="confirm_password" placeholder="Nhập lại mật khẩu">
+                    </div>
+                    {{!-- <div class="form-items">
+                        <input type="password" name="verification_code" placeholder="Mã xác nhận">
+                    </div> --}}
+                    <div class="form-items">
+                        <button name="submit" value="register" type="submit" class="register-btn-action">Tạo Tài
+                            Khoản</button>
+                    </div>
+                    <div class="form-items">
+                        <button type="button" class="btn-exit" type="button" {{!--onclick="registerAction()" --}}><i
+                                class="icofont-exit"></i> Trở về </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end pop up register account -->

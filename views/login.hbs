@@ -1,0 +1,42 @@
+<!-- pop up sign in account -->
+{{!-- <div
+    class="login-popup {{#if login_errorMessage}}opacityDisplay{{/if}} {{#if login_successMessage}}opacityDisplay{{/if}}  {{#if resetpass_Message}}opacityDisplay{{/if}}"
+    id="action-btn-signin"> --}}
+    <div class="login-popup opacityDisplay" id="action-btn-signin">
+        <div class="position-center-flex">
+            <div class="form-login">
+                <form action="" method="POST" id="loginForm">
+                    <h2>Đăng nhập vào V.exe</h2>
+                    <div>
+                        {{#if login_errorMessage}}{{login_errorMessage}}{{/if}}
+                        {{#if login_successMessage}}{{login_successMessage}}{{/if}}
+                        {{#if resetpass_Message}}{{resetpass_Message}}{{/if}}</div>
+                    <div class="form-items">
+                        <input type="text" name="phone_mail" placeholder="Số điện thoại hoặc email">
+                    </div>
+                    <div class="form-items">
+                        <input type="password" name="password" placeholder="Mật Khẩu">
+                    </div>
+                    <div class="form-items">
+                        <button type="submit" name="submit" value="login" class="signin-btn-action">Đăng Nhập</button>
+                    </div>
+                    <div class="form-items">
+                        <button type="button" class="register-btn-action" {{!-- onclick="twoToggleElement()n" --}}>Tạo
+                            Tài Khoản Mới</button>
+                    </div>
+                    <div class="form-items">
+                        <button type="submit" name="submit" value="resetpass" class="forgetpass-btn-action">Quên mật
+                            khẩu?</button>
+                    </div>
+                    <div class="form-items">
+                        <button type="button" class="btn-exit" onclick="history.back()"><i
+                                class="icofont-exit"></i> Trở
+                            về </button>
+                        {{!-- <a href="{{back}}" class="btn-exit" role="button"><i
+                                class="icofont-exit"></i> Trở về</a> --}}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end pop up sign in account -->
