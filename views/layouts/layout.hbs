@@ -85,7 +85,7 @@
               <button type="submit" name="submit" value="resetpass" class="forgetpass-btn-action">Quên mật khẩu?</button>
             </div>
             <div class="form-items">
-              <button class="btn-exit" onclick="signinAction()"><i class="icofont-exit"></i> Trở về </button>
+              <button type="button" class="btn-exit" onclick="signinAction()"><i class="icofont-exit"></i> Trở về </button>
             </div>
           </form>
         </div>
@@ -132,7 +132,7 @@
               <button name="submit" value="register" type="submit" class="register-btn-action">Tạo Tài Khoản</button>
             </div>
             <div class="form-items">
-              <button class="btn-exit" type="button" onclick="registerAction()"><i class="icofont-exit"></i> Trở về </button>
+              <button type="button" class="btn-exit" type="button" onclick="registerAction()"><i class="icofont-exit"></i> Trở về </button>
             </div>
           </form>
         </div>
@@ -175,7 +175,7 @@
             {{!-- <img src={{authUser.imgPath}} alt="avatar"> --}}
             <a href='/user_info?userId={{authUser.id}}'>{{authUser.fullname}}</a>
             <a href="/logout" style="margin-left: 1rem">
-              <i class="icofont-logout"></i> Log out
+              <i class="icofont-logout"></i> Đăng xuất
             </a>
             {{else}}
             <button class="btn btn-login" onclick="signinAction()"><i class="icofont-user"></i> Đăng nhập</button>
