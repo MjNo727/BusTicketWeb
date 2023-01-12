@@ -29,7 +29,12 @@
             <a href="/history"><i class="icofont-school-bus"></i>Quản Lý Vé</a>
             {{/if}}
           </li>
-          <li><a href="/contact"><i class="icofont-school-bus"></i>Liên Hệ</a></li>
+          <li>{{#if (eq authUser.role "admin")}}
+            <a href="/manage_contact"><i class="icofont-school-bus"></i>Liên Hệ</a>
+            {{else}}
+            <a href="/contact"><i class="icofont-school-bus"></i>Liên Hệ</a>
+            {{/if}}
+            </li>
         </ul>
       </div>
       <div class="logo-mb"><button class="btn-exit" onclick="menuDisplay()"><i class="icofont-exit"></i> Trở về
@@ -67,17 +72,17 @@
             <div class="form-items">
               <input type="text" name="phone_mail" placeholder="Số điện thoại hoặc email">
             </div>
-            <div class="form-items" style="margin-bottom: 0">
+            <div class="form-items" >
               <input type="password" name="password" placeholder="Mật Khẩu">
-            </div>
-            <div class="form-items">
-              <button type="submit" name="submit" value="resetpass" class="forgetpass-btn-action">Quên mật khẩu?</button>
             </div>
             <div class="form-items">
               <button type="submit" name="submit" value="login" class="signin-btn-action">Đăng Nhập</button>
             </div>
             <div class="form-items">
               <button type="button" class="register-btn-action" onclick="twoToggleElement()">Tạo Tài Khoản Mới</button>
+            </div>
+            <div class="form-items">
+              <button type="submit" name="submit" value="resetpass" class="forgetpass-btn-action">Quên mật khẩu?</button>
             </div>
             <div class="form-items">
               <button class="btn-exit" onclick="signinAction()"><i class="icofont-exit"></i> Trở về </button>
@@ -151,8 +156,15 @@
                   <a href="/manage"></i>Quản Lý Hệ Thống</a>
                   {{else}}
                   <a href="/history"></i>Quản Lý Vé</a>
-                  {{/if}}</li>
-                <li><a href="/contact">Liên Hệ</a></li>
+                  {{/if}}
+                </li>
+                <li>
+                  {{#if (eq authUser.role "admin")}}
+                  <a href="/manage_contact"></i>Phản hồi</a>
+                  {{else}}
+                  <a href="/contact"></i>Liên Hệ</a>
+                  {{/if}}
+                </li>
                 <li><a href="/partner_info">Nhà xe</a></li>
               </ul>
             </nav>
