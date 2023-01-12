@@ -72,14 +72,14 @@ const handleSearchAdmin = async function (req, res) {
 //for ad
 
 router.get("/manage_trip_list", async function (req, res) {
-    // if (!req.session.auth) {
-    //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
-    // }
-    // console.log();
-    // if (res.locals.authUser["role"] != "admin") {
-    //   console.log("wrong role");
-    //   return res.redirect("/");
-    // }
+    if (!req.session.auth) {
+      return res.redirect(`/login?login=true&redirect=${req.originalUrl}`);
+    }
+    console.log();
+    if (res.locals.authUser["role"] != "admin") {
+      console.log("wrong role");
+      return res.redirect("/");
+    }
     //have some problem with database note by !
     const ticketList = await ticketModel.find().lean(); // !
     const newTicketList = []; // !
@@ -105,13 +105,13 @@ router.get("/manage_trip_list", async function (req, res) {
 router.post("/manage_trip_list", handleSearchAdmin);
 
 router.get("/create_trip_info", async (req, res) => {
-    // if (!req.session.auth) {
-    //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
-    // }
-    // if (res.locals.authUser["role"] != "admin") {
-    //   console.log("wrong role");
-    //   return res.redirect("/");
-    // }
+    if (!req.session.auth) {
+      return res.redirect(`/login?login=true&redirect=${req.originalUrl}`);
+    }
+    if (res.locals.authUser["role"] != "admin") {
+      console.log("wrong role");
+      return res.redirect("/");
+    }
     const garageList = await garageModel.find().lean(); // !
     // const newGarageList = []; // !
     const carList = await carModel.find().lean();
@@ -256,13 +256,13 @@ router.get("/replication_trip", async (req, res) => { // not finish
 })
 
 router.get("/manage_trip_info", async (req, res) => {
-    // if (!req.session.auth) {
-    //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
-    // }
-    // if (res.locals.authUser["role"] != "admin") {
-    //   console.log("wrong role");
-    //   return res.redirect("/");
-    // }
+    if (!req.session.auth) {
+      return res.redirect(`/login?login=true&redirect=${req.originalUrl}`);
+    }
+    if (res.locals.authUser["role"] != "admin") {
+      console.log("wrong role");
+      return res.redirect("/");
+    }
     //have some problem with database, note by !
     const id = req.query.trip;
     // console.log(typeof id)
@@ -333,13 +333,13 @@ router.post("/manage_trip_info", async (req, res) => { // for update
 
 
 router.get("/manage_history", async (req, res) => {
-    // if (!req.session.auth) {
-    //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
-    // }
-    // if (res.locals.authUser["role"] != "admin") {
-    //   console.log("wrong role");
-    //   return res.redirect("/");
-    // }
+    if (!req.session.auth) {
+      return res.redirect(`/login?login=true&redirect=${req.originalUrl}`);
+    }
+    if (res.locals.authUser["role"] != "admin") {
+      console.log("wrong role");
+      return res.redirect("/");
+    }
 
     const orders = await orderModel.find().lean();
     const order_details = [];
@@ -452,13 +452,13 @@ router.post("/manage_history", async (req, res) => {
 
 
 router.get("/manage_partner", async (req, res) => {
-    //if (!req.session.auth) {
-    //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
-    // }
-    // if (res.locals.authUser["role"] != "admin") {
-    //   console.log("wrong role");
-    //   return res.redirect("/");
-    // }
+    if (!req.session.auth) {
+      return res.redirect(`/login?login=true&redirect=${req.originalUrl}`);
+    }
+    if (res.locals.authUser["role"] != "admin") {
+      console.log("wrong role");
+      return res.redirect("/");
+    }
     const garageList = await garageModel.find().lean();
     const ratingItems = await ratingModel.find().lean();
 
@@ -637,13 +637,13 @@ router.get("/manage_contact", async (req, res) => {
 });
 
 router.get("/manage", (req, res) => {
-    // if (!req.session.auth) {
-    //   return res.redirect(`/?login=true&redirect=${req.originalUrl}`);
-    // }
-    // if (res.locals.authUser["role"] != "admin") {
-    //   console.log("wrong role");
-    //   return res.redirect("/");
-    // }
+    if (!req.session.auth) {
+      return res.redirect(`/login?login=true&redirect=${req.originalUrl}`);
+    }
+    if (res.locals.authUser["role"] != "admin") {
+      console.log("wrong role");
+      return res.redirect("/");
+    }
     res.render("manage", { title: "Quản lý hệ thống" });
 });
 
